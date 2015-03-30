@@ -14,7 +14,7 @@ namespace PingPongCsharp
         [STAThread]
         static void Main()
         {
-            System.Console.WriteLine("HelloWorld");
+            System.Console.WriteLine("Hello World");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
