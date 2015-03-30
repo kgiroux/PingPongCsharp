@@ -25,13 +25,31 @@ namespace PingPongCsharp
         private void button2_Click(object sender, EventArgs e)
         {
             string name = textBox1.Text;
+            if (name.Equals("") || name.Equals(null))
+            {
+                
+                name = "AnonymeServeur";
+            }
             System.Console.WriteLine(name);
+            client.Enabled = false;
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             string name = textBox1.Text;
+            if (name.Equals("") || name.Equals(null))
+            {
+                name = "AnonymeClient";
+            }
             System.Console.WriteLine(name);
+            serveur.Enabled = false;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            serveur.Enabled = true;
+            client.Enabled = true;
+            textBox1.Text = "";
         }
     }
 }
