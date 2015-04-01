@@ -91,6 +91,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.serveur);
             this.Controls.Add(this.client);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form1";
             this.Text = "Configuration Bluetooth";
             this.Load += new System.EventHandler(this.Form1_Load);

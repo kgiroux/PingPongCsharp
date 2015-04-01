@@ -27,7 +27,6 @@ namespace PingPongCsharp
             string name = textBox1.Text;
             if (name.Equals("") || name.Equals(null))
             {
-                
                 name = "AnonymeServeur";
             }
             System.Console.WriteLine(name);
