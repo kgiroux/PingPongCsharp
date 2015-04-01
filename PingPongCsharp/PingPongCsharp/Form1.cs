@@ -31,6 +31,7 @@ namespace PingPongCsharp
             }
             System.Console.WriteLine(name);
             client.Enabled = false;
+            ServerClass srv = new ServerClass();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -42,6 +43,7 @@ namespace PingPongCsharp
             }
             System.Console.WriteLine(name);
             serveur.Enabled = false;
+            ClientClass clt = new ClientClass();
         }
 
         private void button1_Click(object sender, EventArgs e)
