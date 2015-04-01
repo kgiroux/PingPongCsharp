@@ -33,9 +33,10 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.NamePlayer = new System.Windows.Forms.Label();
             this.stop = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.outPutLog = new System.Windows.Forms.TextBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.scan_button = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // serveur
@@ -50,13 +51,12 @@
             // 
             // client
             // 
-            this.client.Location = new System.Drawing.Point(518, 250);
+            this.client.Location = new System.Drawing.Point(560, 250);
             this.client.Name = "client";
             this.client.Size = new System.Drawing.Size(97, 23);
             this.client.TabIndex = 0;
             this.client.Text = "Client";
             this.client.UseVisualStyleBackColor = true;
-            this.client.Click += new System.EventHandler(this.button3_Click);
             // 
             // textBox1
             // 
@@ -84,30 +84,40 @@
             this.stop.UseVisualStyleBackColor = true;
             this.stop.Click += new System.EventHandler(this.button1_Click);
             // 
-            // textBox2
+            // outPutLog
             // 
-            this.textBox2.Location = new System.Drawing.Point(38, 71);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(294, 177);
-            this.textBox2.TabIndex = 4;
+            this.outPutLog.Location = new System.Drawing.Point(38, 71);
+            this.outPutLog.Multiline = true;
+            this.outPutLog.Name = "outPutLog";
+            this.outPutLog.Size = new System.Drawing.Size(294, 177);
+            this.outPutLog.TabIndex = 4;
             // 
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(475, 71);
+            this.listBox1.Location = new System.Drawing.Point(457, 71);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(182, 173);
+            this.listBox1.Size = new System.Drawing.Size(200, 173);
             this.listBox1.TabIndex = 5;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(472, 39);
+            this.label1.Location = new System.Drawing.Point(456, 39);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(98, 13);
             this.label1.TabIndex = 2;
             this.label1.Text = "Devices Available :";
+            // 
+            // scan_button
+            // 
+            this.scan_button.Location = new System.Drawing.Point(457, 250);
+            this.scan_button.Name = "scan_button";
+            this.scan_button.Size = new System.Drawing.Size(97, 23);
+            this.scan_button.TabIndex = 0;
+            this.scan_button.Text = "Scan";
+            this.scan_button.UseVisualStyleBackColor = true;
+            this.scan_button.Click += new System.EventHandler(this.scan_button_Click);
             // 
             // Form1
             // 
@@ -115,12 +125,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(684, 344);
             this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.outPutLog);
             this.Controls.Add(this.stop);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.NamePlayer);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.serveur);
+            this.Controls.Add(this.scan_button);
             this.Controls.Add(this.client);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form1";
@@ -138,9 +149,10 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label NamePlayer;
         private System.Windows.Forms.Button stop;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.TextBox outPutLog;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button scan_button;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }
 
