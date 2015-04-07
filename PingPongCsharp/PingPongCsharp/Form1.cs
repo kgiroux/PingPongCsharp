@@ -70,7 +70,7 @@ namespace PingPongCsharp
             /* Désactive le bouton Server */
             serveur.Enabled = false;
             /* Lance la connexion au serveur */
-            clt.connectAsClient();
+            //clt.connectAsClient();
         }
         /* Bouton Stop qui va permettre de quitter le serveur et le client */
         /// <summary>
