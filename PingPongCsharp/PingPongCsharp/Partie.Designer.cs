@@ -30,8 +30,10 @@
         {
             this.raquette = new System.Windows.Forms.PictureBox();
             this.raquette2 = new System.Windows.Forms.PictureBox();
+            this.ball = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.raquette)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.raquette2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ball)).BeginInit();
             this.SuspendLayout();
             // 
             // raquette
@@ -54,11 +56,22 @@
             this.raquette2.TabIndex = 1;
             this.raquette2.TabStop = false;
             // 
+            // ball
+            // 
+            this.ball.AccessibleName = "Ball";
+            this.ball.BackColor = System.Drawing.SystemColors.InfoText;
+            this.ball.Location = new System.Drawing.Point(539, 244);
+            this.ball.Name = "ball";
+            this.ball.Size = new System.Drawing.Size(24, 24);
+            this.ball.TabIndex = 2;
+            this.ball.TabStop = false;
+            // 
             // Partie
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1089, 506);
+            this.Controls.Add(this.ball);
             this.Controls.Add(this.raquette2);
             this.Controls.Add(this.raquette);
             this.Name = "Partie";
@@ -66,6 +79,7 @@
             this.Load += new System.EventHandler(this.Partie_Load);
             ((System.ComponentModel.ISupportInitialize)(this.raquette)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.raquette2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ball)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -74,5 +88,6 @@
 
         private System.Windows.Forms.PictureBox raquette;
         private System.Windows.Forms.PictureBox raquette2;
+        private System.Windows.Forms.PictureBox ball;
     }
 }

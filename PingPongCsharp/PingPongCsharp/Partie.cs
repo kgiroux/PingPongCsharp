@@ -35,8 +35,9 @@ namespace PingPongCsharp
             {
                 if (e.KeyCode == Keys.Up && raquette2.Location.Y > 0) y2 -= 1;
                 else if (e.KeyCode == Keys.Down && raquette2.Location.Y + raquette2.Height < this.Height) y2 += 1;
-                else if (e.KeyCode == Keys.Up && raquette.Location.Y > 0) y -= 1;
-                else if (e.KeyCode == Keys.Down && raquette.Location.Y + raquette.Height < this.Height) y += 1;
+
+                if (e.KeyCode == Keys.Z && raquette.Location.Y > 0) y -= 1;
+                else if (e.KeyCode == Keys.S && raquette.Location.Y + raquette.Height < this.Height) y += 1;
                 i++;
 
                 raquette.Location = new Point(x, y);
