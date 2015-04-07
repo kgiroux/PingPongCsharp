@@ -56,9 +56,10 @@ public class ServerClass
         bluetoothClient = bluetoothServerListener.AcceptBluetoothClient();
         /* Attend qu'un client se connect */
         this.updateOutputLog("Client connect");
-        Stream messageStream = bluetoothClient.GetStream();
+        Stream messageStream2 = new StreamWriter();
+        //Stream messageStream = bluetoothClient.GetStream();
 
-
+        messageStream2.WriteAsync(Encoding.ASCII.GetBytes("Hello world"), 0, Encoding.ASCII.GetBytes("Hello world").Length);
         while (true)
         {
 
