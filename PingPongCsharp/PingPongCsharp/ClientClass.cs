@@ -13,6 +13,7 @@ using PingPongCsharp;
 public class ClientClass
 {
     private BluetoothDeviceInfo[] devices_found = null;
+    private BluetoothDeviceInfo device_selected = null;
     private List<string> items_bluetooth;
     BluetoothClient client;
     private Form1 form;
@@ -30,7 +31,7 @@ public class ClientClass
     /// </summary>
     public void connectAsClient(String name_device)
     {
-        BluetoothDeviceInfo device_selected = null;
+        device_selected = null;
         foreach(BluetoothDeviceInfo device in devices_found){
             if (name_device == device.DeviceName)
             {
@@ -39,23 +40,33 @@ public class ClientClass
             }
         }
         this.updateOutputLog("Try to connect to : " + device_selected.DeviceName);
-
-        if (pairDevice())
+        if (device_selected != null)
         {
-            this.updateOutputLog("Starting to connect");
-            this.updateOutputLog("Starting connecting Thread !!!");
-            Thread bluetoothClientThread = new Thread(new ThreadStart(ClientConnectThread));
-            bluetoothClientThread.Start();
+            if (pairDevice())
+            {
+                this.updateOutputLog("Starting to connect");
+                this.updateOutputLog("Starting connecting Thread !!!");
+                Thread bluetoothClientThread = new Thread(new ThreadStart(ClientConnectThread));
+                bluetoothClientThread.Start();
+            }
+            else
+            {
+                this.updateOutputLog("Failed to connect");
+            }
         }
         else
         {
-            this.updateOutputLog("Failed to connect");
+            this.updateOutputLog("Device not found !!! ");
         }
+        
     }
 
     private void ClientConnectThread()
     {
-        //BluetoothClient client = 
+        BluetoothClient client = new BluetoothClient();
+        Console.WriteLine(device_selected.DeviceAddress);
+        //client.BeginConnect(device_selected.DeviceAddress,device_selected.1
+        
     }
 
     public bool pairDevice()
