@@ -49,6 +49,8 @@ public class ServerClass
         this.updateOutputLog("Initializing component...");
         /* Création du listener pour le serveur */
         bluetoothServerListener = new BluetoothListener(this.mUUID);
+
+        Console.WriteLine(this.mUUID);
         bluetoothServerListener.Start();
 
         bluetoothClient = bluetoothServerListener.AcceptBluetoothClient();
