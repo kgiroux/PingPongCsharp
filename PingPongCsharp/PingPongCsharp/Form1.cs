@@ -100,11 +100,6 @@ namespace PingPongCsharp
             client.Enabled = false;
             clt = new ClientClass(this);
             clt.startScanBluetoothDevices();
-
-            if (listBoxDevice.DataSource != null)
-            {
-                client.Enabled = true;
-            }
         }
         
         /* Méthode permettant de mettre à jour la liste du contenu dans la liste Box */
@@ -143,6 +138,14 @@ namespace PingPongCsharp
                 return 0;
             };
             Invoke(del);
+        }
+
+        private void listBoxDevice_DoubleClick(object sender, EventArgs e)
+        {
+            serveur.Enabled = false;
+            /* Lance la connexion au serveur */
+            Console.WriteLine(listBoxDevice.SelectedItem.ToString());
+            clt.connectAsClient(listBoxDevice.SelectedItem.ToString());
         }
 
         

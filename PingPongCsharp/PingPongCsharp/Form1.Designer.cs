@@ -100,6 +100,7 @@
             this.listBoxDevice.Name = "listBoxDevice";
             this.listBoxDevice.Size = new System.Drawing.Size(200, 173);
             this.listBoxDevice.TabIndex = 5;
+            this.listBoxDevice.DoubleClick += new System.EventHandler(this.listBoxDevice_DoubleClick);
             // 
             // label1
             // 

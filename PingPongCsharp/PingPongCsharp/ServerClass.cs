@@ -74,6 +74,8 @@ public class ServerClass
             byte[] send_data = Encoding.ASCII.GetBytes("Hello world");
             messageStream.Write(send_data, 0, send_data.Length);
 
+
+
             
         }
         bluetoothClient.Close();
