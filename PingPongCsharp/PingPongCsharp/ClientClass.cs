@@ -74,6 +74,7 @@ public class ClientClass
 
     private void ClientConnectThread()
     {
+        this.updateOutputLog("Connect");
         BluetoothClient client = new BluetoothClient();
         Console.WriteLine(device_selected.DeviceAddress);
         client.BeginConnect(device_selected.DeviceAddress, mUUID, this.BluetoothClientConnectCallBack, client);
@@ -86,7 +87,7 @@ public class ClientClass
         client.EndConnect(result);
 
         Stream stream = client.GetStream();
-        stream.ReadTimeout = 1000;
+        stream.ReadTimeout = 4000;
 
         while (true)
         {

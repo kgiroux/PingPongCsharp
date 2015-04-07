@@ -59,6 +59,8 @@ public class ServerClass
         Stream messageStream = bluetoothClient.GetStream();
         while (true)
         {
+
+            this.updateOutputLog("Receiving Data");
             // Récupération d'un message envoyer au client
             byte[] received_data = new byte[1024];
             // Reception
