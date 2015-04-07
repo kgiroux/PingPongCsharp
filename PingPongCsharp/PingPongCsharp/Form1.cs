@@ -84,6 +84,8 @@ namespace PingPongCsharp
                 client.Enabled = false;
                 scan_button.Enabled = true;
                 textBox1.Text = "";
+                Partie p = new Partie();
+                p.Show();
         }
 
         /* Bouton Scan qui va être chercher les appareils pour le client */
