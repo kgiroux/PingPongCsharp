@@ -86,12 +86,16 @@ public class ClientClass
         BluetoothClient client = (BluetoothClient)result.AsyncState;
         client.EndConnect(result);
 
+
+        
+
         Stream stream = client.GetStream();
         stream.ReadTimeout = 4000;
 
         while (true)
         {
             while (!ready) ;
+            this.updateOutputLog("Send_Data");
             send_date();
             stream.Write(message, 0, message.Length);
         }
