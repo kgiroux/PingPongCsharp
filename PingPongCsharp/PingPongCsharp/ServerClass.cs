@@ -57,6 +57,7 @@ public class ServerClass
         /* Attend qu'un client se connect */
         this.updateOutputLog("Client connect");
         Stream messageStream = bluetoothClient.GetStream();
+        this.updateOutputLog("Client connect");
         while (true)
         {
 

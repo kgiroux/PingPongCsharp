@@ -10,6 +10,8 @@ namespace PingPongCsharp
     {
         private int angle;
         private int vitesse;
+        public int Angle { get {return angle;} set{angle = value;} }
+        public int Vitesse { get {return vitesse;} set{vitesse = value;} }
 
         public Balle()
         {
@@ -23,10 +25,11 @@ namespace PingPongCsharp
             angle = r.Next(0, 360);
         }
 
-        public int[] Position()
+        public int[] Delta()
         {
             int[] p = new int[2];
             p[0] = (int)Math.Cos(angle) * vitesse;
+            p[1] = (int)Math.Sin(angle) * vitesse;
 
             return p;
         }

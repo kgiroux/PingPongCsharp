@@ -16,6 +16,15 @@ namespace PingPongCsharp
         {
             InitializeComponent();
             KeyDown += new KeyEventHandler(Form1_KeyDown);
+
+            Balle b = new Balle();
+
+            b.Lance();
+
+            int[] tab = new int[2];
+            tab = b.Delta();
+            
+            ball.Location = new Point(ball.Location.X + tab[0], ball.Location.Y - tab[1]);
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
