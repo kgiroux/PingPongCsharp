@@ -28,11 +28,41 @@ public class ClientClass
     /// <summary>
     /// Methode permettant la connexion au client */
     /// </summary>
-    public void connectAsClient()
+    public void connectAsClient(String name_device)
     {
-        System.Console.WriteLine("Hello Client");
-        
+        BluetoothDeviceInfo device_selected = null;
+        foreach(BluetoothDeviceInfo device in devices_found){
+            if (name_device == device.DeviceName)
+            {
+                device_selected = device;
+                break;
+            }
+        }
+        this.updateOutputLog("Try to connect to : " + device_selected.DeviceName);
+
+        if (pairDevice())
+        {
+            this.updateOutputLog("Starting to connect");
+            this.updateOutputLog("Starting connecting Thread !!!");
+            Thread bluetoothClientThread = new Thread(new ThreadStart(ClientConnectThread));
+            bluetoothClientThread.Start();
+        }
+        else
+        {
+            this.updateOutputLog("Failed to connect");
+        }
     }
+
+    private void ClientConnectThread()
+    {
+        BluetoothClient client = 
+    }
+
+    public bool pairDevice()
+    {
+        return true;
+    }
+    
     /// <summary>
     /// Lancement de la recherche Bluetooth via un thread (Permet de ne pas bloquer le programme)
     /// </summary>
@@ -111,4 +141,6 @@ public class ClientClass
         client = null;
         form = null;
     }
+
+
 }

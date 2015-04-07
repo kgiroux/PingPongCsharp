@@ -52,6 +52,7 @@ namespace PingPongCsharp
             /* Configuration du Serveur */
             client.Enabled = false;
             scan_button.Enabled = false;
+            serveur.Enabled = false;
             /* Créer un objet ServerClass qui va être l'objet contenir toute les méthodes concernant le serveur */
             /* On lui passe l'objet form pour pouvoir modifier les textes dans la liste et la textBox */
             svr = new ServerClass(this);
@@ -96,6 +97,11 @@ namespace PingPongCsharp
             client.Enabled = false;
             clt = new ClientClass(this);
             clt.startScanBluetoothDevices();
+
+            if (listBoxDevice.DataSource != null)
+            {
+                client.Enabled = true;
+            }
         }
         
         /* Méthode permettant de mettre à jour la liste du contenu dans la liste Box */
@@ -110,9 +116,9 @@ namespace PingPongCsharp
             Func<int> del = delegate()
             {
                 /* Remplacement de la liste actuelle par null (RESET)*/
-                listBox1.DataSource = null;
+                listBoxDevice.DataSource = null;
                 /* Création de la liste avec les nouvelles données */
-                listBox1.DataSource = item_return;
+                listBoxDevice.DataSource = item_return;
                 return 0;
             };
             Invoke(del);
