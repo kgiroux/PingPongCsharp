@@ -11,7 +11,7 @@ using System.Text;
 public class ServerClass
 {
     private Form1 form;
-    private Guid mUUID = Guid.NewGuid();
+    private Guid mUUID = new Guid("293eb187-b6e9-4434-894b-ef81120f0e5b");
     private BluetoothClient bluetoothClient;
     private BluetoothListener bluetoothServerListener;
     Thread bluetoothServerThread;

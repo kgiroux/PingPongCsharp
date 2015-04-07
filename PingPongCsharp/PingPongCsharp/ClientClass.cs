@@ -14,6 +14,7 @@ public class ClientClass
 {
     private BluetoothDeviceInfo[] devices_found = null;
     private BluetoothDeviceInfo device_selected = null;
+    private Guid mUUID = new Guid("293eb187-b6e9-4434-894b-ef81120f0e5b");
     private List<string> items_bluetooth;
     BluetoothClient client;
     private Form1 form;
@@ -32,32 +33,42 @@ public class ClientClass
     public void connectAsClient(String name_device)
     {
         device_selected = null;
-        foreach(BluetoothDeviceInfo device in devices_found){
-            if (name_device == device.DeviceName)
-            {
-                device_selected = device;
-                break;
-            }
-        }
-        this.updateOutputLog("Try to connect to : " + device_selected.DeviceName);
-        if (device_selected != null)
+        if (devices_found != null)
         {
-            if (pairDevice())
+            foreach (BluetoothDeviceInfo device in devices_found)
             {
-                this.updateOutputLog("Starting to connect");
-                this.updateOutputLog("Starting connecting Thread !!!");
-                Thread bluetoothClientThread = new Thread(new ThreadStart(ClientConnectThread));
-                bluetoothClientThread.Start();
+                if (name_device == device.DeviceName)
+                {
+                    device_selected = device;
+                    break;
+                }
+            }
+            this.updateOutputLog("Try to connect to : " + device_selected.DeviceName);
+            if (device_selected != null)
+            {
+                if (pairDevice())
+                {
+                    this.updateOutputLog("Starting to connect");
+                    this.updateOutputLog("Starting connecting Thread !!!");
+                    Thread bluetoothClientThread = new Thread(new ThreadStart(ClientConnectThread));
+                    bluetoothClientThread.Start();
+                }
+                else
+                {
+                    this.updateOutputLog("Failed to connect");
+                }
             }
             else
             {
-                this.updateOutputLog("Failed to connect");
+                this.updateOutputLog("Device not found !!! ");
             }
         }
         else
         {
             this.updateOutputLog("Device not found !!! ");
         }
+       
+       
         
     }
 
@@ -65,12 +76,35 @@ public class ClientClass
     {
         BluetoothClient client = new BluetoothClient();
         Console.WriteLine(device_selected.DeviceAddress);
-        //client.BeginConnect(device_selected.DeviceAddress,device_selected.1
+        client.BeginConnect(device_selected.DeviceAddress, mUUID, this.BluetoothClientConnectCallBack, client);
         
     }
 
+    void BluetoothClientConnectCallBack(IAsyncResult result)
+    {
+        BluetoothClient client = (BluetoothClient)result.AsyncState;
+        client.EndConnect(result);
+
+        Stream stream = client.GetStream();
+        stream.ReadTimeout = 1000;
+
+        while (true)
+        {
+            while (!ready) ;
+            send_date();
+            stream.Write(message, 0, message.Length);
+        }
+    }
+    string myPin = "1234";
+    bool ready = false;
     public bool pairDevice()
     {
+        if (!device_selected.Authenticated)
+        {
+            if(!BluetoothSecurity.PairRequest(device_selected.DeviceAddress,myPin)){
+                return false;
+            }
+        }
         return true;
     }
     
@@ -151,6 +185,12 @@ public class ClientClass
         items_bluetooth = null;
         client = null;
         form = null;
+    }
+    byte[] message;
+    private void send_date()
+    {
+        message = Encoding.ASCII.GetBytes("Sending Message");
+        ready = true;
     }
 
 
