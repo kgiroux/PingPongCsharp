@@ -55,7 +55,7 @@ public class ClientClass
 
     private void ClientConnectThread()
     {
-        BluetoothClient client = 
+        //BluetoothClient client = 
     }
 
     public bool pairDevice()
