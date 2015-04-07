@@ -15,14 +15,26 @@ namespace PingPongCsharp
         public Partie()
         {
             InitializeComponent();
+            KeyDown += new KeyEventHandler(Form1_KeyDown);
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Down) 
+            int x2 = raquette2.Location.X;
+            int y2 = raquette2.Location.Y;
+            int i =0;
+
+            Console.WriteLine(this.Height);
+            Console.WriteLine(raquette2.Location.Y + raquette2.Height);
+            
+            while (i < 15)
             {
-                raquette.Location = new Point(raquette.Left, raquette.Top --);
-            } 
+                if (e.KeyCode == Keys.Up && raquette2.Location.Y > 0) y2 -= 1;
+                else if (e.KeyCode == Keys.Down && raquette2.Location.Y + raquette2.Height < this.Height) y2 += 1;
+                i++;
+
+                raquette2.Location = new Point(x2, y2);
+            }
         }
 
         private void Partie_Load(object sender, EventArgs e)
