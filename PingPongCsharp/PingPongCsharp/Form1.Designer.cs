@@ -47,7 +47,7 @@
             this.serveur.TabIndex = 0;
             this.serveur.Text = "Serveur";
             this.serveur.UseVisualStyleBackColor = true;
-            this.serveur.Click += new System.EventHandler(this.button2_Click);
+            this.serveur.Click += new System.EventHandler(this.serveur_click);
             // 
             // client
             // 
@@ -57,6 +57,7 @@
             this.client.TabIndex = 0;
             this.client.Text = "Client";
             this.client.UseVisualStyleBackColor = true;
+            this.client.Click += new System.EventHandler(this.client_Click);
             // 
             // textBox1
             // 
@@ -82,7 +83,7 @@
             this.stop.TabIndex = 3;
             this.stop.Text = "Stop";
             this.stop.UseVisualStyleBackColor = true;
-            this.stop.Click += new System.EventHandler(this.button1_Click);
+            this.stop.Click += new System.EventHandler(this.stop_action);
             // 
             // outPutLog
             // 

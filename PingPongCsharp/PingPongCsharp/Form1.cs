@@ -46,7 +46,7 @@ namespace PingPongCsharp
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void button2_Click(object sender, EventArgs e)
+        private void serveur_click(object sender, EventArgs e)
         {
             /* Désactivation du bouton Client et du bouton Scan */
             /* Configuration du Serveur */
@@ -56,7 +56,7 @@ namespace PingPongCsharp
             /* On lui passe l'objet form pour pouvoir modifier les textes dans la liste et la textBox */
             svr = new ServerClass(this);
             /* Lancement de la methode pour lancer le serveur */
-            svr.connectAsServer(); 
+            svr.connectAsServer();
         }
         /* Méthode de lancement Client, cela va gerer la connection en fonction de la cible choisit */
         /// <summary>
@@ -64,13 +64,12 @@ namespace PingPongCsharp
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void button3_Click(object sender, EventArgs e)
+        private void client_Click(object sender, EventArgs e)
         {
             /* Désactive le bouton Server */
-            serveur.Enabled = false;   
+            serveur.Enabled = false;
             /* Lance la connexion au serveur */
             clt.connectAsClient();
-
         }
         /* Bouton Stop qui va permettre de quitter le serveur et le client */
         /// <summary>
@@ -78,14 +77,14 @@ namespace PingPongCsharp
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-            serveur.Enabled = true;
-            client.Enabled = false;
-            scan_button.Enabled = true;
-            textBox1.Text = "";
+        
+        private void stop_action(object sender, EventArgs e){
+                serveur.Enabled = true;
+                client.Enabled = false;
+                scan_button.Enabled = true;
+                textBox1.Text = "";
         }
+
         /* Bouton Scan qui va être chercher les appareils pour le client */
         /// <summary>
         /// Méthode dédiée à la gestion du click sur le bouton scan 
@@ -136,5 +135,7 @@ namespace PingPongCsharp
             };
             Invoke(del);
         }
+
+        
     }
 }

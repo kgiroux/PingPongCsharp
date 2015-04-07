@@ -75,7 +75,6 @@ public class ServerClass
             
         }
         bluetoothClient.Close();
-        bluetoothServerListener.EndAcceptBluetoothClient();
     }
 
     
