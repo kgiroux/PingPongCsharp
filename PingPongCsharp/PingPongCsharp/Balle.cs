@@ -8,7 +8,7 @@ namespace PingPongCsharp
 {
     class Balle
     {
-        private double angle;
+        private int angle;
         private int vitesse;
 
         public Balle()
@@ -18,8 +18,17 @@ namespace PingPongCsharp
         }
         public void Lance()
         {
+            Random r = new Random();
             vitesse = 20;
+            angle = r.Next(0, 360);
+        }
 
+        public int[] Position()
+        {
+            int[] p = new int[2];
+            p[0] = (int)Math.Cos(angle) * vitesse;
+
+            return p;
         }
     }
 }
