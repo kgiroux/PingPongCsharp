@@ -84,21 +84,28 @@ public class ClientClass
     void BluetoothClientConnectCallBack(IAsyncResult result)
     {
         BluetoothClient client = (BluetoothClient)result.AsyncState;
-        client.EndConnect(result);
-
-
+        try
+        {
+            client.EndConnect(result);
+            this.updateOutputLog("Send_Data");
+            Stream stream = client.GetStream();
+            stream.ReadTimeout = 1000;
+            this.updateOutputLog("Send_Data");
+            while (true)
+            {
+                while (!ready) ;
+                this.updateOutputLog("Send_Data");
+                send_date();
+                stream.Write(message, 0, message.Length);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
         
 
-        Stream stream = client.GetStream();
-        stream.ReadTimeout = 4000;
-
-        while (true)
-        {
-            while (!ready) ;
-            this.updateOutputLog("Send_Data");
-            send_date();
-            stream.Write(message, 0, message.Length);
-        }
+        
     }
     string myPin = "1234";
     bool ready = false;
