@@ -63,7 +63,18 @@ public class ServerClass
             // Récupération d'un message envoyer au client
             byte[] received_data = new byte[1024];
             // Reception
-            messageStream.Read(received_data, 0, received_data.Length);
+            try
+            {
+                //messageStream.Write(Encoding.ASCII.GetBytes("HEELOOOOO"), 0, Encoding.ASCII.GetBytes("HEELOOOOO").Length);
+                messageStream.Read(received_data, 0, received_data.Length);
+            }
+            catch (IOException e)
+            {
+                this.updateOutputLog(e.Message);
+            }
+            
+            this.updateOutputLog("Receiving Data 2");
+
             String received_string = Encoding.ASCII.GetString(received_data);
             this.updateOutputLog("Received:" + received_string );
 
@@ -73,7 +84,19 @@ public class ServerClass
             }
             // Envoi
             byte[] send_data = Encoding.ASCII.GetBytes("Hello world");
-            messageStream.Write(send_data, 0, send_data.Length);
+            try
+            {
+                messageStream.Write(send_data, 0, send_data.Length);
+            }
+            catch (IOException e)
+            {
+                this.updateOutputLog(e.Message);
+            }
+            finally
+            {
+                this.updateOutputLog("Passage ICI");
+            }
+            
         }
         bluetoothClient.Close();
     }
