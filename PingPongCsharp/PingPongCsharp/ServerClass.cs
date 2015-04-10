@@ -56,13 +56,9 @@ public class ServerClass
         bluetoothClient = bluetoothServerListener.AcceptBluetoothClient();
         /* Attend qu'un client se connect */
         this.updateOutputLog("Client connect");
-        //Stream messageStream2 = new StreamWriter(new Stream)
         Stream messageStream = bluetoothClient.GetStream();
-
-        //messageStream2.WriteAsync(Encoding.ASCII.GetBytes("Hello world"), 0, Encoding.ASCII.GetBytes("Hello world").Length);
         while (true)
         {
-
             this.updateOutputLog("Receiving Data");
             // Récupération d'un message envoyer au client
             byte[] received_data = new byte[1024];
@@ -78,10 +74,6 @@ public class ServerClass
             // Envoi
             byte[] send_data = Encoding.ASCII.GetBytes("Hello world");
             messageStream.Write(send_data, 0, send_data.Length);
-
-
-
-            
         }
         bluetoothClient.Close();
     }
