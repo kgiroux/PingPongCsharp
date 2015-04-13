@@ -15,9 +15,10 @@ public class ClientClass
     private BluetoothDeviceInfo[] devices_found = null;
     private BluetoothDeviceInfo device_selected = null;
     private BluetoothClient client = null;
-    Thread bluetoothScanThread = null;
-    Thread readingThread = null;
-    Thread bluetoothClientThread = null;
+    private Thread ErrorThreadManager = null;
+    private Thread bluetoothScanThread = null;
+    private Thread readingThread = null;
+    private Thread bluetoothClientThread = null;
     private Stream stream = null;
     private Guid mUUID = new Guid("293eb187-b6e9-4434-894b-ef81120f0e5b");
     private List<string> items_bluetooth;
@@ -39,6 +40,8 @@ public class ClientClass
 
     public int connectAsClient(String name_device)
     {
+        ErrorThreadManager = new Thread(new ThreadStart(errorManager));
+
         error = 0;
         device_selected = null;
         if (devices_found != null)
@@ -80,6 +83,15 @@ public class ClientClass
             error = -1;
         }
         return error;
+    }
+
+    private void errorManager()
+    {
+        while (this.error != -1)
+        {
+
+        }
+        this.updateOutputLog("Error");
     }
 
 
@@ -129,7 +141,7 @@ public class ClientClass
             while (true)
             {
                 this.updateOutputLog("Sending_Data");
-                send_date();
+                send_data();
                 stream.Write(message, 0, message.Length);
             }
         }
@@ -311,7 +323,7 @@ public class ClientClass
         
     }
     byte[] message;
-    private void send_date()
+    private void send_data()
     {
         int rand = new Random().Next();
         message = Encoding.ASCII.GetBytes("Sending Message" + rand);
