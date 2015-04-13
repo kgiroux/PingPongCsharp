@@ -12,10 +12,10 @@ using PingPongCsharp;
 
 public class ClientClass
 {
+
     private BluetoothDeviceInfo[] devices_found = null;
     private BluetoothDeviceInfo device_selected = null;
     private BluetoothClient client = null;
-    private Thread ErrorThreadManager = null;
     private Thread bluetoothScanThread = null;
     private Thread readingThread = null;
     private Thread bluetoothClientThread = null;
@@ -23,8 +23,9 @@ public class ClientClass
     private Guid mUUID = new Guid("293eb187-b6e9-4434-894b-ef81120f0e5b");
     private List<string> items_bluetooth;
     private int error = 0;
-    //BluetoothClient client;
     private Form1 form;
+
+
    /// <summary>
    /// Constructeur de l'objet Client Class 
    /// </summary>
@@ -40,7 +41,7 @@ public class ClientClass
 
     public int connectAsClient(String name_device)
     {
-        ErrorThreadManager = new Thread(new ThreadStart(errorManager));
+       
 
         error = 0;
         device_selected = null;
@@ -84,16 +85,9 @@ public class ClientClass
         return error;
     }
 
-    private void errorManager()
-    {
-        while (this.error != -1)
-        {
-
-        }
-        this.updateOutputLog("Error", -1);
-    }
-
-
+    /// <summary>
+    /// Thread Pour la connexion du client
+    /// </summary>
     private void ClientConnectThread()
     {
         this.updateOutputLog("Connect",0);
