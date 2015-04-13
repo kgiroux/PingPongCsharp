@@ -13,6 +13,7 @@ public class ServerClass
     private Form1 form;
     private Guid mUUID = new Guid("293eb187-b6e9-4434-894b-ef81120f0e5b");
     private BluetoothClient bluetoothClient;
+    Stream messageStream = null;
     private BluetoothListener bluetoothServerListener;
     Thread bluetoothServerThread;
     /// <summary>
@@ -56,7 +57,7 @@ public class ServerClass
         bluetoothClient = bluetoothServerListener.AcceptBluetoothClient();
         /* Attend qu'un client se connect */
         this.updateOutputLog("Client connect");
-        Stream messageStream = bluetoothClient.GetStream();
+        messageStream = bluetoothClient.GetStream();
         while (true)
         {
             this.updateOutputLog("Receiving Data");
@@ -112,13 +113,27 @@ public class ServerClass
     public void closeServer()
     {
        //this.bluetoothServerThread.Finalize();
-
     }
     /// <summary>
     /// Destructeur de la classe 
     /// </summary>
     ~ServerClass()
     {
-
+        if (bluetoothServerListener != null)
+        {
+            bluetoothServerListener.Stop();
+        }
+        if (messageStream != null)
+        {
+            messageStream.Close();
+        }
+        if (bluetoothServerThread != null)
+        {
+            bluetoothServerThread.Abort();
+        }
+        if (bluetoothClient != null)
+        {
+            bluetoothClient.Close();
+        }
     }
 }
