@@ -21,15 +21,19 @@ namespace PingPongCsharp
         public void Lance()
         {
             Random r = new Random();
-            vitesse = 20;
+            vitesse = 2;
             angle = r.Next(0, 360);
         }
 
         public int[] Delta()
         {
             int[] p = new int[2];
-            p[0] = (int)Math.Cos(angle) * vitesse;
-            p[1] = (int)Math.Sin(angle) * vitesse;
+            p[0] = (int) (Math.Cos(angle) * 10);
+            do
+            {
+                p[1] = (int)(Math.Sin(angle) * 10);
+            } 
+            while (p[1] == 0);
 
             return p;
         }

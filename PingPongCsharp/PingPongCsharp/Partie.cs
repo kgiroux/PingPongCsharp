@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Timers;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,19 +13,18 @@ namespace PingPongCsharp
 {
     public partial class Partie : Form
     {
+        private static Balle b;
+        private static int t = 0;
+
         public Partie()
         {
             InitializeComponent();
+
             KeyDown += new KeyEventHandler(Form1_KeyDown);
 
-            Balle b = new Balle();
+            b = new Balle();
 
             b.Lance();
-
-            int[] tab = new int[2];
-            tab = b.Delta();
-            
-            ball.Location = new Point(ball.Location.X + tab[0], ball.Location.Y - tab[1]);
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -57,6 +57,34 @@ namespace PingPongCsharp
         private void Partie_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (t < b.Vitesse)
+            {
+                t++;
+            }
+            else
+            {
+                int x = ball.Location.X;
+                int y = ball.Location.Y;
+
+                if (y < 0)
+                    b.Angle += 2 * b.Angle;
+                if (y > this.Height)
+                    b.Angle -= 2 * b.Angle;
+
+                int[] tab = new int[2];
+                tab = b.Delta();
+
+                x += tab[0];
+                y += tab[1];
+
+                ball.Location = new Point(x, y);
+
+                t = 0;
+            }
         }
     }
 }

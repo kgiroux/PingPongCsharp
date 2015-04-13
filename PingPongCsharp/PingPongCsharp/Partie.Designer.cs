@@ -28,9 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.raquette = new System.Windows.Forms.PictureBox();
             this.raquette2 = new System.Windows.Forms.PictureBox();
             this.ball = new System.Windows.Forms.PictureBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.raquette)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.raquette2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ball)).BeginInit();
@@ -66,6 +68,12 @@
             this.ball.TabIndex = 2;
             this.ball.TabStop = false;
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 10;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Partie
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -89,5 +97,6 @@
         private System.Windows.Forms.PictureBox raquette;
         private System.Windows.Forms.PictureBox raquette2;
         private System.Windows.Forms.PictureBox ball;
+        private System.Windows.Forms.Timer timer1;
     }
 }
