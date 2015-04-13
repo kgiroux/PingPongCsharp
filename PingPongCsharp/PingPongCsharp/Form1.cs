@@ -145,6 +145,7 @@ namespace PingPongCsharp
             serveur.Enabled = false;
             /* Lance la connexion au serveur */
             Console.WriteLine(listBoxDevice.SelectedItem.ToString());
+            Console.WriteLine("ICI 1");
             clt.connectAsClient(listBoxDevice.SelectedItem.ToString());
         }
 
