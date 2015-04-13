@@ -21,6 +21,7 @@ public class ClientClass
     private Stream stream = null;
     private Guid mUUID = new Guid("293eb187-b6e9-4434-894b-ef81120f0e5b");
     private List<string> items_bluetooth;
+    private int error = 0;
     //BluetoothClient client;
     private Form1 form;
    /// <summary>
@@ -33,10 +34,12 @@ public class ClientClass
         items_bluetooth = new List<string>();
 	}
     /// <summary>
-    /// Methode permettant la connexion au client */
+    /// Methode permettant la connexion au client (tester)*/
     /// </summary>
-    public void connectAsClient(String name_device)
+
+    public int connectAsClient(String name_device)
     {
+        error = 0;
         device_selected = null;
         if (devices_found != null)
         {
@@ -44,6 +47,7 @@ public class ClientClass
             {
                 if (name_device == device.DeviceName)
                 {
+                    this.updateOutputLog("ICI 3");
                     device_selected = device;
                     break;
                 }
@@ -61,18 +65,23 @@ public class ClientClass
                 else
                 {
                     this.updateOutputLog("Failed to connect");
+                    error = -1;
                 }
             }
             else
             {
                 this.updateOutputLog("Device not found !!! ");
+                error = -1;
             }
         }
         else
         {
             this.updateOutputLog("Device not found !!! ");
+            error = -1;
         }
+        return error;
     }
+
 
     private void ClientConnectThread()
     {
@@ -81,20 +90,22 @@ public class ClientClass
         Console.WriteLine(device_selected.DeviceAddress);
         try
         {
-            Console.WriteLine("ICI 6");
-            client.BeginConnect(device_selected.DeviceAddress, mUUID, this.BluetoothClientConnectCallBack, client);
             Console.WriteLine("ICI 7");
+            client.BeginConnect(device_selected.DeviceAddress, mUUID, this.BluetoothClientConnectCallBack, client);
         }
         catch (System.Net.Sockets.SocketException ex)
         {
+            this.error = -1;
             this.updateOutputLog("Error : " + ex.ToString());
         }
         catch (IOException ex)
         {
+            this.error = -1;
             this.updateOutputLog("Error : "+  ex.ToString());
         }
         catch (Exception ex)
         {
+            this.error = -1;
             this.updateOutputLog("Error : " + ex.ToString());
         }
         
@@ -124,6 +135,7 @@ public class ClientClass
         }
         catch (System.Net.Sockets.SocketException ex )
         {
+            this.error = -1;
             Console.WriteLine(ex.Message);
             this.updateOutputLog(ex.Message);
             this.updateOutputLog("Fail to connect to this serveur");
@@ -144,6 +156,7 @@ public class ClientClass
         }
         catch (Exception ex)
         {
+            this.error = -1;
             Console.WriteLine(ex.Message);
             this.updateOutputLog(ex.Message);
             this.updateOutputLog("Fail to connect to this serveur");
@@ -169,6 +182,7 @@ public class ClientClass
     /// <param name=""></param>
     private void reading()
     {
+        this.error = -1;
         byte[] message_recu = new byte[1024];
 
          try
@@ -213,6 +227,7 @@ public class ClientClass
     /// </summary>
     private void scan()
     {
+        int result_error;
         /* Mise à jour du texte dans la fenetre principal afin d'afficher les actions en arrière plan */
         this.updateOutputLog("Starting Scanning ...");
         this.updateOutputLog("Initializing component ...");
