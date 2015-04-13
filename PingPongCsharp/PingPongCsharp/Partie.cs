@@ -85,7 +85,7 @@ namespace PingPongCsharp
 
                 if (bx < r1x + r1w && bx > r1x && by < r1y + r1h && by + bh > r1y)
                     b.Angle += 2 * b.Angle;
-                if (bx + bw > r2x && bx + bw < r2x + r2w && by < r1y + r1h && by + bh > r1y)
+                if (bx + bw > r2x && bx + bw < r2x + r2w && by < r2y + r2h && by + bh > r2y)
                     b.Angle += 2 * b.Angle;
 
                 int[] tab = new int[2];
