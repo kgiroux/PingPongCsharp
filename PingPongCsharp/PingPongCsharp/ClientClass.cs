@@ -50,36 +50,35 @@ public class ClientClass
             {
                 if (name_device == device.DeviceName)
                 {
-                    this.updateOutputLog("ICI 3");
                     device_selected = device;
                     break;
                 }
             }
-            this.updateOutputLog("Try to connect to : " + device_selected.DeviceName);
+            this.updateOutputLog("Try to connect to : " + device_selected.DeviceName, 0);
             if (device_selected != null)
             {
                 if (pairDevice())
                 {
-                    this.updateOutputLog("Starting to connect");
-                    this.updateOutputLog("Starting connecting Thread !!!");
+                    this.updateOutputLog("Starting to connect",0);
+                    this.updateOutputLog("Starting connecting Thread !!!",0);
                     bluetoothClientThread = new Thread(new ThreadStart(ClientConnectThread));
                     bluetoothClientThread.Start();
                 }
                 else
                 {
-                    this.updateOutputLog("Failed to connect");
+                    this.updateOutputLog("Failed to connect",-1);
                     error = -1;
                 }
             }
             else
             {
-                this.updateOutputLog("Device not found !!! ");
+                this.updateOutputLog("Device not found !!! ", -1);
                 error = -1;
             }
         }
         else
         {
-            this.updateOutputLog("Device not found !!! ");
+            this.updateOutputLog("Device not found !!! ", -1);
             error = -1;
         }
         return error;
@@ -91,34 +90,33 @@ public class ClientClass
         {
 
         }
-        this.updateOutputLog("Error");
+        this.updateOutputLog("Error", -1);
     }
 
 
     private void ClientConnectThread()
     {
-        this.updateOutputLog("Connect");
+        this.updateOutputLog("Connect",0);
         BluetoothClient client = new BluetoothClient();
         Console.WriteLine(device_selected.DeviceAddress);
         try
         {
-            Console.WriteLine("ICI 7");
             client.BeginConnect(device_selected.DeviceAddress, mUUID, this.BluetoothClientConnectCallBack, client);
         }
         catch (System.Net.Sockets.SocketException ex)
         {
             this.error = -1;
-            this.updateOutputLog("Error : " + ex.ToString());
+            this.updateOutputLog("Error : " + ex.ToString(),-1);
         }
         catch (IOException ex)
         {
             this.error = -1;
-            this.updateOutputLog("Error : "+  ex.ToString());
+            this.updateOutputLog("Error : "+  ex.ToString(),-1);
         }
         catch (Exception ex)
         {
             this.error = -1;
-            this.updateOutputLog("Error : " + ex.ToString());
+            this.updateOutputLog("Error : " + ex.ToString(),-1);
         }
         
         
@@ -135,12 +133,11 @@ public class ClientClass
             client.EndConnect(result);
             stream = client.GetStream();
             stream.ReadTimeout = 1000;
-            Console.WriteLine("Ici 8");
             readingThread = new Thread(new ThreadStart(reading));
             readingThread.Start();
             while (true)
             {
-                this.updateOutputLog("Sending_Data");
+                this.updateOutputLog("Sending_Data",0);
                 send_data();
                 stream.Write(message, 0, message.Length);
             }
@@ -149,13 +146,13 @@ public class ClientClass
         {
             this.error = -1;
             Console.WriteLine(ex.Message);
-            this.updateOutputLog(ex.Message);
-            this.updateOutputLog("Fail to connect to this serveur");
+            this.updateOutputLog(ex.Message,-1);
+            this.updateOutputLog("Fail to connect to this serveur",-1);
             if (readingThread != null)
             {
                 readingThread.Abort();
             }
-            this.updateOutputLog("Fermeture des connexions");
+            this.updateOutputLog("Fermeture des connexions",-1);
             if (stream != null)
             {
                 stream.Close();
@@ -164,19 +161,19 @@ public class ClientClass
             {
                 client.Close();
             }
-            this.updateOutputLog("S'agit-il d'un serveur Pour le PINGPONG ???");
+            this.updateOutputLog("S'agit-il d'un serveur Pour le PINGPONG ???",-1);
         }
         catch (Exception ex)
         {
             this.error = -1;
             Console.WriteLine(ex.Message);
-            this.updateOutputLog(ex.Message);
-            this.updateOutputLog("Fail to connect to this serveur");
+            this.updateOutputLog(ex.Message,-1);
+            this.updateOutputLog("Fail to connect to this serveur",-1);
             if (readingThread != null)
             {
                 readingThread.Abort();
             }
-            this.updateOutputLog("Fermeture des connexions");
+            this.updateOutputLog("Fermeture des connexions", -1);
             if (stream != null)
             {
                 stream.Close();
@@ -185,7 +182,7 @@ public class ClientClass
             {
                 client.Close();
             }
-            this.updateOutputLog("S'agit-il d'un serveur Pour le PINGPONG ???");
+            this.updateOutputLog("S'agit-il d'un serveur Pour le PINGPONG ???", -1);
         }
     }
     /// <summary>
@@ -201,9 +198,9 @@ public class ClientClass
         {
             while (true)
             {
-                this.updateOutputLog("Receiving_Data");
+                this.updateOutputLog("Receiving_Data", 0);
                 stream.Read(message_recu, 0, message_recu.Length);
-                this.updateOutputLog(Encoding.ASCII.GetString(message_recu));
+                this.updateOutputLog(Encoding.ASCII.GetString(message_recu),0);
             }
         }
          catch (Exception ex)
@@ -219,7 +216,6 @@ public class ClientClass
         if (!device_selected.Authenticated)
         {
             if(!BluetoothSecurity.PairRequest(device_selected.DeviceAddress,myPin)){
-                System.Console.WriteLine("ICI");
                 return false;
             }
         }
@@ -241,14 +237,14 @@ public class ClientClass
     {
         int result_error;
         /* Mise à jour du texte dans la fenetre principal afin d'afficher les actions en arrière plan */
-        this.updateOutputLog("Starting Scanning ...");
-        this.updateOutputLog("Initializing component ...");
+        this.updateOutputLog("Starting Scanning ...", 0);
+        this.updateOutputLog("Initializing component ...", 0);
 
         /* Création via la Class contenu dans la InTheHand */
         client = new BluetoothClient();
-        this.updateOutputLog("Done\n");
+        this.updateOutputLog("Done", 0);
         /* Lancement de la recherche bluetooth */
-        this.updateOutputLog("Searching Bluetooth Devices ...");
+        this.updateOutputLog("Searching Bluetooth Devices ...", 0);
         BluetoothDeviceInfo[] devices = client.DiscoverDevicesInRange();
         
         /* On récupère un tableau de contenant les appareils */
@@ -261,11 +257,11 @@ public class ClientClass
                 items_bluetooth.Add(d.DeviceName);
             }   
         }
-        this.updateOutputLog("Ending of the research");
-        this.updateOutputLog("Creation of the list");
+        this.updateOutputLog("Ending of the research", 0);
+        this.updateOutputLog("Creation of the list", 0);
         /* Méthode permettant la mise à jour des appareils */
         this.updateListBox();
-        this.updateOutputLog("=========================");
+        this.updateOutputLog("=========================", 0);
         this.devices_found = devices;
     }
     /// <summary>
@@ -287,9 +283,9 @@ public class ClientClass
     ///  Méthode permettant d'acceder à la méthode dédié au changement de la TextBox
     /// </summary>
     /// <param name="text"></param>
-    public void updateOutputLog(String text)
+    public void updateOutputLog(String text, int type)
     {
-        this.form.updateConsoleLog(text);
+        this.form.updateConsoleLog(text,type);
     }
     /// <summary>
     /// Méthode permettant de fermer la connection

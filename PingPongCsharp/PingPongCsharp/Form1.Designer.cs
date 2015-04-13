@@ -33,10 +33,10 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.NamePlayer = new System.Windows.Forms.Label();
             this.stop = new System.Windows.Forms.Button();
-            this.outPutLog = new System.Windows.Forms.TextBox();
             this.listBoxDevice = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.scan_button = new System.Windows.Forms.Button();
+            this.outPutLog = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // serveur
@@ -85,14 +85,6 @@
             this.stop.UseVisualStyleBackColor = true;
             this.stop.Click += new System.EventHandler(this.stop_action);
             // 
-            // outPutLog
-            // 
-            this.outPutLog.Location = new System.Drawing.Point(38, 71);
-            this.outPutLog.Multiline = true;
-            this.outPutLog.Name = "outPutLog";
-            this.outPutLog.Size = new System.Drawing.Size(294, 177);
-            this.outPutLog.TabIndex = 4;
-            // 
             // listBoxDevice
             // 
             this.listBoxDevice.FormattingEnabled = true;
@@ -121,13 +113,21 @@
             this.scan_button.UseVisualStyleBackColor = true;
             this.scan_button.Click += new System.EventHandler(this.scan_button_Click);
             // 
+            // outPutLog
+            // 
+            this.outPutLog.Location = new System.Drawing.Point(60, 71);
+            this.outPutLog.Name = "outPutLog";
+            this.outPutLog.Size = new System.Drawing.Size(272, 177);
+            this.outPutLog.TabIndex = 6;
+            this.outPutLog.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(684, 344);
-            this.Controls.Add(this.listBoxDevice);
             this.Controls.Add(this.outPutLog);
+            this.Controls.Add(this.listBoxDevice);
             this.Controls.Add(this.stop);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.NamePlayer);
@@ -151,10 +151,10 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label NamePlayer;
         private System.Windows.Forms.Button stop;
-        private System.Windows.Forms.TextBox outPutLog;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button scan_button;
         private System.Windows.Forms.ListBox listBoxDevice;
+        private System.Windows.Forms.RichTextBox outPutLog;
     }
 }
 
