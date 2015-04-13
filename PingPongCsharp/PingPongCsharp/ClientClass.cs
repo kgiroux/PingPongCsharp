@@ -14,9 +14,11 @@ public class ClientClass
 {
     private BluetoothDeviceInfo[] devices_found = null;
     private BluetoothDeviceInfo device_selected = null;
+    private BluetoothClient client = null;
+    private Stream stream = null;
     private Guid mUUID = new Guid("293eb187-b6e9-4434-894b-ef81120f0e5b");
     private List<string> items_bluetooth;
-    BluetoothClient client;
+    //BluetoothClient client;
     private Form1 form;
    /// <summary>
    /// Constructeur de l'objet Client Class 
@@ -80,21 +82,19 @@ public class ClientClass
         client.BeginConnect(device_selected.DeviceAddress, mUUID, this.BluetoothClientConnectCallBack, client);
         
     }
-
     void BluetoothClientConnectCallBack(IAsyncResult result)
     {
-        BluetoothClient client = (BluetoothClient)result.AsyncState;
+        client = (BluetoothClient)result.AsyncState;
         try
         {
             client.EndConnect(result);
-            this.updateOutputLog("Send_Data");
-            Stream stream = client.GetStream();
+            stream = client.GetStream();
             stream.ReadTimeout = 1000;
-            this.updateOutputLog("Send_Data");
+            Thread readingThread = new Thread(new ThreadStart(reading));
+            readingThread.Start();
             while (true)
             {
-                while (!ready) ;
-                this.updateOutputLog("Send_Data");
+                this.updateOutputLog("Sending_Data");
                 send_date();
                 stream.Write(message, 0, message.Length);
             }
@@ -106,6 +106,25 @@ public class ClientClass
         
 
         
+    }
+
+    private void reading()
+    {
+        byte[] message_recu = new byte[1024];
+
+         try
+        {
+            while (true)
+            {
+                this.updateOutputLog("Receiving_Data");
+                stream.Read(message_recu, 0, message_recu.Length);
+                this.updateOutputLog(Encoding.ASCII.GetString(message_recu));
+            }
+        }
+         catch (Exception ex)
+         {
+             Console.WriteLine(ex.Message);
+         }
     }
     string myPin = "1234";
     bool ready = false;
@@ -201,7 +220,8 @@ public class ClientClass
     byte[] message;
     private void send_date()
     {
-        message = Encoding.ASCII.GetBytes("Sending Message");
+        int rand = new Random().Next();
+        message = Encoding.ASCII.GetBytes("Sending Message" + rand);
         ready = true;
     }
 

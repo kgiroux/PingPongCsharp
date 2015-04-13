@@ -66,13 +66,14 @@ public class ServerClass
             try
             {
                 messageStream.Read(received_data, 0, received_data.Length);
+                this.updateOutputLog(Encoding.ASCII.GetString(received_data));
             }
             catch (IOException e)
             {
                 this.updateOutputLog(e.Message);
             }
             
-            this.updateOutputLog("Receiving Data 2");
+            //this.updateOutputLog("Receiving Data 2");
 
             String received_string = Encoding.ASCII.GetString(received_data);
             this.updateOutputLog("Received:" + received_string );
@@ -81,8 +82,7 @@ public class ServerClass
             {
                 break;
             }
-            // Envoi
-            byte[] send_data = Encoding.ASCII.GetBytes("Hello world");
+            byte[] send_data = Encoding.ASCII.GetBytes("Hello world !!!!");
             try
             {
                 messageStream.Write(send_data, 0, send_data.Length);
@@ -93,14 +93,12 @@ public class ServerClass
             }
             finally
             {
-                this.updateOutputLog("Passage ICI");
+                this.updateOutputLog("Passage ICI +++ FIN d'envoi !!!!");
             }
             
         }
         bluetoothClient.Close();
     }
-
-    
     /// <summary>
     /// Méthode qui permet de mettre à jour l'affichage de la texte box
     /// </summary>
