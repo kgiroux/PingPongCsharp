@@ -65,7 +65,6 @@ public class ServerClass
             // Reception
             try
             {
-                //messageStream.Write(Encoding.ASCII.GetBytes("HEELOOOOO"), 0, Encoding.ASCII.GetBytes("HEELOOOOO").Length);
                 messageStream.Read(received_data, 0, received_data.Length);
             }
             catch (IOException e)
