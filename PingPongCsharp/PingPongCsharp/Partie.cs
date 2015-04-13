@@ -67,21 +67,34 @@ namespace PingPongCsharp
             }
             else
             {
-                int x = ball.Location.X;
-                int y = ball.Location.Y;
+                int bx = ball.Location.X;
+                int by = ball.Location.Y;
+                int bh = ball.Height;
+                int bw = ball.Width;
+                int r1x = raquette.Location.X;
+                int r1y = raquette.Location.Y;
+                int r1h = raquette.Height;
+                int r1w = raquette.Width;
+                int r2x = raquette2.Location.X;
+                int r2y = raquette2.Location.Y;
+                int r2h = raquette2.Height;
+                int r2w = raquette2.Width;
 
-                if (y < 0)
-                    b.Angle += 2 * b.Angle;
-                if (y > this.Height)
+                if (by < 0 || by + bh > this.Height)
                     b.Angle -= 2 * b.Angle;
+
+                if (bx < r1x + r1w && bx > r1x && by < r1y + r1h && by + bh > r1y)
+                    b.Angle += 2 * b.Angle;
+                if (bx + bw > r2x && bx + bw < r2x + r2w && by < r1y + r1h && by + bh > r1y)
+                    b.Angle += 2 * b.Angle;
 
                 int[] tab = new int[2];
                 tab = b.Delta();
 
-                x += tab[0];
-                y += tab[1];
+                bx += tab[0];
+                by += tab[1];
 
-                ball.Location = new Point(x, y);
+                ball.Location = new Point(bx, by);
 
                 t = 0;
             }
