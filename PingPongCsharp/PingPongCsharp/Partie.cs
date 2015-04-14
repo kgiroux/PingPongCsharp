@@ -66,8 +66,15 @@ namespace PingPongCsharp
             {
                 ry += 10;
             }
-
-            raquette.Location = new Point(rx, ry);
+            try
+            {
+                raquette.Location = new Point(rx, ry);
+            }
+            catch(InvalidOperationException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
 
             if (b.Vitesse != 0) 
             {

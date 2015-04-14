@@ -98,7 +98,7 @@ public class ServerClass
                     this.updateOutputLog("Passage ICI +++ FIN d'envoi !!!!");
                 }
                 this.form.setReady(true);
-                ready = false;
+                ready = true;
             }
             
         }

@@ -18,6 +18,7 @@ namespace PingPongCsharp
         Partie p = null;
         private ServerClass svr;
         private Boolean ready = false;
+        private Boolean ready_client = false;
         private Thread launching_partie = null;
         List<string> item = null;
         /* Constructeur de la fenetre*/
@@ -60,7 +61,7 @@ namespace PingPongCsharp
             /* Créer un objet ServerClass qui va être l'objet contenir toute les méthodes concernant le serveur */
             /* On lui passe l'objet form pour pouvoir modifier les textes dans la liste et la textBox */
             svr = new ServerClass(this);
-            p = new Partie(0);
+            
             Launching_partie();
             /* Lancement de la methode pour lancer le serveur */
             svr.connectAsServer();
@@ -190,25 +191,51 @@ namespace PingPongCsharp
 
         private void ClientConnected()
         {
+            // Serveur
             this.updateConsoleLog("Ready : value  " + ready);
             while (!ready) ;
             this.updateConsoleLog("Ready " + ready);
-            //p = new Partie(0);
-            p.Show();
-            Application.Run();
+            p = new Partie(0);
+            p.ShowDialog();
             ready = false;
         }
 
-        
-        private void Launching_partie()
+
+        private void ClientConnectedServer()
         {
-            launching_partie = new Thread(new ThreadStart(ClientConnected));
-            launching_partie.Start();
+            // Client
+            this.updateConsoleLog("Ready : value  " + ready_client);
+            while (!ready_client) ;
+            this.updateConsoleLog("Ready " + ready_client);
+            p = new Partie(10);
+            p.ShowDialog();
+            ready_client = false;
+        }
+
+        
+        private void Launching_partie(int mode)
+        {
+            if (mode == 0)
+            {
+                launching_partie = new Thread(new ThreadStart(ClientConnected));
+                launching_partie.Start();
+            }
+            else
+            {
+                launching_partie = new Thread(new ThreadStart(ClientConnectedServer));
+                launching_partie.Start();
+            }
+            
         }
 
         public void setReady(Boolean ready)
         {
             this.ready = ready;
+        }
+
+        public void setReadyClient(Boolean ready)
+        {
+            this.ready_client = ready;
         }
     }
 }
