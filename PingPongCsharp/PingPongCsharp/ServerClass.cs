@@ -17,6 +17,9 @@ public class ServerClass
     private bool ready = true;
     private BluetoothListener bluetoothServerListener;
     Thread bluetoothServerThread;
+    Thread readingThread= null;
+    byte[] messageRecu;
+    byte[] messageSend; 
     /// <summary>
     /// Constructeur de ServerClass
     /// </summary>
@@ -33,13 +36,13 @@ public class ServerClass
     public void connectAsServer()
     {
         
-        this.updateOutputLog("Launching Server ...");
+        this.updateOutputLog("Launching Server ...",0);
         bluetoothServerThread = new Thread(new ThreadStart(start_server));
         if(!serverLaunch)
             bluetoothServerThread.Start();
         else
         {
-            this.updateOutputLog("Server already launched");
+            this.updateOutputLog("Server already launched",0);
         }
         serverLaunch = true;
     }
@@ -48,7 +51,7 @@ public class ServerClass
     /// </summary>
     private void start_server()
     {
-        this.updateOutputLog("Initializing component...");
+        this.updateOutputLog("Initializing component...",0);
         /* Création du listener pour le serveur */
         bluetoothServerListener = new BluetoothListener(this.mUUID);
 
@@ -57,60 +60,61 @@ public class ServerClass
 
         bluetoothClient = bluetoothServerListener.AcceptBluetoothClient();
         /* Attend qu'un client se connect */
-        this.updateOutputLog("Client connect");
+        this.updateOutputLog("Client connect",0);
         messageStream = bluetoothClient.GetStream();
+        readingThread = new Thread(new ThreadStart(reading));
+        readingThread.Start();
         while (true)
         {
-
+            messageSend = new byte[1024];
             if (ready)
             {
-                this.updateOutputLog("Receiving Data");
-                // Récupération d'un message envoyer au client
-                byte[] received_data = new byte[1024];
-                // Reception
+                prepareSendData();
                 try
                 {
-                    messageStream.Read(received_data, 0, received_data.Length);
-                    this.updateOutputLog(Encoding.ASCII.GetString(received_data));
+                    messageStream.Write(messageSend, 0, messageSend.Length);
                 }
                 catch (IOException e)
                 {
-                    this.updateOutputLog(e.Message);
-                }
-                String received_string = Encoding.ASCII.GetString(received_data);
-                this.updateOutputLog("Received:" + received_string);
-
-                if (received_string.Contains("quit"))
-                {
-                    break;
-                }
-                byte[] send_data = Encoding.ASCII.GetBytes("Hello world !!!!");
-                try
-                {
-                    messageStream.Write(send_data, 0, send_data.Length);
-                }
-                catch (IOException e)
-                {
-                    this.updateOutputLog(e.Message);
+                    this.updateOutputLog(e.Message,-1);
                 }
                 finally
                 {
-                    this.updateOutputLog("Passage ICI +++ FIN d'envoi !!!!");
+                    this.updateOutputLog("Passage ICI +++ FIN d'envoi !!!!",0);
                 }
                 this.form.setReady(true);
-                ready = true;
+                ready = ready;
             }
             
         }
         bluetoothClient.Close();
     }
+
+    private void reading()
+    {
+        messageRecu = new byte[1024];
+        try
+        {
+            while (true)
+            {
+                this.form.setReady(true);
+                this.updateOutputLog("Receiving_Data", 0);
+                messageStream.Read(messageRecu, 0, messageRecu.Length);
+                this.updateOutputLog(Encoding.ASCII.GetString(messageRecu), 0);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
     /// <summary>
     /// Méthode qui permet de mettre à jour l'affichage de la texte box
     /// </summary>
     /// <param name="text"></param>
-    public void updateOutputLog(String text)
+    public void updateOutputLog(String text , int type)
     {
-        this.form.updateConsoleLog(text);
+        this.form.updateConsoleLog(text,type);
     }
 
 
@@ -141,4 +145,10 @@ public class ServerClass
             bluetoothClient.Close();
         }
     }
+
+    public void prepareSendData(Balle b){
+        S
+        messageSend = 
+    }
+
 }

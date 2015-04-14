@@ -146,7 +146,15 @@ namespace PingPongCsharp
                 outPutLog.AppendText(text + System.Environment.NewLine);
                 return 0;
             };
-            Invoke(del);
+            try
+            {
+                Invoke(del);
+            }
+            catch (ObjectDisposedException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
         }
 
         public void updateConsoleLog(string text, int type)
@@ -178,7 +186,14 @@ namespace PingPongCsharp
                 outPutLog.SelectionColor = outPutLog.ForeColor;
                 return 0;
             };
-            Invoke(del);
+            try
+            {
+                Invoke(del);
+            }
+            catch (ObjectDisposedException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         private void listBoxDevice_DoubleClick(object sender, EventArgs e)

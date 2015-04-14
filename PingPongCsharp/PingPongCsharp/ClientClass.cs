@@ -24,6 +24,8 @@ public class ClientClass
     private List<string> items_bluetooth;
     private int error = 0;
     private Form1 form;
+    byte[] messageSend;
+    byte[] messageRecu;
 
 
    /// <summary>
@@ -133,8 +135,8 @@ public class ClientClass
             {
                 this.form.setReadyClient(true);
                 this.updateOutputLog("Sending_Data",0);
-                send_data();
-                stream.Write(message, 0, message.Length);
+                prepareSendData();
+                stream.Write(messageSend, 0, messageSend.Length);
             }
         }
         catch (System.Net.Sockets.SocketException ex )
@@ -185,7 +187,7 @@ public class ClientClass
     private void reading()
     {
         this.error = -1;
-        byte[] message_recu = new byte[1024];
+        messageRecu = new byte[1024];
 
          try
         {
@@ -193,8 +195,8 @@ public class ClientClass
             {
                 this.form.setReadyClient(true);
                 this.updateOutputLog("Receiving_Data", 0);
-                stream.Read(message_recu, 0, message_recu.Length);
-                this.updateOutputLog(Encoding.ASCII.GetString(message_recu),0);
+                stream.Read(messageRecu, 0, messageRecu.Length);
+                this.updateOutputLog(Encoding.ASCII.GetString(messageRecu), 0);
             }
         }
          catch (Exception ex)
@@ -313,11 +315,11 @@ public class ClientClass
         }
         
     }
-    byte[] message;
-    private void send_data()
+    
+    private void prepareSendData()
     {
         int rand = new Random().Next();
-        message = Encoding.ASCII.GetBytes("Sending Message" + rand);
+        messageSend = Encoding.ASCII.GetBytes("Sending Message" + rand);
     }
 
 
