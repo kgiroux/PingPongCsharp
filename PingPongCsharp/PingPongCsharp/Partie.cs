@@ -24,7 +24,6 @@ namespace PingPongCsharp
             this.joueur = joueur;
 
             b = new Balle();
-
             InitializeComponent();
 
             if (joueur == 1)
@@ -32,7 +31,6 @@ namespace PingPongCsharp
                 //ball.Visible = false;
                 raquette.Location = new Point(this.Width - 46, this.Height / 2 - raquette.Height / 2);
             }
-            
             KeyDown += new KeyEventHandler(Form1_KeyDown);
         }
         

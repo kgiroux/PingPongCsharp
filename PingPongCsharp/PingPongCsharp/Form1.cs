@@ -15,6 +15,7 @@ namespace PingPongCsharp
     public partial class Form1 : Form
     {
         private ClientClass clt;
+        Partie p = null;
         private ServerClass svr;
         private Boolean ready = false;
         private Thread launching_partie = null;
@@ -59,6 +60,7 @@ namespace PingPongCsharp
             /* Créer un objet ServerClass qui va être l'objet contenir toute les méthodes concernant le serveur */
             /* On lui passe l'objet form pour pouvoir modifier les textes dans la liste et la textBox */
             svr = new ServerClass(this);
+            p = new Partie(0);
             Launching_partie();
             /* Lancement de la methode pour lancer le serveur */
             svr.connectAsServer();
@@ -188,11 +190,13 @@ namespace PingPongCsharp
 
         private void ClientConnected()
         {
-            this.updateConsoleLog("Ready : value ! " + ready);
+            this.updateConsoleLog("Ready : value  " + ready);
             while (!ready) ;
             this.updateConsoleLog("Ready " + ready);
-            Partie p = new Partie(0);
+            //p = new Partie(0);
             p.Show();
+            Application.Run();
+            ready = false;
         }
 
         

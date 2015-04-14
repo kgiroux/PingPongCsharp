@@ -14,6 +14,7 @@ public class ServerClass
     private Guid mUUID = new Guid("293eb187-b6e9-4434-894b-ef81120f0e5b");
     private BluetoothClient bluetoothClient;
     Stream messageStream = null;
+    private bool ready = true;
     private BluetoothListener bluetoothServerListener;
     Thread bluetoothServerThread;
     /// <summary>
@@ -60,41 +61,46 @@ public class ServerClass
         messageStream = bluetoothClient.GetStream();
         while (true)
         {
-            this.updateOutputLog("Receiving Data");
-            // Récupération d'un message envoyer au client
-            byte[] received_data = new byte[1024];
-            // Reception
-            try
-            {
-                messageStream.Read(received_data, 0, received_data.Length);
-                this.updateOutputLog(Encoding.ASCII.GetString(received_data));
-            }
-            catch (IOException e)
-            {
-                this.updateOutputLog(e.Message);
-            }
-            String received_string = Encoding.ASCII.GetString(received_data);
-            this.updateOutputLog("Received:" + received_string );
 
-            if (received_string.Contains("quit"))
+            if (ready)
             {
-                break;
+                this.updateOutputLog("Receiving Data");
+                // Récupération d'un message envoyer au client
+                byte[] received_data = new byte[1024];
+                // Reception
+                try
+                {
+                    messageStream.Read(received_data, 0, received_data.Length);
+                    this.updateOutputLog(Encoding.ASCII.GetString(received_data));
+                }
+                catch (IOException e)
+                {
+                    this.updateOutputLog(e.Message);
+                }
+                String received_string = Encoding.ASCII.GetString(received_data);
+                this.updateOutputLog("Received:" + received_string);
+
+                if (received_string.Contains("quit"))
+                {
+                    break;
+                }
+                byte[] send_data = Encoding.ASCII.GetBytes("Hello world !!!!");
+                try
+                {
+                    messageStream.Write(send_data, 0, send_data.Length);
+                }
+                catch (IOException e)
+                {
+                    this.updateOutputLog(e.Message);
+                }
+                finally
+                {
+                    this.updateOutputLog("Passage ICI +++ FIN d'envoi !!!!");
+                }
+                this.form.setReady(true);
+                ready = false;
             }
-            byte[] send_data = Encoding.ASCII.GetBytes("Hello world !!!!");
-            try
-            {
-                messageStream.Write(send_data, 0, send_data.Length);
-            }
-            catch (IOException e)
-            {
-                this.updateOutputLog(e.Message);
-            }
-            finally
-            {
-                this.updateOutputLog("Passage ICI +++ FIN d'envoi !!!!");
-            }
-            this.form.setReady(true);
-            while (true) ;
+            
         }
         bluetoothClient.Close();
     }
