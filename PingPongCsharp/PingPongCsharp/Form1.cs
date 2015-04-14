@@ -62,7 +62,7 @@ namespace PingPongCsharp
             /* On lui passe l'objet form pour pouvoir modifier les textes dans la liste et la textBox */
             svr = new ServerClass(this);
             
-            Launching_partie();
+            Launching_partie(0);
             /* Lancement de la methode pour lancer le serveur */
             svr.connectAsServer();
         }
@@ -106,6 +106,7 @@ namespace PingPongCsharp
         {
             client.Enabled = false;
             clt = new ClientClass(this);
+            Launching_partie(1);
             clt.startScanBluetoothDevices();
         }
         
@@ -220,10 +221,14 @@ namespace PingPongCsharp
                 launching_partie = new Thread(new ThreadStart(ClientConnected));
                 launching_partie.Start();
             }
-            else
+            else if(mode == 1)
             {
                 launching_partie = new Thread(new ThreadStart(ClientConnectedServer));
                 launching_partie.Start();
+            }
+            else
+            {
+                
             }
             
         }
