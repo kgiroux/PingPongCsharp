@@ -13,18 +13,24 @@ namespace PingPongCsharp
 {
     public partial class Partie : Form
     {
-        private static Balle b;
-        private static int t = 0;
+        private int joueur;
+        private Balle b;
 
-        public Partie()
+        public Partie(int joueur)
         {
-            InitializeComponent();
-            
-            KeyDown += new KeyEventHandler(Form1_KeyDown);
+            this.joueur = joueur;
+
+            if (joueur == 1)
+            {
+                ball.Visible = false;
+                raquette.Location = new Point(this.Width - 46, this.Height / 2 - raquette.Height / 2);
+            }
 
             b = new Balle();
 
-            b.Lance();
+            InitializeComponent();
+            
+            KeyDown += new KeyEventHandler(Form1_KeyDown);
         }
         
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -34,10 +40,13 @@ namespace PingPongCsharp
 
             int i = 0;
             
+            if(e.KeyCode == Keys.Space && b.Vitesse == 0)
+                b.Lance();
+
             while (i < 15)
             {
-                if (e.KeyCode == Keys.Z && y > 0) y -= 1;
-                else if (e.KeyCode == Keys.S && y + raquette.Height < this.ClientSize.Height) y += 1;
+                if (e.KeyCode == Keys.Up && y > 0) y -= 1;
+                else if (e.KeyCode == Keys.Down && y + raquette.Height < this.ClientSize.Height) y += 1;
                 i++;
             }
 
@@ -51,11 +60,7 @@ namespace PingPongCsharp
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (t < b.Vitesse)
-            {
-                t++;
-            }
-            else
+            if (b.Vitesse != 0) 
             {
                 int bx = ball.Location.X;
                 int by = ball.Location.Y;
@@ -76,12 +81,20 @@ namespace PingPongCsharp
                     else
                         b.Angle = 180 - b.Angle;
 
-                if(bx < rx + rw && bx > rx && by < ry + rh && by + bh > ry)
-                    if(b.Angle > 180)
-                        b.Angle = 540 - b.Angle;
-                    else
-                        b.Angle = 180 - b.Angle;
+                if (joueur == 0)
+                    if (bx < rx + rw && bx > rx && by < ry + rh && by + bh > ry)
+                        if (b.Angle > 180)
+                            b.Angle = 540 - b.Angle;
+                        else
+                            b.Angle = 180 - b.Angle;
+                else
+                    if (bx + bw < rx + rw && bx + bw > rx && by < ry + rh && by + bh > ry)
+                        if (b.Angle > 180)
+                            b.Angle = 540 - b.Angle;
+                        else
+                            b.Angle = 180 - b.Angle;
                 
+
                 tab = b.Delta();
 
                 Console.WriteLine(b.Angle);
@@ -91,11 +104,7 @@ namespace PingPongCsharp
                 by += tab[1];
 
                 ball.Location = new Point(bx, by);
-
-                t = 0;
             }
-
-            this.Invalidate();
         }
     }
 }
