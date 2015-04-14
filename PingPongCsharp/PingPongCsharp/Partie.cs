@@ -20,15 +20,15 @@ namespace PingPongCsharp
         {
             this.joueur = joueur;
 
+            b = new Balle();
+
+            InitializeComponent();
+
             if (joueur == 1)
             {
                 ball.Visible = false;
                 raquette.Location = new Point(this.Width - 46, this.Height / 2 - raquette.Height / 2);
             }
-
-            b = new Balle();
-
-            InitializeComponent();
             
             KeyDown += new KeyEventHandler(Form1_KeyDown);
         }
@@ -40,7 +40,7 @@ namespace PingPongCsharp
 
             int i = 0;
             
-            if(e.KeyCode == Keys.Space && b.Vitesse == 0)
+            if(e.KeyCode == Keys.Space && b.Vitesse == 0 && ball.Visible == true)
                 b.Lance();
 
             while (i < 15)

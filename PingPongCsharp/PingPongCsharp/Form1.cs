@@ -192,7 +192,7 @@ namespace PingPongCsharp
             Partie p = new Partie(0);
         }
 
-
+        
         private void Lanching_partie()
         {
             lauching_partie = new Thread(new ThreadStart(ClientConnected));
