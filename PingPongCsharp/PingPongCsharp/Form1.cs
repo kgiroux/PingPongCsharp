@@ -134,7 +134,40 @@ namespace PingPongCsharp
             Func<int> del = delegate()
             {
                 /* Rajoute du texte à la texte box */
+                //outPutLog.ForeColor= Color.Red ;
                 outPutLog.AppendText(text + System.Environment.NewLine);
+                return 0;
+            };
+            Invoke(del);
+        }
+
+        public void updateConsoleLog(string text, int type)
+        {
+            /* Création d'une méthode sécurisé (pointeur sur une fonction) pour changer le contenu de la liste. Cette méthode est anonyme*/
+            Func<int> del = delegate()
+            {
+                Color color;
+                /* Rajoute du texte à la texte box */
+                switch (type)
+                {
+                    case 0 :
+                        color = Color.Black;
+                        break;
+                    case 1 :
+                        color = Color.Green;
+                        break;
+                    case -1 :
+                        color = Color.Red;
+                        break;
+                    default :
+                        color = Color.Black;
+                        break;
+                }
+                outPutLog.SelectionStart = outPutLog.TextLength;
+                outPutLog.SelectionLength = 0;
+                outPutLog.SelectionColor = color;
+                outPutLog.AppendText(text + System.Environment.NewLine);
+                outPutLog.SelectionColor = outPutLog.ForeColor;
                 return 0;
             };
             Invoke(del);
