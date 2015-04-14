@@ -131,6 +131,7 @@ public class ClientClass
             readingThread.Start();
             while (true)
             {
+                this.form.setReadyClient(true);
                 this.updateOutputLog("Sending_Data",0);
                 send_data();
                 stream.Write(message, 0, message.Length);
@@ -155,7 +156,6 @@ public class ClientClass
             {
                 client.Close();
             }
-            this.updateOutputLog("S'agit-il d'un serveur Pour le PINGPONG ???",-1);
         }
         catch (Exception ex)
         {
@@ -176,7 +176,6 @@ public class ClientClass
             {
                 client.Close();
             }
-            this.updateOutputLog("S'agit-il d'un serveur Pour le PINGPONG ???", -1);
         }
     }
     /// <summary>
@@ -192,6 +191,7 @@ public class ClientClass
         {
             while (true)
             {
+                this.form.setReadyClient(true);
                 this.updateOutputLog("Receiving_Data", 0);
                 stream.Read(message_recu, 0, message_recu.Length);
                 this.updateOutputLog(Encoding.ASCII.GetString(message_recu),0);
