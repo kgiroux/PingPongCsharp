@@ -110,8 +110,15 @@ namespace PingPongCsharp
 
                 bx += tab[0];
                 by += tab[1];
-
-                ball.Location = new Point(bx, by);
+                try
+                {
+                    ball.Location = new Point(bx, by);
+                }
+                catch (InvalidOperationException ex)
+                {
+                    Console.WriteLine(ex.Message)
+                }
+                
             }
         }
     }
