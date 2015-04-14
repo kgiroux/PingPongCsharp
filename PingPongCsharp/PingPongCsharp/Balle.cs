@@ -21,7 +21,7 @@ namespace PingPongCsharp
         public void Lance()
         {
             Random r = new Random();
-            vitesse = 20;
+            vitesse = 10;
             do
                 angle = r.Next(0, 360);
             while(angle > 45 && angle < 135 || angle > 225 && angle < 315);

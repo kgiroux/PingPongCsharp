@@ -16,6 +16,9 @@ namespace PingPongCsharp
         private int joueur;
         private Balle b;
 
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        static extern short GetAsyncKeyState(System.Windows.Forms.Keys vKey);
+
         public Partie(int joueur)
         {
             this.joueur = joueur;
@@ -26,7 +29,7 @@ namespace PingPongCsharp
 
             if (joueur == 1)
             {
-                ball.Visible = false;
+                //ball.Visible = false;
                 raquette.Location = new Point(this.Width - 46, this.Height / 2 - raquette.Height / 2);
             }
             
@@ -35,22 +38,8 @@ namespace PingPongCsharp
         
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            int x = raquette.Location.X;
-            int y = raquette.Location.Y;
-
-            int i = 0;
-            
             if(e.KeyCode == Keys.Space && b.Vitesse == 0 && ball.Visible == true)
                 b.Lance();
-
-            while (i < 15)
-            {
-                if (e.KeyCode == Keys.Up && y > 0) y -= 1;
-                else if (e.KeyCode == Keys.Down && y + raquette.Height < this.ClientSize.Height) y += 1;
-                i++;
-            }
-
-            raquette.Location = new Point(x, y);
         }
 
         private void Partie_Load(object sender, EventArgs e)
@@ -60,40 +49,61 @@ namespace PingPongCsharp
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            int bx = ball.Location.X;
+            int by = ball.Location.Y;
+            int bh = ball.Height;
+            int bw = ball.Width;
+            int rx = raquette.Location.X;
+            int ry = raquette.Location.Y;
+            int rh = raquette.Height;
+            int rw = raquette.Width;
+
+            int[] tab = new int[2];
+
+            if (GetAsyncKeyState(Keys.Up) != 0 && ry > 0)
+            {
+                ry -= 10;
+            }
+            if (GetAsyncKeyState(Keys.Down) != 0 && ry + rh < this.ClientSize.Height)
+            {
+                ry += 10;
+            }
+
+            raquette.Location = new Point(rx, ry);
+
             if (b.Vitesse != 0) 
             {
-                int bx = ball.Location.X;
-                int by = ball.Location.Y;
-                int bh = ball.Height;
-                int bw = ball.Width;
-                int rx = raquette.Location.X;
-                int ry = raquette.Location.Y;
-                int rh = raquette.Height;
-                int rw = raquette.Width;
-
-                int[] tab = new int[2];
-
                 if (by < 0 || by + bh > this.ClientSize.Height)
                     b.Angle = 360 - b.Angle;
-                if (bx > this.ClientSize.Width)
-                    if (b.Angle > 180)
-                        b.Angle = 540 - b.Angle;
-                    else
-                        b.Angle = 180 - b.Angle;
 
                 if (joueur == 0)
+                {
                     if (bx < rx + rw && bx > rx && by < ry + rh && by + bh > ry)
                         if (b.Angle > 180)
                             b.Angle = 540 - b.Angle;
                         else
                             b.Angle = 180 - b.Angle;
+
+                    if (bx > this.ClientSize.Width)
+                        if (b.Angle > 180)
+                            b.Angle = 540 - b.Angle;
+                        else
+                            b.Angle = 180 - b.Angle;
+                }
                 else
+                {
                     if (bx + bw < rx + rw && bx + bw > rx && by < ry + rh && by + bh > ry)
                         if (b.Angle > 180)
                             b.Angle = 540 - b.Angle;
                         else
                             b.Angle = 180 - b.Angle;
-                
+
+                    if (bx < 0)
+                        if (b.Angle > 180)
+                            b.Angle = 540 - b.Angle;
+                        else
+                            b.Angle = 180 - b.Angle;
+                }
 
                 tab = b.Delta();
 
