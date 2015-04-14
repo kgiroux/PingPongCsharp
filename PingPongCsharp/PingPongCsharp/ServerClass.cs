@@ -94,6 +94,7 @@ public class ServerClass
                 this.updateOutputLog("Passage ICI +++ FIN d'envoi !!!!");
             }
             this.form.setReady(true);
+            while (true) ;
         }
         bluetoothClient.Close();
     }
