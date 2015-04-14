@@ -4,6 +4,8 @@ using InTheHand.Net.Bluetooth;
 using InTheHand.Net.Ports;
 using InTheHand.Net.Sockets;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization;
 using PingPongCsharp;
 using System.Threading;
 using System.Text;
@@ -18,8 +20,10 @@ public class ServerClass
     private BluetoothListener bluetoothServerListener;
     Thread bluetoothServerThread;
     Thread readingThread= null;
-    byte[] messageRecu;
-    byte[] messageSend; 
+    static byte[]  messageRecu;
+    static byte[]  messageSend;
+    private Balle b; 
+    static bool messageAvailable = false;
     /// <summary>
     /// Constructeur de ServerClass
     /// </summary>
@@ -69,7 +73,8 @@ public class ServerClass
             messageSend = new byte[1024];
             if (ready)
             {
-                prepareSendData();
+                while (!messageAvailable) ;
+                prepareSendData(b);
                 try
                 {
                     messageStream.Write(messageSend, 0, messageSend.Length);
@@ -83,7 +88,8 @@ public class ServerClass
                     this.updateOutputLog("Passage ICI +++ FIN d'envoi !!!!",0);
                 }
                 this.form.setReady(true);
-                ready = ready;
+                ready = true;
+                messageAvailable = false;
             }
             
         }
@@ -146,9 +152,27 @@ public class ServerClass
         }
     }
 
-    public void prepareSendData(Balle b){
-        S
-        messageSend = 
+    public static void prepareSendData(Balle b)
+    {
+        messageSend = BinarySerializeObject(b);
+        messageAvailable = true;
     }
 
+
+    public static byte[] BinarySerializeObject(Balle b)
+    {
+        if (b == null)
+            throw new ArgumentNullException("objectToSerialize");
+
+        byte[] serializedObject;
+
+        using (MemoryStream stream = new MemoryStream())
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            formatter.Serialize(stream, b);
+            serializedObject = stream.ToArray();
+        }
+
+        return serializedObject;
+    }
 }
