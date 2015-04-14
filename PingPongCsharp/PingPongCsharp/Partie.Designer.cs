@@ -30,11 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             this.raquette = new System.Windows.Forms.PictureBox();
-            this.raquette2 = new System.Windows.Forms.PictureBox();
             this.ball = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.raquette)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.raquette2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ball)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,16 +45,6 @@
             this.raquette.Size = new System.Drawing.Size(22, 156);
             this.raquette.TabIndex = 0;
             this.raquette.TabStop = false;
-            // 
-            // raquette2
-            // 
-            this.raquette2.AccessibleName = "Raquette";
-            this.raquette2.BackColor = System.Drawing.SystemColors.InfoText;
-            this.raquette2.Location = new System.Drawing.Point(1018, 176);
-            this.raquette2.Name = "raquette2";
-            this.raquette2.Size = new System.Drawing.Size(22, 156);
-            this.raquette2.TabIndex = 1;
-            this.raquette2.TabStop = false;
             // 
             // ball
             // 
@@ -80,13 +68,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1089, 506);
             this.Controls.Add(this.ball);
-            this.Controls.Add(this.raquette2);
             this.Controls.Add(this.raquette);
             this.Name = "Partie";
             this.Text = "Partie";
             this.Load += new System.EventHandler(this.Partie_Load);
             ((System.ComponentModel.ISupportInitialize)(this.raquette)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.raquette2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ball)).EndInit();
             this.ResumeLayout(false);
 
@@ -95,7 +81,6 @@
         #endregion
 
         private System.Windows.Forms.PictureBox raquette;
-        private System.Windows.Forms.PictureBox raquette2;
         private System.Windows.Forms.PictureBox ball;
         private System.Windows.Forms.Timer timer1;
     }

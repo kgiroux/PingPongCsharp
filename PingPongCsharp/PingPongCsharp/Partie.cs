@@ -19,39 +19,29 @@ namespace PingPongCsharp
         public Partie()
         {
             InitializeComponent();
-
+            
             KeyDown += new KeyEventHandler(Form1_KeyDown);
 
             b = new Balle();
 
             b.Lance();
         }
-
+        
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             int x = raquette.Location.X;
             int y = raquette.Location.Y;
 
-            int x2 = raquette2.Location.X;
-            int y2 = raquette2.Location.Y;
-
-            int i =0;
-
-            Console.WriteLine(this.Height);
-            Console.WriteLine(raquette2.Location.Y + raquette2.Height);
+            int i = 0;
             
             while (i < 15)
             {
-                if (e.KeyCode == Keys.Up && raquette2.Location.Y > 0) y2 -= 1;
-                else if (e.KeyCode == Keys.Down && raquette2.Location.Y + raquette2.Height < this.Height) y2 += 1;
-
-                if (e.KeyCode == Keys.Z && raquette.Location.Y > 0) y -= 1;
-                else if (e.KeyCode == Keys.S && raquette.Location.Y + raquette.Height < this.Height) y += 1;
+                if (e.KeyCode == Keys.Z && y > 0) y -= 1;
+                else if (e.KeyCode == Keys.S && y + raquette.Height < this.ClientSize.Height) y += 1;
                 i++;
-
-                raquette.Location = new Point(x, y);
-                raquette2.Location = new Point(x2, y2);
             }
+
+            raquette.Location = new Point(x, y);
         }
 
         private void Partie_Load(object sender, EventArgs e)
@@ -71,25 +61,31 @@ namespace PingPongCsharp
                 int by = ball.Location.Y;
                 int bh = ball.Height;
                 int bw = ball.Width;
-                int r1x = raquette.Location.X;
-                int r1y = raquette.Location.Y;
-                int r1h = raquette.Height;
-                int r1w = raquette.Width;
-                int r2x = raquette2.Location.X;
-                int r2y = raquette2.Location.Y;
-                int r2h = raquette2.Height;
-                int r2w = raquette2.Width;
-
-                if (by < 0 || by + bh > this.Height)
-                    b.Angle -= 2 * b.Angle;
-
-                if (bx < r1x + r1w && bx > r1x && by < r1y + r1h && by + bh > r1y)
-                    b.Angle += 2 * b.Angle;
-                if (bx + bw > r2x && bx + bw < r2x + r2w && by < r2y + r2h && by + bh > r2y)
-                    b.Angle += 2 * b.Angle;
+                int rx = raquette.Location.X;
+                int ry = raquette.Location.Y;
+                int rh = raquette.Height;
+                int rw = raquette.Width;
 
                 int[] tab = new int[2];
+
+                if (by < 0 || by + bh > this.ClientSize.Height)
+                    b.Angle = 360 - b.Angle;
+                if (bx > this.ClientSize.Width)
+                    if (b.Angle > 180)
+                        b.Angle = 540 - b.Angle;
+                    else
+                        b.Angle = 180 - b.Angle;
+
+                if(bx < rx + rw && bx > rx && by < ry + rh && by + bh > ry)
+                    if(b.Angle > 180)
+                        b.Angle = 540 - b.Angle;
+                    else
+                        b.Angle = 180 - b.Angle;
+                
                 tab = b.Delta();
+
+                Console.WriteLine(b.Angle);
+                Console.WriteLine(tab[0] + "    " + tab[1]);
 
                 bx += tab[0];
                 by += tab[1];
@@ -98,6 +94,8 @@ namespace PingPongCsharp
 
                 t = 0;
             }
+
+            this.Invalidate();
         }
     }
 }

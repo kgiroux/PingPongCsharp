@@ -28,13 +28,15 @@ namespace PingPongCsharp
         public int[] Delta()
         {
             int[] p = new int[2];
-            p[0] = (int) (Math.Cos(angle) * 10);
+            p[0] = (int)(Math.Cos(angle * Math.PI / 180) * 10);
             do
             {
-                p[1] = (int)(Math.Sin(angle) * 10);
+                Console.WriteLine(angle);
+                p[1] = (int)(Math.Sin(angle * Math.PI / 180) * 10);
             } 
             while (p[1] == 0);
 
+            Console.WriteLine(Math.Cos(angle) + "     " + Math.Sin(angle));
             return p;
         }
     }
