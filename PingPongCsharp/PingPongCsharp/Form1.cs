@@ -85,7 +85,7 @@ namespace PingPongCsharp
                 client.Enabled = false;
                 scan_button.Enabled = true;
                 textBox1.Text = "";
-                Partie p = new Partie();
+                Partie p = new Partie(1);
                 p.Show();
         }
 
