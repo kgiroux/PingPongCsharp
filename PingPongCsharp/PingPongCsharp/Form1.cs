@@ -208,7 +208,7 @@ namespace PingPongCsharp
             this.updateConsoleLog("Ready : value  " + ready_client);
             while (!ready_client) ;
             this.updateConsoleLog("Ready " + ready_client);
-            p = new Partie(10);
+            p = new Partie(1);
             p.ShowDialog();
             ready_client = false;
         }

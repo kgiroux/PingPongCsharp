@@ -206,7 +206,6 @@ public class ClientClass
 
 
     string myPin = "1234";
-    bool ready = false;
     public bool pairDevice()
     {
 
@@ -232,7 +231,6 @@ public class ClientClass
     /// </summary>
     private void scan()
     {
-        int result_error;
         /* Mise à jour du texte dans la fenetre principal afin d'afficher les actions en arrière plan */
         this.updateOutputLog("Starting Scanning ...", 0);
         this.updateOutputLog("Initializing component ...", 0);
@@ -320,7 +318,6 @@ public class ClientClass
     {
         int rand = new Random().Next();
         message = Encoding.ASCII.GetBytes("Sending Message" + rand);
-        ready = true;
     }
 
 
