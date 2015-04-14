@@ -116,7 +116,7 @@ namespace PingPongCsharp
                 }
                 catch (InvalidOperationException ex)
                 {
-                    Console.WriteLine(ex.Message)
+                    Console.WriteLine(ex.Message);
                 }
                 
             }
