@@ -91,21 +91,33 @@ namespace PingPongCsharp
                             b.Angle = 180 - b.Angle;
 
                         if(by + bh > ry && by + bh/2 < ry + rh/2)
-                            b.Angle -= (1 - ((by + bh) - ry)) / (rh / 2) * 60;
+                            b.Angle -= (int)((double)((double)rh / 2 - ((by + bh) - ry)) / ((double)rh / 2) * 60);
                         else
-                            b.Angle += (by - (ry + rh / 2)) / (rh / 2) * 60;
+                            b.Angle += (int) ((double)(by - (ry + rh / 2)) / ((double)rh / 2) * 60);
 
-                        if(b.Angle > 60)
+                        if(b.Angle > 60 && b.Angle < 180)
                             b.Angle = 60;
-                        if(b.Angle < 300)
+                        if(b.Angle < 300 && b.Angle > 180)
                             b.Angle = 300;
                     }
 
                     if (bx > this.ClientSize.Width)
+                    {
                         if (b.Angle > 180)
                             b.Angle = 540 - b.Angle;
                         else
                             b.Angle = 180 - b.Angle;
+
+                        if (by + bh > ry && by + bh / 2 < ry + rh / 2)
+                            b.Angle += (int)((double)(by - (ry + rh / 2)) / ((double)rh / 2) * 60);
+                        else
+                            b.Angle -= (int)((double)((double)rh / 2 - ((by + bh) - ry)) / ((double)rh / 2) * 60);
+
+                        if (b.Angle > 240 && b.Angle < 360)
+                            b.Angle = 240;
+                        if (b.Angle < 120 && b.Angle > 0)
+                            b.Angle = 120;
+                    }
                 }
                 else
                 {
