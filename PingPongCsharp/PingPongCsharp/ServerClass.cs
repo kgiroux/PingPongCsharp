@@ -73,9 +73,6 @@ public class ServerClass
             {
                 this.updateOutputLog(e.Message);
             }
-            
-            //this.updateOutputLog("Receiving Data 2");
-
             String received_string = Encoding.ASCII.GetString(received_data);
             this.updateOutputLog("Received:" + received_string );
 
@@ -96,7 +93,7 @@ public class ServerClass
             {
                 this.updateOutputLog("Passage ICI +++ FIN d'envoi !!!!");
             }
-            
+            this.form.setReady(true);
         }
         bluetoothClient.Close();
     }
@@ -108,6 +105,7 @@ public class ServerClass
     {
         this.form.updateConsoleLog(text);
     }
+
 
     
     public void closeServer()

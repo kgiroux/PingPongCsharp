@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,6 +16,8 @@ namespace PingPongCsharp
     {
         private ClientClass clt;
         private ServerClass svr;
+        private Boolean ready = false;
+        private Thread lauching_partie = null;
         List<string> item = null;
         /* Constructeur de la fenetre*/
         
@@ -85,7 +88,7 @@ namespace PingPongCsharp
                 client.Enabled = false;
                 scan_button.Enabled = true;
                 textBox1.Text = "";
-                Partie p = new Partie();
+                Partie p = new Partie(1);
                 p.Show();
         }
 
@@ -182,6 +185,23 @@ namespace PingPongCsharp
             clt.connectAsClient(listBoxDevice.SelectedItem.ToString());
         }
 
-        
+        private void ClientConnected()
+        {
+
+            while (!ready) ;
+            Partie p = new Partie(0);
+        }
+
+
+        private void Lanching_partie()
+        {
+            lauching_partie = new Thread(new ThreadStart(ClientConnected));
+            lauching_partie.Start();
+        }
+
+        public void setReady(Boolean ready)
+        {
+            this.ready = ready;
+        }
     }
 }

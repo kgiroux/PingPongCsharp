@@ -202,6 +202,9 @@ public class ClientClass
              Console.WriteLine(ex.Message);
          }
     }
+
+
+
     string myPin = "1234";
     bool ready = false;
     public bool pairDevice()
