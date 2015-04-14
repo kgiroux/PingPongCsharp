@@ -80,7 +80,7 @@ namespace PingPongCsharp
                 {
                     if (bx < rx + rw && bx > rx && by < ry + rh && by + bh > ry)
                         if (b.Angle > 180)
-                            b.Angle = 540 - b.Angle;
+                            b.Angle = 540 - b.Angle ;
                         else
                             b.Angle = 180 - b.Angle;
 
