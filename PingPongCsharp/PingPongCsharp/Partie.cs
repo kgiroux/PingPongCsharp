@@ -23,12 +23,12 @@ namespace PingPongCsharp
         {
             this.joueur = joueur;
 
-            b = new Balle();
             InitializeComponent();
+            b = new Balle(ball.Location.X, ball.Location.Y);
 
             if (joueur == 1)
             {
-                //ball.Visible = false;
+                ball.Visible = false;
                 raquette.Location = new Point(this.Width - 46, this.Height / 2 - raquette.Height / 2);
             }
             KeyDown += new KeyEventHandler(Form1_KeyDown);
@@ -47,8 +47,6 @@ namespace PingPongCsharp
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            int bx = ball.Location.X;
-            int by = ball.Location.Y;
             int bh = ball.Height;
             int bw = ball.Width;
             int rx = raquette.Location.X;
@@ -66,6 +64,7 @@ namespace PingPongCsharp
             {
                 ry += 10;
             }
+
             try
             {
                 raquette.Location = new Point(rx, ry);
@@ -75,25 +74,24 @@ namespace PingPongCsharp
                 Console.WriteLine(ex.Message);
             }
             
-
             if (b.Vitesse != 0) 
             {
-                if (by < 0 || by + bh > this.ClientSize.Height)
+                if (b.Y < 0 || b.Y + bh > this.ClientSize.Height)
                     b.Angle = 360 - b.Angle;
 
                 if (joueur == 0)
                 {
-                    if(bx < rx + rw && bx > rx && by < ry + rh && by + bh > ry)
+                    if(b.X < rx + rw && b.X > rx && b.Y < ry + rh && b.Y + bh > ry)
                     {
                         if(b.Angle > 180)
                             b.Angle = 540 - b.Angle;
                         else
                             b.Angle = 180 - b.Angle;
 
-                        if(by + bh > ry && by + bh/2 < ry + rh/2)
-                            b.Angle -= (int)((double)((double)rh / 2 - ((by + bh) - ry)) / ((double)rh / 2) * 60);
+                        if(b.Y + bh > ry && b.Y + bh/2 < ry + rh/2)
+                            b.Angle -= (int)((double)((double)rh / 2 - ((b.Y + bh) - ry)) / ((double)rh / 2) * 60);
                         else
-                            b.Angle += (int) ((double)(by - (ry + rh / 2)) / ((double)rh / 2) * 60);
+                            b.Angle += (int) ((double)(b.Y - (ry + rh / 2)) / ((double)rh / 2) * 60);
 
                         if(b.Angle > 60 && b.Angle < 180)
                             b.Angle = 60;
@@ -101,49 +99,52 @@ namespace PingPongCsharp
                             b.Angle = 300;
                     }
 
-                    if (bx > this.ClientSize.Width)
+                    if (b.X > this.ClientSize.Width)
+                    {
+                        ball.Visible = false;
+                        
+                        //Envoi des données
+                        prepareSendData(b);
+
+                        b.Vitesse = 0;
+                    }
+                }
+                else
+                {
+                    if (b.X + bw < rx + rw && b.X + bw > rx && b.Y < ry + rh && b.Y + bh > ry)
                     {
                         if (b.Angle > 180)
                             b.Angle = 540 - b.Angle;
                         else
                             b.Angle = 180 - b.Angle;
 
-                        if (by + bh > ry && by + bh / 2 < ry + rh / 2)
-                            b.Angle += (int)((double)(by - (ry + rh / 2)) / ((double)rh / 2) * 60);
+                        if(b.Y + bh > ry && b.Y + bh/2 < ry + rh/2)
+                            b.Angle += (int)((double)((double)rh / 2 - ((b.Y + bh) - ry)) / ((double)rh / 2) * 60);
                         else
-                            b.Angle -= (int)((double)((double)rh / 2 - ((by + bh) - ry)) / ((double)rh / 2) * 60);
+                            b.Angle -= (int) ((double)(b.Y - (ry + rh / 2)) / ((double)rh / 2) * 60);
 
                         if (b.Angle > 240 && b.Angle < 360)
                             b.Angle = 240;
                         if (b.Angle < 120 && b.Angle > 0)
                             b.Angle = 120;
                     }
-                }
-                else
-                {
-                    if (bx + bw < rx + rw && bx + bw > rx && by < ry + rh && by + bh > ry)
-                        if (b.Angle > 180)
-                            b.Angle = 540 - b.Angle;
-                        else
-                            b.Angle = 180 - b.Angle;
 
-                    if (bx < 0)
-                        if (b.Angle > 180)
-                            b.Angle = 540 - b.Angle;
-                        else
-                            b.Angle = 180 - b.Angle;
+                    if (b.X < 0)
+                    {
+                        ball.Visible = false;
+
+                        //Envoi des données
+                        prepareSendData(b);
+
+                        b.Vitesse = 0;
+                    }
                 }
 
-                tab = b.Delta();
+                b.Delta();
 
-                Console.WriteLine(b.Angle);
-                Console.WriteLine(tab[0] + "    " + tab[1]);
-
-                bx += tab[0];
-                by += tab[1];
                 try
                 {
-                    ball.Location = new Point(bx, by);
+                    ball.Location = new Point(b.X, b.Y);
                 }
                 catch (InvalidOperationException ex)
                 {
