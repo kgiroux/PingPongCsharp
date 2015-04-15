@@ -22,8 +22,9 @@ public class ServerClass
     Thread readingThread= null;
     static byte[]  messageRecu;
     static byte[]  messageSend;
-    private Balle b; 
+    public static Balle b; 
     static bool messageAvailable = false;
+
     /// <summary>
     /// Constructeur de ServerClass
     /// </summary>
@@ -107,6 +108,8 @@ public class ServerClass
                 this.updateOutputLog("Receiving_Data", 0);
                 messageStream.Read(messageRecu, 0, messageRecu.Length);
                 this.updateOutputLog(Encoding.ASCII.GetString(messageRecu), 0);
+
+                b = BinaryDeserializeObject(messageRecu);
             }
         }
         catch (Exception ex)
@@ -122,8 +125,6 @@ public class ServerClass
     {
         this.form.updateConsoleLog(text,type);
     }
-
-
     
     public void closeServer()
     {
@@ -159,20 +160,39 @@ public class ServerClass
     }
 
 
-    public static byte[] BinarySerializeObject(Balle b)
+    private static byte[] BinarySerializeObject(Balle b)
     {
         if (b == null)
-            throw new ArgumentNullException("objectToSerialize");
-
-        byte[] serializedObject;
-
-        using (MemoryStream stream = new MemoryStream())
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            formatter.Serialize(stream, b);
-            serializedObject = stream.ToArray();
+            return new byte[0];
         }
+        else
+        {
+            MemoryStream streamMemory = new MemoryStream();
+            BinaryFormatter formatter = new BinaryFormatter();
+            formatter.Serialize(streamMemory, b);
+            return streamMemory.GetBuffer();
+        }
+    }
 
-        return serializedObject;
+    private static Balle BinaryDeserializeObject(byte[] bt)
+    {
+        if (bt == null)
+        {
+            return null;
+        }
+        else
+        {
+            if (bt.Length == 0)
+            {
+                return null;
+            }
+            else
+            {
+                BinaryFormatter formatter = new BinaryFormatter();
+                MemoryStream ms = new MemoryStream(bt);
+                return (Balle) formatter.Deserialize(ms);
+            }
+        }
     }
 }

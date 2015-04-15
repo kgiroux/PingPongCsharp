@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace PingPongCsharp
 {
     [Serializable]
-    class Balle
+    public class Balle
     {
         private int x;
         private int y;

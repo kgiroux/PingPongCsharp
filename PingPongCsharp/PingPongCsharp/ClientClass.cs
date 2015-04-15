@@ -7,6 +7,8 @@ using InTheHand.Net.Ports;
 using InTheHand.Net.Sockets;
 using System.IO;
 using System.Windows.Forms;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization;
 using System.Threading;
 using PingPongCsharp;
 
@@ -26,6 +28,7 @@ public class ClientClass
     private Form1 form;
     byte[] messageSend;
     byte[] messageRecu;
+    public static Balle b;
 
 
    /// <summary>
@@ -197,6 +200,8 @@ public class ClientClass
                 this.updateOutputLog("Receiving_Data", 0);
                 stream.Read(messageRecu, 0, messageRecu.Length);
                 this.updateOutputLog(Encoding.ASCII.GetString(messageRecu), 0);
+
+                b = BinaryDeserializeObject(messageRecu);
             }
         }
          catch (Exception ex)
@@ -322,5 +327,40 @@ public class ClientClass
         messageSend = Encoding.ASCII.GetBytes("Sending Message" + rand);
     }
 
+    private static byte[] BinarySerializeObject(Balle b)
+    {
+        if (b == null)
+        {
+            return new byte[0];
+        }
+        else
+        {
+            MemoryStream streamMemory = new MemoryStream();
+            BinaryFormatter formatter = new BinaryFormatter();
+            formatter.Serialize(streamMemory, b);
+            return streamMemory.GetBuffer();
+        }
+    }
+
+    private static Balle BinaryDeserializeObject(byte[] bt)
+    {
+        if (bt == null)
+        {
+            return null;
+        }
+        else
+        {
+            if (bt.Length == 0)
+            {
+                return null;
+            }
+            else
+            {
+                BinaryFormatter formatter = new BinaryFormatter();
+                MemoryStream ms = new MemoryStream(bt);
+                return (Balle)formatter.Deserialize(ms);
+            }
+        }
+    }
 
 }

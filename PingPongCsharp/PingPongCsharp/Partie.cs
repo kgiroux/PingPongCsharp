@@ -74,83 +74,109 @@ namespace PingPongCsharp
                 Console.WriteLine(ex.Message);
             }
             
-            if (b.Vitesse != 0) 
+            if(ball.Visible == true)  
             {
-                if (b.Y < 0 || b.Y + bh > this.ClientSize.Height)
-                    b.Angle = 360 - b.Angle;
-
-                if (joueur == 0)
+                if (b.Vitesse != 0) 
                 {
-                    if(b.X < rx + rw && b.X > rx && b.Y < ry + rh && b.Y + bh > ry)
+                    if (b.Y < 0 || b.Y + bh > this.ClientSize.Height)
+                        b.Angle = 360 - b.Angle;
+
+                    if (joueur == 0)
                     {
-                        if(b.Angle > 180)
-                            b.Angle = 540 - b.Angle;
-                        else
-                            b.Angle = 180 - b.Angle;
+                        if(b.X < rx + rw && b.X > rx && b.Y < ry + rh && b.Y + bh > ry)
+                        {
+                            if(b.Angle > 180)
+                                b.Angle = 540 - b.Angle;
+                            else
+                                b.Angle = 180 - b.Angle;
 
-                        if(b.Y + bh > ry && b.Y + bh/2 < ry + rh/2)
-                            b.Angle -= (int)((double)((double)rh / 2 - ((b.Y + bh) - ry)) / ((double)rh / 2) * 60);
-                        else
-                            b.Angle += (int) ((double)(b.Y - (ry + rh / 2)) / ((double)rh / 2) * 60);
+                            if(b.Y + bh > ry && b.Y + bh/2 < ry + rh/2)
+                                b.Angle -= (int)((double)((double)rh / 2 - ((b.Y + bh) - ry)) / ((double)rh / 2) * 60);
+                            else
+                                b.Angle += (int) ((double)(b.Y - (ry + rh / 2)) / ((double)rh / 2) * 60);
 
-                        if(b.Angle > 60 && b.Angle < 180)
-                            b.Angle = 60;
-                        if(b.Angle < 300 && b.Angle > 180)
-                            b.Angle = 300;
+                            if(b.Angle > 60 && b.Angle < 180)
+                                b.Angle = 60;
+                            if(b.Angle < 300 && b.Angle > 180)
+                                b.Angle = 300;
+                        }
+
+                        if (b.X > this.ClientSize.Width)
+                        {
+                            ball.Visible = false;
+                        
+                            //Envoi des données
+                            ServerClass.prepareSendData(b);
+
+                            b.Vitesse = 0;
+                        }
+                    }
+                    else
+                    {
+                        if (b.X + bw < rx + rw && b.X + bw > rx && b.Y < ry + rh && b.Y + bh > ry)
+                        {
+                            if (b.Angle > 180)
+                                b.Angle = 540 - b.Angle;
+                            else
+                                b.Angle = 180 - b.Angle;
+
+                            if(b.Y + bh > ry && b.Y + bh/2 < ry + rh/2)
+                                b.Angle += (int)((double)((double)rh / 2 - ((b.Y + bh) - ry)) / ((double)rh / 2) * 60);
+                            else
+                                b.Angle -= (int) ((double)(b.Y - (ry + rh / 2)) / ((double)rh / 2) * 60);
+
+                            if (b.Angle > 240 && b.Angle < 360)
+                                b.Angle = 240;
+                            if (b.Angle < 120 && b.Angle > 0)
+                                b.Angle = 120;
+                        }
+
+                        if (b.X < 0)
+                        {
+                            ball.Visible = false;
+
+                            //Envoi des données
+                            ServerClass.prepareSendData(b);
+
+                            b.Vitesse = 0;
+                        }
                     }
 
-                    if (b.X > this.ClientSize.Width)
-                    {
-                        ball.Visible = false;
-                        
-                        //Envoi des données
-                        prepareSendData(b);
+                    b.Delta();
 
-                        b.Vitesse = 0;
+                    try
+                    {
+                        ball.Location = new Point(b.X, b.Y);
+                    }
+                    catch (InvalidOperationException ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                
+                }
+            }
+            else
+            {
+                if(joueur == 0)
+                {
+                    if(ServerClass.b != null)
+                    {
+                        b.Y = ServerClass.b.Y;
+                        b.Vitesse = ServerClass.b.Vitesse;
+                        b.Angle = ServerClass.b.Angle;
+                        ball.Visible = true;
+                        ServerClass.b = null;
                     }
                 }
                 else
-                {
-                    if (b.X + bw < rx + rw && b.X + bw > rx && b.Y < ry + rh && b.Y + bh > ry)
+                    if (ClientClass.b != null)
                     {
-                        if (b.Angle > 180)
-                            b.Angle = 540 - b.Angle;
-                        else
-                            b.Angle = 180 - b.Angle;
-
-                        if(b.Y + bh > ry && b.Y + bh/2 < ry + rh/2)
-                            b.Angle += (int)((double)((double)rh / 2 - ((b.Y + bh) - ry)) / ((double)rh / 2) * 60);
-                        else
-                            b.Angle -= (int) ((double)(b.Y - (ry + rh / 2)) / ((double)rh / 2) * 60);
-
-                        if (b.Angle > 240 && b.Angle < 360)
-                            b.Angle = 240;
-                        if (b.Angle < 120 && b.Angle > 0)
-                            b.Angle = 120;
+                        b.Y = ClientClass.b.Y;
+                        b.Vitesse = ClientClass.b.Vitesse;
+                        b.Angle = ClientClass.b.Angle;
+                        ball.Visible = true;
+                        ClientClass.b = null;
                     }
-
-                    if (b.X < 0)
-                    {
-                        ball.Visible = false;
-
-                        //Envoi des données
-                        prepareSendData(b);
-
-                        b.Vitesse = 0;
-                    }
-                }
-
-                b.Delta();
-
-                try
-                {
-                    ball.Location = new Point(b.X, b.Y);
-                }
-                catch (InvalidOperationException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-                
             }
         }
     }
