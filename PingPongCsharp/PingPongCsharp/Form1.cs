@@ -92,7 +92,7 @@ namespace PingPongCsharp
                 client.Enabled = false;
                 scan_button.Enabled = true;
                 textBox1.Text = "";
-                Partie p = new Partie(0);
+                Partie p = new Partie(0,this);
                 p.Show();
         }
 
@@ -211,7 +211,7 @@ namespace PingPongCsharp
             this.updateConsoleLog("Ready : value  " + ready);
             while (!ready) ;
             this.updateConsoleLog("Ready " + ready);
-            p = new Partie(0);
+            p = new Partie(0, this);
             p.ShowDialog();
             ready = false;
         }
@@ -223,7 +223,7 @@ namespace PingPongCsharp
             this.updateConsoleLog("Ready : value  " + ready_client);
             while (!ready_client) ;
             this.updateConsoleLog("Ready " + ready_client);
-            p = new Partie(1);
+            p = new Partie(1,this);
             p.ShowDialog();
             ready_client = false;
         }

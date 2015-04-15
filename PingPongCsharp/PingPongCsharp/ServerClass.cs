@@ -72,26 +72,22 @@ public class ServerClass
         while (true)
         {
             messageSend = new byte[1024];
-            if (ready)
+            while (!messageAvailable);
+            prepareSendData(b);
+            try
             {
-                while (!messageAvailable) ;
-                prepareSendData(b);
-                try
-                {
-                    messageStream.Write(messageSend, 0, messageSend.Length);
-                }
-                catch (IOException e)
-                {
-                    this.updateOutputLog(e.Message,-1);
-                }
-                finally
-                {
-                    this.updateOutputLog("Passage ICI +++ FIN d'envoi !!!!",0);
-                }
-                this.form.setReady(true);
-                ready = true;
-                messageAvailable = false;
+                messageStream.Write(messageSend, 0, messageSend.Length);
             }
+            catch (IOException e)
+            {
+                this.updateOutputLog(e.Message,-1);
+            }
+            finally
+            {
+                this.updateOutputLog("Passage ICI +++ FIN d'envoi !!!!",0);
+            }
+            this.form.setReady(true);
+            messageAvailable = false;
             
         }
         bluetoothClient.Close();

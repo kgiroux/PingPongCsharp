@@ -26,8 +26,9 @@ public class ClientClass
     private List<string> items_bluetooth;
     private int error = 0;
     private Form1 form;
-    byte[] messageSend;
-    byte[] messageRecu;
+    static byte[] messageSend;
+    static byte[] messageRecu;
+    static bool messageAvailable; 
     public static Balle b;
 
 
@@ -136,10 +137,23 @@ public class ClientClass
             readingThread.Start();
             while (true)
             {
-                this.form.setReadyClient(true);
-                this.updateOutputLog("Sending_Data",0);
-                prepareSendData();
-                stream.Write(messageSend, 0, messageSend.Length);
+                messageSend = new byte[1024];
+                while (!messageAvailable) ;
+                prepareSendData(b);
+                try
+                {
+                    stream.Write(messageSend, 0, messageSend.Length);
+                }
+                catch (IOException e)
+                {
+                    this.updateOutputLog(e.Message, -1);
+                }
+                finally
+                {
+                    this.updateOutputLog("Passage ICI +++ FIN d'envoi !!!!", 0);
+                }
+                this.form.setReady(true);
+                messageAvailable = false;
             }
         }
         catch (System.Net.Sockets.SocketException ex )
@@ -200,7 +214,6 @@ public class ClientClass
                 this.updateOutputLog("Receiving_Data", 0);
                 stream.Read(messageRecu, 0, messageRecu.Length);
                 this.updateOutputLog(Encoding.ASCII.GetString(messageRecu), 0);
-
                 b = BinaryDeserializeObject(messageRecu);
             }
         }
@@ -320,11 +333,11 @@ public class ClientClass
         }
         
     }
-    
-    private void prepareSendData()
+
+    public static void prepareSendData(Balle b)
     {
-        int rand = new Random().Next();
-        messageSend = Encoding.ASCII.GetBytes("Sending Message" + rand);
+        messageSend = BinarySerializeObject(b);
+        messageAvailable = true;
     }
 
     private static byte[] BinarySerializeObject(Balle b)

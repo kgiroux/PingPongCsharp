@@ -14,15 +14,16 @@ namespace PingPongCsharp
     public partial class Partie : Form
     {
         private int joueur;
+        private Form1 form;
         private Balle b;
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         static extern short GetAsyncKeyState(System.Windows.Forms.Keys vKey);
 
-        public Partie(int joueur)
+        public Partie(int joueur, Form1 form)
         {
             this.joueur = joueur;
-
+            this.form = form;
             InitializeComponent();
             b = new Balle(ball.Location.X, ball.Location.Y);
 
@@ -179,5 +180,11 @@ namespace PingPongCsharp
                     }
             }
         }
+        public void updateOutputLog(String text, int type)
+        {
+            this.form.updateConsoleLog(text, type);
+        }
     }
+
+
 }
