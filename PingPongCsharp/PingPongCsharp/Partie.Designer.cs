@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Partie));
             this.raquette = new System.Windows.Forms.PictureBox();
             this.ball = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -40,19 +41,23 @@
             // 
             this.raquette.AccessibleName = "Raquette";
             this.raquette.BackColor = System.Drawing.SystemColors.InfoText;
-            this.raquette.Location = new System.Drawing.Point(46, 176);
+            this.raquette.Image = ((System.Drawing.Image)(resources.GetObject("raquette.Image")));
+            this.raquette.Location = new System.Drawing.Point(34, 143);
+            this.raquette.Margin = new System.Windows.Forms.Padding(2);
             this.raquette.Name = "raquette";
-            this.raquette.Size = new System.Drawing.Size(22, 156);
+            this.raquette.Size = new System.Drawing.Size(16, 127);
             this.raquette.TabIndex = 0;
             this.raquette.TabStop = false;
             // 
             // ball
             // 
             this.ball.AccessibleName = "Ball";
-            this.ball.BackColor = System.Drawing.SystemColors.InfoText;
-            this.ball.Location = new System.Drawing.Point(539, 244);
+            this.ball.BackColor = System.Drawing.Color.Transparent;
+            this.ball.Image = ((System.Drawing.Image)(resources.GetObject("ball.Image")));
+            this.ball.Location = new System.Drawing.Point(404, 198);
+            this.ball.Margin = new System.Windows.Forms.Padding(2);
             this.ball.Name = "ball";
-            this.ball.Size = new System.Drawing.Size(24, 24);
+            this.ball.Size = new System.Drawing.Size(18, 20);
             this.ball.TabIndex = 2;
             this.ball.TabStop = false;
             // 
@@ -64,14 +69,18 @@
             // 
             // Partie
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1089, 506);
+            this.BackColor = System.Drawing.Color.White;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(844, 411);
             this.Controls.Add(this.ball);
             this.Controls.Add(this.raquette);
+            this.ForeColor = System.Drawing.Color.White;
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Partie";
             this.Text = "Partie";
-            this.Load += new System.EventHandler(this.Partie_Load);
             ((System.ComponentModel.ISupportInitialize)(this.raquette)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ball)).EndInit();
             this.ResumeLayout(false);

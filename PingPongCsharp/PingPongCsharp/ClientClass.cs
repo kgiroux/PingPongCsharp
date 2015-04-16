@@ -118,8 +118,6 @@ public class ClientClass
             this.error = -1;
             this.updateOutputLog("Error : " + ex.ToString(),-1);
         }
-        
-        
     }
     /// <summary>
     ///  Methode gerant l'envoi et la réception des messages
@@ -132,16 +130,17 @@ public class ClientClass
         {
             client.EndConnect(result);
             stream = client.GetStream();
-            stream.ReadTimeout = 1000;
+            //stream.ReadTimeout = 1000;
             readingThread = new Thread(new ThreadStart(reading));
             readingThread.Start();
             while (true)
             {
                 messageSend = new byte[1024];
                 while (!messageAvailable) ;
-                prepareSendData(b);
+                //prepareSendData(b);
                 try
                 {
+                    this.updateOutputLog(Encoding.ASCII.GetString(messageSend),0);
                     stream.Write(messageSend, 0, messageSend.Length);
                 }
                 catch (IOException e)
@@ -206,20 +205,21 @@ public class ClientClass
         this.error = -1;
         messageRecu = new byte[1024];
 
-         try
+        try
         {
             while (true)
             {
                 this.form.setReadyClient(true);
                 this.updateOutputLog("Receiving_Data", 0);
-                stream.Read(messageRecu, 0, messageRecu.Length);
+                stream.ReadAsync(messageRecu, 0, messageRecu.Length);
+                this.updateOutputLog("Receiving_Data 2", 0);
                 this.updateOutputLog(Encoding.ASCII.GetString(messageRecu), 0);
                 b = BinaryDeserializeObject(messageRecu);
             }
         }
          catch (Exception ex)
          {
-             Console.WriteLine(ex.Message);
+             Console.WriteLine("=++>" +ex.Message);
          }
     }
 

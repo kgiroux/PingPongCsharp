@@ -31,6 +31,9 @@ namespace PingPongCsharp
             {
                 ball.Visible = false;
                 raquette.Location = new Point(this.Width - 46, this.Height / 2 - raquette.Height / 2);
+                Image img = raquette.Image;
+                img.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                raquette.Image = img;
             }
             KeyDown += new KeyEventHandler(Form1_KeyDown);
         }
@@ -39,11 +42,6 @@ namespace PingPongCsharp
         {
             if(e.KeyCode == Keys.Space && b.Vitesse == 0 && ball.Visible == true)
                 b.Lance();
-        }
-
-        private void Partie_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void timer1_Tick(object sender, EventArgs e)
