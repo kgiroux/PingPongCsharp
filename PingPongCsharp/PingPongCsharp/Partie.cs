@@ -30,10 +30,14 @@ namespace PingPongCsharp
             if (joueur == 1)
             {
                 ball.Visible = false;
-                raquette.Location = new Point(this.Width - 46, this.Height / 2 - raquette.Height / 2);
+                raquette.Location = new Point(this.ClientSize.Width - 46, this.ClientSize.Height / 2 - raquette.Height / 2);
                 Image img = raquette.Image;
                 img.RotateFlip(RotateFlipType.Rotate180FlipNone);
                 raquette.Image = img;
+                Image img_terrain = this.BackgroundImage;
+                img_terrain.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                this.BackgroundImage = img_terrain;
+                
             }
             KeyDown += new KeyEventHandler(Form1_KeyDown);
         }

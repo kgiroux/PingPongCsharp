@@ -77,6 +77,7 @@
             this.ClientSize = new System.Drawing.Size(844, 411);
             this.Controls.Add(this.ball);
             this.Controls.Add(this.raquette);
+            this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.Color.White;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Partie";
