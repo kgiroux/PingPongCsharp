@@ -73,7 +73,6 @@ public class ServerClass
         {
             messageSend = new byte[1024];
             while (!messageAvailable);
-            prepareSendData(b);
             try
             {
                 messageStream.Write(messageSend, 0, messageSend.Length);

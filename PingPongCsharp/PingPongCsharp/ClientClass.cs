@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 using System.Threading;
+using System.Linq;
 using PingPongCsharp;
 
 public class ClientClass
@@ -204,7 +205,9 @@ public class ClientClass
     {
         this.error = -1;
         messageRecu = new byte[1024];
-
+        messageRecu.Initialize();
+        byte[] message_test = new byte[1024];
+        message_test.Initialize();
         try
         {
             while (true)
@@ -213,8 +216,9 @@ public class ClientClass
                 this.updateOutputLog("Receiving_Data", 0);
                 stream.ReadAsync(messageRecu, 0, messageRecu.Length);
                 this.updateOutputLog("Receiving_Data 2", 0);
-                this.updateOutputLog(Encoding.ASCII.GetString(messageRecu), 0);
-                b = BinaryDeserializeObject(messageRecu);
+                this.updateOutputLog("ICI " +Encoding.ASCII.GetString(messageRecu), 0);
+                if (!messageRecu.SequenceEqual(message_test))
+                    b = BinaryDeserializeObject(messageRecu);
             }
         }
          catch (Exception ex)
