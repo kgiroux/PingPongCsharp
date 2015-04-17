@@ -102,6 +102,8 @@ namespace PingPongCsharp
                                 b.Angle = 60;
                             if(b.Angle < 300 && b.Angle > 180)
                                 b.Angle = 300;
+
+                            b.Vitesse++;
                         }
 
                         if (b.X > this.ClientSize.Width)
