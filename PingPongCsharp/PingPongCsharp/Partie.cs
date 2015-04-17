@@ -139,7 +139,7 @@ namespace PingPongCsharp
                             ball.Visible = false;
 
                             //Envoi des données
-                            ServerClass.prepareSendData(b);
+                            ClientClass.prepareSendData(b);
 
                             b.Vitesse = 0;
                         }
@@ -164,9 +164,11 @@ namespace PingPongCsharp
                 {
                     if(ServerClass.b != null)
                     {
+                        b.X = this.ClientSize.Width;
                         b.Y = ServerClass.b.Y;
                         b.Vitesse = ServerClass.b.Vitesse;
                         b.Angle = ServerClass.b.Angle;
+                        b.Delta();
                         ball.Visible = true;
                         ServerClass.b = null;
                     }
@@ -174,9 +176,11 @@ namespace PingPongCsharp
                 else
                     if (ClientClass.b != null)
                     {
+                        b.X = 0;
                         b.Y = ClientClass.b.Y;
                         b.Vitesse = ClientClass.b.Vitesse;
                         b.Angle = ClientClass.b.Angle;
+                        b.Delta();
                         ball.Visible = true;
                         ClientClass.b = null;
                     }

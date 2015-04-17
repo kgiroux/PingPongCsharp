@@ -8,14 +8,16 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 using PingPongCsharp;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Text;
+using System.Linq;
 
 public class ServerClass
 {
     private Form1 form;
     private Guid mUUID = new Guid("293eb187-b6e9-4434-894b-ef81120f0e5b");
     private BluetoothClient bluetoothClient;
-    Stream messageStream = null;
+    private Stream messageStream = null;
     private bool ready = true;
     private BluetoothListener bluetoothServerListener;
     Thread bluetoothServerThread;
@@ -24,6 +26,7 @@ public class ServerClass
     static byte[]  messageSend;
     public static Balle b; 
     static bool messageAvailable = false;
+    private int error = 0;
 
     /// <summary>
     /// Constructeur de ServerClass
@@ -40,6 +43,7 @@ public class ServerClass
     bool serverLaunch = false;
     public void connectAsServer()
     {
+        error = 0;
         
         this.updateOutputLog("Launching Server ...",0);
         bluetoothServerThread = new Thread(new ThreadStart(start_server));
@@ -69,42 +73,90 @@ public class ServerClass
         messageStream = bluetoothClient.GetStream();
         readingThread = new Thread(new ThreadStart(reading));
         readingThread.Start();
-        while (true)
+
+        try
         {
-            messageSend = new byte[1024];
-            while (!messageAvailable);
-            try
+            while (true)
             {
-                messageStream.Write(messageSend, 0, messageSend.Length);
+                messageSend = new byte[1024];
+                while (!messageAvailable);
+                try
+                {
+                    messageStream.Write(messageSend, 0, messageSend.Length);
+                }
+                catch (IOException e)
+                {
+                    this.updateOutputLog(e.Message, -1);
+                }
+                finally
+                {
+                    this.updateOutputLog("Passage ICI +++ FIN d'envoi !!!!", 0);
+                }
+                this.form.setReady(true);
+                messageAvailable = false;
+
             }
-            catch (IOException e)
+        }
+        catch (System.Net.Sockets.SocketException ex)
+        {
+            this.error = -1;
+            Console.WriteLine(ex.Message);
+            this.updateOutputLog(ex.Message, -1);
+            this.updateOutputLog("Fail to connect to this serveur", -1);
+            if (readingThread != null)
             {
-                this.updateOutputLog(e.Message,-1);
+                readingThread.Abort();
             }
-            finally
+            this.updateOutputLog("Fermeture des connexions", -1);
+            if (messageStream != null)
             {
-                this.updateOutputLog("Passage ICI +++ FIN d'envoi !!!!",0);
+                messageStream.Close();
             }
-            this.form.setReady(true);
-            messageAvailable = false;
-            
+            if (bluetoothClient != null)
+            {
+                bluetoothClient.Close();
+            }
+        }
+        catch (Exception ex)
+        {
+            this.error = -1;
+            Console.WriteLine(ex.Message);
+            this.updateOutputLog(ex.Message, -1);
+            this.updateOutputLog("Fail to connect to this serveur", -1);
+            if (readingThread != null)
+            {
+                readingThread.Abort();
+            }
+            this.updateOutputLog("Fermeture des connexions", -1);
+            if (messageStream != null)
+            {
+                messageStream.Close();
+            }
+            if (bluetoothClient != null)
+            {
+                bluetoothClient.Close();
+            }
         }
         bluetoothClient.Close();
     }
 
-    private void reading()
+    private async void reading()
     {
+        this.error = -1;
         messageRecu = new byte[1024];
+        messageRecu.Initialize();
+        byte[] message_test = new byte[1024];
+        message_test.Initialize();
         try
         {
             while (true)
             {
                 this.form.setReady(true);
-                this.updateOutputLog("Receiving_Data", 0);
-                messageStream.Read(messageRecu, 0, messageRecu.Length);
-                this.updateOutputLog(Encoding.ASCII.GetString(messageRecu), 0);
-
+                int x = await messageStream.ReadAsync(messageRecu, 0, messageRecu.Length);
+                this.updateOutputLog("ICI " + Encoding.ASCII.GetString(messageRecu), 0);
                 b = BinaryDeserializeObject(messageRecu);
+                messageRecu = new byte[1024];
+                messageRecu.Initialize();
             }
         }
         catch (Exception ex)
@@ -112,6 +164,7 @@ public class ServerClass
             Console.WriteLine(ex.Message);
         }
     }
+
     /// <summary>
     /// Méthode qui permet de mettre à jour l'affichage de la texte box
     /// </summary>
@@ -154,7 +207,6 @@ public class ServerClass
         messageAvailable = true;
     }
 
-
     private static byte[] BinarySerializeObject(Balle b)
     {
         if (b == null)
@@ -166,7 +218,7 @@ public class ServerClass
             MemoryStream streamMemory = new MemoryStream();
             BinaryFormatter formatter = new BinaryFormatter();
             formatter.Serialize(streamMemory, b);
-            return streamMemory.GetBuffer();
+            return streamMemory.ToArray();
         }
     }
 

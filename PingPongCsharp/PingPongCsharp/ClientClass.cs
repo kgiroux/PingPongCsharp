@@ -201,7 +201,7 @@ public class ClientClass
     /// Méthode Thread pour la récéption de message !!!
     /// </summary>
     /// <param name=""></param>
-    private void reading()
+    private async void reading()
     {
         this.error = -1;
         messageRecu = new byte[1024];
@@ -213,12 +213,11 @@ public class ClientClass
             while (true)
             {
                 this.form.setReadyClient(true);
-                this.updateOutputLog("Receiving_Data", 0);
-                stream.ReadAsync(messageRecu, 0, messageRecu.Length);
-                this.updateOutputLog("Receiving_Data 2", 0);
-                this.updateOutputLog("ICI " +Encoding.ASCII.GetString(messageRecu), 0);
-                if (!messageRecu.SequenceEqual(message_test))
-                    b = BinaryDeserializeObject(messageRecu);
+                await stream.ReadAsync(messageRecu, 0, messageRecu.Length);
+                this.updateOutputLog("ICI " + Encoding.ASCII.GetString(messageRecu), 0);
+                b = BinaryDeserializeObject(messageRecu);
+                messageRecu = new byte[1024];
+                messageRecu.Initialize();
             }
         }
          catch (Exception ex)
@@ -355,7 +354,7 @@ public class ClientClass
             MemoryStream streamMemory = new MemoryStream();
             BinaryFormatter formatter = new BinaryFormatter();
             formatter.Serialize(streamMemory, b);
-            return streamMemory.GetBuffer();
+            return streamMemory.ToArray();
         }
     }
 
