@@ -86,7 +86,7 @@ public class ServerClass
                 }
                 catch (IOException e)
                 {
-                    this.updateOutputLog(e.Message, -1);
+                    this.updateOutputLog("====>>>" + e.Message, -1);
                 }
                 finally
                 {

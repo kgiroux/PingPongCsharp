@@ -192,6 +192,18 @@ namespace PingPongCsharp
         {
             this.form.updateConsoleLog(text, type);
         }
+        private void Form1_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this.updateOutputLog("Fermeture de la partie en cours", 0);
+            if (joueur == 1)
+            {
+                 
+            }
+            else
+            {
+
+            }
+        }
     }
 
 

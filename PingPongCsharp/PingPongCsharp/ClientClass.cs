@@ -337,6 +337,12 @@ public class ClientClass
         
     }
 
+    public void destroy_session()
+    {
+        ~ClientClass();
+    }
+
+
     public static void prepareSendData(Balle b)
     {
         messageSend = BinarySerializeObject(b);
