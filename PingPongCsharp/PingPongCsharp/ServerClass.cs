@@ -18,7 +18,6 @@ public class ServerClass
     private Guid mUUID = new Guid("293eb187-b6e9-4434-894b-ef81120f0e5b");
     private BluetoothClient bluetoothClient;
     private Stream messageStream = null;
-    private bool ready = true;
     private BluetoothListener bluetoothServerListener;
     Thread bluetoothServerThread;
     Thread readingThread= null;
@@ -26,7 +25,6 @@ public class ServerClass
     static byte[]  messageSend;
     public static Balle b; 
     static bool messageAvailable = false;
-    private int error = 0;
 
     /// <summary>
     /// Constructeur de ServerClass
@@ -139,7 +137,9 @@ public class ServerClass
         }
         bluetoothClient.Close();
     }
-
+    /// <summary>
+    /// Methode de lecture pour le serveur. Il s'agit d'un thread qui attend un message
+    /// </summary>
     private async void reading()
     {
         this.error = -1;
@@ -200,13 +200,20 @@ public class ServerClass
             bluetoothClient.Close();
         }
     }
-
+    /// <summary>
+    /// Methode préparant les messages pour le serveur
+    /// </summary>
+    /// <param name="b"> Objet à envoyer</param>
     public static void prepareSendData(Balle b)
     {
         messageSend = BinarySerializeObject(b);
         messageAvailable = true;
     }
-
+    /// <summary>
+    /// Methode sérialisant un objet pour le transformer en tableau de Byte
+    /// </summary>
+    /// <param name="b">Objet à sérialiser</param>
+    /// <returns>Renvoi un tableau de Byte contenant le message à sérialiser</returns>
     private static byte[] BinarySerializeObject(Balle b)
     {
         if (b == null)
@@ -221,7 +228,11 @@ public class ServerClass
             return streamMemory.ToArray();
         }
     }
-
+    /// <summary>
+    /// Message à déserialiser 
+    /// </summary>
+    /// <param name="bt">Tableau provenant du message recu</param>
+    /// <returns>Renvoi un objet BALLE</returns>
     private static Balle BinaryDeserializeObject(byte[] bt)
     {
         if (bt == null)

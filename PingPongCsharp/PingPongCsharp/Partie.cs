@@ -26,6 +26,7 @@ namespace PingPongCsharp
             this.form = form;
             InitializeComponent();
             b = new Balle(ball.Location.X, ball.Location.Y);
+            this.Resize += new EventHandler(Form1_Resize);
 
             if (joueur == 1)
             {
@@ -37,8 +38,8 @@ namespace PingPongCsharp
                 Image img_terrain = this.BackgroundImage;
                 img_terrain.RotateFlip(RotateFlipType.Rotate180FlipNone);
                 this.BackgroundImage = img_terrain;
-                
             }
+
             KeyDown += new KeyEventHandler(Form1_KeyDown);
         }
         
@@ -115,6 +116,14 @@ namespace PingPongCsharp
 
                             b.Vitesse = 0;
                         }
+                        else if (b.X < 0)
+                        {
+                            b.EnDehors = true;
+                            b.Vitesse = 0;
+                            ball.Visible = false;
+                            ServerClass.prepareSendData(b);
+                            b.EnDehors = false;
+                    }
                     }
                     else
                     {
@@ -145,6 +154,14 @@ namespace PingPongCsharp
 
                             b.Vitesse = 0;
                         }
+                        else if (b.X > this.ClientSize.Width)
+                        {
+                            b.EnDehors = true;
+                            b.Vitesse = 0;
+                            ball.Visible = false;
+                            ClientClass.prepareSendData(b);
+                            b.EnDehors = false;
+                        }
                     }
 
                     b.Delta();
@@ -158,6 +175,13 @@ namespace PingPongCsharp
                         Console.WriteLine(ex.Message);
                     }
                 
+                }
+                else
+                {
+                    if (b.EnDehors == true)
+                    {
+                        b = new Balle(this.ClientSize.Width / 2 - ball.Width / 2, this.ClientSize.Height / 2 - ball.Height / 2);
+                    }
                 }
             }
             else
@@ -192,12 +216,18 @@ namespace PingPongCsharp
         {
             this.form.updateConsoleLog(text, type);
         }
+
+        private void Form1_Resize(Object sender, EventArgs e)
+        {
+            if (joueur == 1)
+                raquette.Location = new Point(this.ClientSize.Width - 46, this.ClientSize.Height / 2 - raquette.Height / 2);
+        }
         private void Form1_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             this.updateOutputLog("Fermeture de la partie en cours", 0);
             if (joueur == 1)
             {
-                 
+                 ClientClass.
             }
             else
             {
@@ -205,6 +235,4 @@ namespace PingPongCsharp
             }
         }
     }
-
-
 }

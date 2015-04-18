@@ -15,7 +15,6 @@ using PingPongCsharp;
 
 public class ClientClass
 {
-
     private BluetoothDeviceInfo[] devices_found = null;
     private BluetoothDeviceInfo device_selected = null;
     private BluetoothClient client = null;
@@ -131,14 +130,12 @@ public class ClientClass
         {
             client.EndConnect(result);
             stream = client.GetStream();
-            //stream.ReadTimeout = 1000;
             readingThread = new Thread(new ThreadStart(reading));
             readingThread.Start();
             while (true)
             {
                 messageSend = new byte[1024];
                 while (!messageAvailable) ;
-                //prepareSendData(b);
                 try
                 {
                     this.updateOutputLog(Encoding.ASCII.GetString(messageSend),0);
@@ -339,16 +336,23 @@ public class ClientClass
 
     public void destroy_session()
     {
-        ~ClientClass();
+        
     }
 
-
+    /// <summary>
+    /// Message qui lance la préparation du message
+    /// </summary>
+    /// <param name="b">Passage de Balle</param>
     public static void prepareSendData(Balle b)
     {
         messageSend = BinarySerializeObject(b);
         messageAvailable = true;
     }
-
+    /// <summary>
+    /// Methode qui serialise un objet en tableau de Byte. Cette méthode sert à préparer un message à envoyé
+    /// </summary>
+    /// <param name="b"></param>
+    /// <returns></returns>
     private static byte[] BinarySerializeObject(Balle b)
     {
         if (b == null)
@@ -363,7 +367,11 @@ public class ClientClass
             return streamMemory.ToArray();
         }
     }
-
+    /// <summary>
+    /// Methode pour désarialiser un objet après reception de celui-ci
+    /// </summary>
+    /// <param name="bt">Passage du tableau de Byte qui a été reçu</param>
+    /// <returns>Renvoi un objet de type Balle</returns>
     private static Balle BinaryDeserializeObject(byte[] bt)
     {
         if (bt == null)
