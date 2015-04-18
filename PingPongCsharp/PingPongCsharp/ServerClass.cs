@@ -16,15 +16,16 @@ public class ServerClass
 {
     private Form1 form;
     private Guid mUUID = new Guid("293eb187-b6e9-4434-894b-ef81120f0e5b");
-    private BluetoothClient bluetoothClient;
-    private Stream messageStream = null;
-    private BluetoothListener bluetoothServerListener;
-    Thread bluetoothServerThread;
-    Thread readingThread= null;
+    private static BluetoothClient bluetoothClient;
+    private static Stream messageStream = null;
+    private static BluetoothListener bluetoothServerListener;
+    private static Thread bluetoothServerThread = null;
+    private static Thread readingThread= null;
     static byte[]  messageRecu;
     static byte[]  messageSend;
     public static Balle b; 
-    static bool messageAvailable = false;
+    private static bool messageAvailable = false;
+    private static bool serverLaunch = false;
 
     /// <summary>
     /// Constructeur de ServerClass
@@ -38,11 +39,9 @@ public class ServerClass
     ///  Méthode de lancement pour la création du serveur */
     /// </summary>
 
-    bool serverLaunch = false;
+    
     public void connectAsServer()
-    {
-        error = 0;
-        
+    {      
         this.updateOutputLog("Launching Server ...",0);
         bluetoothServerThread = new Thread(new ThreadStart(start_server));
         if(!serverLaunch)
@@ -97,7 +96,6 @@ public class ServerClass
         }
         catch (System.Net.Sockets.SocketException ex)
         {
-            this.error = -1;
             Console.WriteLine(ex.Message);
             this.updateOutputLog(ex.Message, -1);
             this.updateOutputLog("Fail to connect to this serveur", -1);
@@ -117,7 +115,6 @@ public class ServerClass
         }
         catch (Exception ex)
         {
-            this.error = -1;
             Console.WriteLine(ex.Message);
             this.updateOutputLog(ex.Message, -1);
             this.updateOutputLog("Fail to connect to this serveur", -1);
@@ -142,7 +139,6 @@ public class ServerClass
     /// </summary>
     private async void reading()
     {
-        this.error = -1;
         messageRecu = new byte[1024];
         messageRecu.Initialize();
         byte[] message_test = new byte[1024];
@@ -252,5 +248,31 @@ public class ServerClass
                 return (Balle) formatter.Deserialize(ms);
             }
         }
+    }
+
+
+    public static void CloseConnection()
+    {
+        if (bluetoothClient != null)
+        {
+            bluetoothClient.Close();
+        }
+        if (bluetoothServerThread != null)
+        {
+            bluetoothServerThread.Abort();
+        }
+        if (readingThread != null)
+        {
+            readingThread.Abort();
+        }
+        if (messageStream != null)
+        {
+            messageStream.Close();
+        }
+        if (readingThread != null)
+        {
+            readingThread.Abort();
+        }
+        serverLaunch = false;
     }
 }

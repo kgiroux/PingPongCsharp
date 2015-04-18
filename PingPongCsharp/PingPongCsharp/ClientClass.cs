@@ -17,11 +17,11 @@ public class ClientClass
 {
     private BluetoothDeviceInfo[] devices_found = null;
     private BluetoothDeviceInfo device_selected = null;
-    private BluetoothClient client = null;
-    private Thread bluetoothScanThread = null;
-    private Thread readingThread = null;
-    private Thread bluetoothClientThread = null;
-    private Stream stream = null;
+    private static BluetoothClient client = null;
+    private static Thread bluetoothScanThread = null;
+    private static Thread readingThread = null;
+    private static Thread bluetoothClientThread = null;
+    private static Stream stream = null;
     private Guid mUUID = new Guid("293eb187-b6e9-4434-894b-ef81120f0e5b");
     private List<string> items_bluetooth;
     private int error = 0;
@@ -97,7 +97,7 @@ public class ClientClass
     private void ClientConnectThread()
     {
         this.updateOutputLog("Connect",0);
-        BluetoothClient client = new BluetoothClient();
+        client = new BluetoothClient();
         Console.WriteLine(device_selected.DeviceAddress);
         try
         {
@@ -305,9 +305,28 @@ public class ClientClass
     /// <summary>
     /// Méthode permettant de fermer la connection
     /// </summary>
-    public void CloseConnection()
+    public static void CloseConnection()
     {
-        client.Close();
+        if (client != null)
+        {
+            client.Close();
+        } 
+        if (bluetoothScanThread != null)
+        {
+            bluetoothScanThread.Abort();
+        }
+        if (readingThread != null)
+        {
+            readingThread.Abort();
+        }
+        if (stream != null)
+        {
+            stream.Close();
+        }
+        if (bluetoothClientThread != null)
+        {
+            bluetoothClientThread.Abort();
+        }
     }
     ~ClientClass()
     {
@@ -331,11 +350,6 @@ public class ClientClass
         {
             bluetoothClientThread.Abort();
         }
-        
-    }
-
-    public void destroy_session()
-    {
         
     }
 

@@ -257,5 +257,20 @@ namespace PingPongCsharp
         {
             this.ready_client = ready;
         }
+
+        internal void changeServerButtonActivate(Boolean activated)
+        {
+            this.serveur.Enabled = activated;
+        }
+
+        internal void changeScanButtonActivate(Boolean activated)
+        {
+            this.scan_button.Enabled = activated;
+        }
+
+        internal void changeClientButtonActivate(Boolean activated)
+        {
+            this.client.Enabled = activated;
+        }
     }
 }
