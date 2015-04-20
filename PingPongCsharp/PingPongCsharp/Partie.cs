@@ -238,7 +238,6 @@ namespace PingPongCsharp
             if (joueur == 1)
             {
                 this.form.changeScanButtonActivate(true);
-                this.form.changeClientButtonActivate(false);
                 ClientClass.CloseConnection();
             }
             else
