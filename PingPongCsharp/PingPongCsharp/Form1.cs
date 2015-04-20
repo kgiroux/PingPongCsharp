@@ -209,7 +209,6 @@ namespace PingPongCsharp
             p.ShowDialog();
             ready = false;
             this.ChangeVisibily(false);
-            score =""+ 1 + "" + 2;
         }
 
         private void ClientConnectedServer()
