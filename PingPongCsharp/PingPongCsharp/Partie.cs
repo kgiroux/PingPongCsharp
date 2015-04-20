@@ -197,8 +197,8 @@ namespace PingPongCsharp
                             b.Y = ServerClass.b.Y;
                             b.Vitesse = ServerClass.b.Vitesse;
                             b.Angle = ServerClass.b.Angle;
-                            ServerClass.b = null;
                         }
+                        ServerClass.b = null;
                     }
                     else
                     {
@@ -215,8 +215,8 @@ namespace PingPongCsharp
                             b.Y = ClientClass.b.Y;
                             b.Vitesse = ClientClass.b.Vitesse;
                             b.Angle = ClientClass.b.Angle;
-                            ClientClass.b = null;
                         }
+                        ClientClass.b = null;
                     }
                 }
             }
