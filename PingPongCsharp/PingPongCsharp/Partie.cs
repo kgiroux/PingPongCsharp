@@ -16,6 +16,7 @@ namespace PingPongCsharp
         private int joueur;
         private Form1 form;
         private Balle b;
+        private int time = 0;
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         static extern short GetAsyncKeyState(System.Windows.Forms.Keys vKey);
