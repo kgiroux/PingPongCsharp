@@ -26,6 +26,7 @@ namespace PingPongCsharp
             this.form = form;
             InitializeComponent();
             temps.Location = new Point(this.ClientSize.Width / 2 - temps.Width / 2, temps.Location.Y);
+            score.Location = new Point(this.ClientSize.Width / 2 - score.Width / 2, score.Location.Y);
             b = new Balle(ball.Location.X, ball.Location.Y);
             this.Resize += new EventHandler(Form1_Resize);
 
@@ -233,6 +234,7 @@ namespace PingPongCsharp
                 raquette.Location = new Point(this.ClientSize.Width - 46, this.ClientSize.Height / 2 - raquette.Height / 2);
 
             temps.Location = new Point(this.ClientSize.Width / 2 - temps.Width / 2, temps.Location.Y);
+            score.Location = new Point(this.ClientSize.Width / 2 - score.Width / 2, score.Location.Y);
         }
 
         private void Partie_FormClosing(object sender, FormClosingEventArgs e)
