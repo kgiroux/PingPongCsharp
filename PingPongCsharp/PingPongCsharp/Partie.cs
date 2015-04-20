@@ -16,12 +16,16 @@ namespace PingPongCsharp
         private int joueur;
         private Form1 form;
         private Balle b;
+        private int scoreServer;
+        private int scoreClient;
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         static extern short GetAsyncKeyState(System.Windows.Forms.Keys vKey);
 
         public Partie(int joueur, Form1 form)
         {
+            scoreServer = 0;
+            scoreClient = 0;
             this.joueur = joueur;
             this.form = form;
             InitializeComponent();
@@ -120,6 +124,8 @@ namespace PingPongCsharp
                         }
                         else if (b.X < 0)
                         {
+                            scoreClient++;
+                            score.Text = scoreServer + "-" + scoreClient;
                             b.EnDehors = true;
                             b.Vitesse = 0;
                             ball.Visible = false;
@@ -158,6 +164,8 @@ namespace PingPongCsharp
                         }
                         else if (b.X > this.ClientSize.Width)
                         {
+                            scoreServer++;
+                            score.Text = scoreServer + "-" + scoreClient;
                             b.EnDehors = true;
                             b.Vitesse = 0;
                             ball.Visible = false;
@@ -189,6 +197,8 @@ namespace PingPongCsharp
                         b.EnDehors = ServerClass.b.EnDehors;
                         if (b.EnDehors == true)
                         {
+                            scoreServer++;
+                            score.Text = scoreServer + "-" + scoreClient;
                             ball.Location = new Point(this.ClientSize.Width / 2 - ball.Width / 2, this.ClientSize.Height / 2 - ball.Height / 2);
                             b = new Balle(ball.Location.X, ball.Location.Y);
                             b.EnDehors = false;
@@ -207,6 +217,8 @@ namespace PingPongCsharp
                         b.EnDehors = ClientClass.b.EnDehors;
                         if (b.EnDehors == true)
                         {
+                            scoreClient++;
+                            score.Text = scoreServer + "-" + scoreClient;
                             ball.Location = new Point(this.ClientSize.Width / 2 - ball.Width / 2, this.ClientSize.Height / 2 - ball.Height / 2);
                             b = new Balle(ball.Location.X, ball.Location.Y);
                             b.EnDehors = false;
