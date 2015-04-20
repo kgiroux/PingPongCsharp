@@ -158,6 +158,7 @@ public class ServerClass
         catch (Exception ex)
         {
             Console.WriteLine("=== > 5" +ex.Message);
+            CloseConnection();
         }
     }
 

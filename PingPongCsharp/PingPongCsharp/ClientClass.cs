@@ -219,6 +219,7 @@ public class ClientClass
         }
          catch (Exception ex)
          {
+             CloseConnection();
              Console.WriteLine("=++>" +ex.Message);
          }
     }
