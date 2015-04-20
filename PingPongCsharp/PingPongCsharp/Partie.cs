@@ -174,42 +174,47 @@ namespace PingPongCsharp
                     {
                         Console.WriteLine(ex.Message);
                     }
-                
-                }
-                else
-                {
-                    if (b.EnDehors == true)
-                    {
-                        b = new Balle(this.ClientSize.Width / 2 - ball.Width / 2, this.ClientSize.Height / 2 - ball.Height / 2);
-                    }
                 }
             }
             else
             {
-                if(joueur == 0)
+                if (ServerClass.b != null || ClientClass.b != null)
                 {
-                    if(ServerClass.b != null)
+                    if (joueur == 0)
                     {
-                        b.X = this.ClientSize.Width;
-                        b.Y = ServerClass.b.Y;
-                        b.Vitesse = ServerClass.b.Vitesse;
-                        b.Angle = ServerClass.b.Angle;
-                        b.Delta();
-                        ball.Visible = true;
-                        ServerClass.b = null;
+                        b.EnDehors = ServerClass.b.EnDehors;
+                        if (b.EnDehors == true)
+                        {
+                            b = new Balle(this.ClientSize.Width / 2 - ball.Width / 2, this.ClientSize.Height / 2 - ball.Height / 2);
+                        }
+                        else
+                        {
+                            b.X = this.ClientSize.Width;
+                            b.Y = ServerClass.b.Y;
+                            b.Vitesse = ServerClass.b.Vitesse;
+                            b.Angle = ServerClass.b.Angle;
+                            ServerClass.b = null;
+                        }
                     }
+                    else
+                    {
+                        b.EnDehors = ClientClass.b.EnDehors;
+                        if (b.EnDehors == true)
+                        {
+                            b = new Balle(this.ClientSize.Width / 2 - ball.Width / 2, this.ClientSize.Height / 2 - ball.Height / 2);
+                        }
+                        else
+                        {
+                            b.X = 0;
+                            b.Y = ClientClass.b.Y;
+                            b.Vitesse = ClientClass.b.Vitesse;
+                            b.Angle = ClientClass.b.Angle;
+                            ClientClass.b = null;
+                        }
+                    }
+
+                    ball.Visible = true;
                 }
-                else
-                    if (ClientClass.b != null)
-                    {
-                        b.X = 0;
-                        b.Y = ClientClass.b.Y;
-                        b.Vitesse = ClientClass.b.Vitesse;
-                        b.Angle = ClientClass.b.Angle;
-                        b.Delta();
-                        ball.Visible = true;
-                        ClientClass.b = null;
-                    }
             }
         }
         public void updateOutputLog(String text, int type)
