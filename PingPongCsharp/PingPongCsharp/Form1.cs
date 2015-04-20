@@ -208,7 +208,7 @@ namespace PingPongCsharp
             p = new Partie(0, this);
             p.ShowDialog();
             ready = false;
-            this.Visible = false;
+            this.ChangeVisibily(false);
         }
 
         private void ClientConnectedServer()
@@ -218,6 +218,7 @@ namespace PingPongCsharp
             p = new Partie(1,this);
             p.ShowDialog();
             ready_client = false;
+            this.ChangeVisibily(false);
         }
 
         
