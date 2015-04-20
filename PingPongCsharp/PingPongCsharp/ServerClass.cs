@@ -131,6 +131,7 @@ public class ServerClass
             {
                 bluetoothClient.Close();
             }
+            this.form.changeServerButtonActivate(true);
         }
         bluetoothClient.Close();
     }
