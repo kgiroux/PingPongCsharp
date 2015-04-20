@@ -112,7 +112,16 @@ public class ServerClass
             {
                 bluetoothClient.Close();
             }
-            this.form.changeServerButtonActivate(true);
+
+            try
+            {
+                this.form.changeServerButtonActivate(true);
+            }
+            catch (System.NullReferenceException ex1)
+            {
+                Console.WriteLine("==>   this.form.changeServerButtonActivate " + ex1.Message);
+            }
+       
         }
         catch (Exception ex)
         {
@@ -132,7 +141,15 @@ public class ServerClass
             {
                 bluetoothClient.Close();
             }
-            this.form.changeServerButtonActivate(true);
+
+            try
+            {
+                this.form.changeServerButtonActivate(true);
+            }
+            catch (System.NullReferenceException ex1)
+            {
+                Console.WriteLine("==>   this.form.changeServerButtonActivate 2" + ex1.Message);
+            }
         }
         bluetoothClient.Close();
     }

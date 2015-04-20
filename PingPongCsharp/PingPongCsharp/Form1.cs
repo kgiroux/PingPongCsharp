@@ -101,6 +101,7 @@ namespace PingPongCsharp
         /// <param name="e"></param>
         private void scan_button_Click(object sender, EventArgs e)
         {
+            this.updateDevicesList(new List<string>());
             clt = new ClientClass(this);
             Launching_partie(1);
             clt.startScanBluetoothDevices();
@@ -204,9 +205,7 @@ namespace PingPongCsharp
         private void ClientConnected()
         {
             // Serveur
-            this.updateConsoleLog("Ready : value  " + ready);
             while (!ready) ;
-            this.updateConsoleLog("Ready " + ready);
             p = new Partie(0, this);
             p.ShowDialog();
             ready = false;
@@ -216,9 +215,7 @@ namespace PingPongCsharp
         private void ClientConnectedServer()
         {
             // Client
-            this.updateConsoleLog("Ready : value  " + ready_client);
             while (!ready_client) ;
-            this.updateConsoleLog("Ready " + ready_client);
             p = new Partie(1,this);
             p.ShowDialog();
             ready_client = false;
@@ -267,7 +264,7 @@ namespace PingPongCsharp
             }
             catch (ObjectDisposedException ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine("====>>> changeServerButtonActivate " + ex.Message);
             }
         }
 
@@ -284,7 +281,7 @@ namespace PingPongCsharp
             }
             catch (ObjectDisposedException ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine("====>>> changeScanButtonActivate " + ex.Message);
             }
         }
     }

@@ -351,7 +351,15 @@ public class ClientClass
         {
             bluetoothClientThread.Abort();
         }
-        this.form.changeScanButtonActivate(true);
+        try
+        {
+            this.form.changeScanButtonActivate(true);
+        }
+        catch (System.NullReferenceException ex)
+        {
+            Console.WriteLine("==> " +ex.Message);
+        }
+        
         
     }
 
