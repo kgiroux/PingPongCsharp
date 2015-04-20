@@ -42,10 +42,10 @@
             this.raquette.AccessibleName = "Raquette";
             this.raquette.BackColor = System.Drawing.SystemColors.InfoText;
             this.raquette.Image = ((System.Drawing.Image)(resources.GetObject("raquette.Image")));
-            this.raquette.Location = new System.Drawing.Point(45, 176);
-            this.raquette.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.raquette.Location = new System.Drawing.Point(34, 143);
+            this.raquette.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.raquette.Name = "raquette";
-            this.raquette.Size = new System.Drawing.Size(21, 156);
+            this.raquette.Size = new System.Drawing.Size(16, 127);
             this.raquette.TabIndex = 0;
             this.raquette.TabStop = false;
             // 
@@ -54,10 +54,10 @@
             this.ball.AccessibleName = "Ball";
             this.ball.BackColor = System.Drawing.Color.Transparent;
             this.ball.Image = ((System.Drawing.Image)(resources.GetObject("ball.Image")));
-            this.ball.Location = new System.Drawing.Point(539, 244);
-            this.ball.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ball.Location = new System.Drawing.Point(404, 198);
+            this.ball.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ball.Name = "ball";
-            this.ball.Size = new System.Drawing.Size(24, 25);
+            this.ball.Size = new System.Drawing.Size(18, 20);
             this.ball.TabIndex = 2;
             this.ball.TabStop = false;
             // 
@@ -69,19 +69,20 @@
             // 
             // Partie
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1125, 506);
+            this.ClientSize = new System.Drawing.Size(844, 411);
             this.Controls.Add(this.ball);
             this.Controls.Add(this.raquette);
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.Color.White;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Partie";
             this.Text = "Partie";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Partie_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.raquette)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ball)).EndInit();
             this.ResumeLayout(false);

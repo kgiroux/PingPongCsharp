@@ -15,14 +15,13 @@ using PingPongCsharp;
 
 public class ClientClass
 {
-
     private BluetoothDeviceInfo[] devices_found = null;
     private BluetoothDeviceInfo device_selected = null;
-    private BluetoothClient client = null;
-    private Thread bluetoothScanThread = null;
-    private Thread readingThread = null;
-    private Thread bluetoothClientThread = null;
-    private Stream stream = null;
+    private static BluetoothClient client = null;
+    private static Thread bluetoothScanThread = null;
+    private static Thread readingThread = null;
+    private static Thread bluetoothClientThread = null;
+    private static Stream stream = null;
     private Guid mUUID = new Guid("293eb187-b6e9-4434-894b-ef81120f0e5b");
     private List<string> items_bluetooth;
     private int error = 0;
@@ -98,7 +97,7 @@ public class ClientClass
     private void ClientConnectThread()
     {
         this.updateOutputLog("Connect",0);
-        BluetoothClient client = new BluetoothClient();
+        client = new BluetoothClient();
         Console.WriteLine(device_selected.DeviceAddress);
         try
         {
@@ -131,14 +130,12 @@ public class ClientClass
         {
             client.EndConnect(result);
             stream = client.GetStream();
-            //stream.ReadTimeout = 1000;
             readingThread = new Thread(new ThreadStart(reading));
             readingThread.Start();
             while (true)
             {
                 messageSend = new byte[1024];
                 while (!messageAvailable) ;
-                //prepareSendData(b);
                 try
                 {
                     this.updateOutputLog(Encoding.ASCII.GetString(messageSend),0);
@@ -308,9 +305,28 @@ public class ClientClass
     /// <summary>
     /// Méthode permettant de fermer la connection
     /// </summary>
-    public void CloseConnection()
+    public static void CloseConnection()
     {
-        client.Close();
+        if (client != null)
+        {
+            client.Close();
+        } 
+        if (bluetoothScanThread != null)
+        {
+            bluetoothScanThread.Abort();
+        }
+        if (readingThread != null)
+        {
+            readingThread.Abort();
+        }
+        if (stream != null)
+        {
+            stream.Close();
+        }
+        if (bluetoothClientThread != null)
+        {
+            bluetoothClientThread.Abort();
+        }
     }
     ~ClientClass()
     {
@@ -337,12 +353,20 @@ public class ClientClass
         
     }
 
+    /// <summary>
+    /// Message qui lance la préparation du message
+    /// </summary>
+    /// <param name="b">Passage de Balle</param>
     public static void prepareSendData(Balle b)
     {
         messageSend = BinarySerializeObject(b);
         messageAvailable = true;
     }
-
+    /// <summary>
+    /// Methode qui serialise un objet en tableau de Byte. Cette méthode sert à préparer un message à envoyé
+    /// </summary>
+    /// <param name="b"></param>
+    /// <returns></returns>
     private static byte[] BinarySerializeObject(Balle b)
     {
         if (b == null)
@@ -357,7 +381,11 @@ public class ClientClass
             return streamMemory.ToArray();
         }
     }
-
+    /// <summary>
+    /// Methode pour désarialiser un objet après reception de celui-ci
+    /// </summary>
+    /// <param name="bt">Passage du tableau de Byte qui a été reçu</param>
+    /// <returns>Renvoi un objet de type Balle</returns>
     private static Balle BinaryDeserializeObject(byte[] bt)
     {
         if (bt == null)

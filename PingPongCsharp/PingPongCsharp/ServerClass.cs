@@ -16,17 +16,16 @@ public class ServerClass
 {
     private Form1 form;
     private Guid mUUID = new Guid("293eb187-b6e9-4434-894b-ef81120f0e5b");
-    private BluetoothClient bluetoothClient;
-    private Stream messageStream = null;
-    private bool ready = true;
-    private BluetoothListener bluetoothServerListener;
-    Thread bluetoothServerThread;
-    Thread readingThread= null;
+    private static BluetoothClient bluetoothClient;
+    private static Stream messageStream = null;
+    private static BluetoothListener bluetoothServerListener;
+    private static Thread bluetoothServerThread = null;
+    private static Thread readingThread= null;
     static byte[]  messageRecu;
     static byte[]  messageSend;
     public static Balle b; 
-    static bool messageAvailable = false;
-    private int error = 0;
+    private static bool messageAvailable = false;
+    private static bool serverLaunch = false;
 
     /// <summary>
     /// Constructeur de ServerClass
@@ -40,11 +39,9 @@ public class ServerClass
     ///  Méthode de lancement pour la création du serveur */
     /// </summary>
 
-    bool serverLaunch = false;
+    
     public void connectAsServer()
-    {
-        error = 0;
-        
+    {      
         this.updateOutputLog("Launching Server ...",0);
         bluetoothServerThread = new Thread(new ThreadStart(start_server));
         if(!serverLaunch)
@@ -86,7 +83,7 @@ public class ServerClass
                 }
                 catch (IOException e)
                 {
-                    this.updateOutputLog(e.Message, -1);
+                    this.updateOutputLog("====>>>" + e.Message, -1);
                 }
                 finally
                 {
@@ -99,7 +96,6 @@ public class ServerClass
         }
         catch (System.Net.Sockets.SocketException ex)
         {
-            this.error = -1;
             Console.WriteLine(ex.Message);
             this.updateOutputLog(ex.Message, -1);
             this.updateOutputLog("Fail to connect to this serveur", -1);
@@ -119,7 +115,6 @@ public class ServerClass
         }
         catch (Exception ex)
         {
-            this.error = -1;
             Console.WriteLine(ex.Message);
             this.updateOutputLog(ex.Message, -1);
             this.updateOutputLog("Fail to connect to this serveur", -1);
@@ -139,10 +134,11 @@ public class ServerClass
         }
         bluetoothClient.Close();
     }
-
+    /// <summary>
+    /// Methode de lecture pour le serveur. Il s'agit d'un thread qui attend un message
+    /// </summary>
     private async void reading()
     {
-        this.error = -1;
         messageRecu = new byte[1024];
         messageRecu.Initialize();
         byte[] message_test = new byte[1024];
@@ -200,13 +196,20 @@ public class ServerClass
             bluetoothClient.Close();
         }
     }
-
+    /// <summary>
+    /// Methode préparant les messages pour le serveur
+    /// </summary>
+    /// <param name="b"> Objet à envoyer</param>
     public static void prepareSendData(Balle b)
     {
         messageSend = BinarySerializeObject(b);
         messageAvailable = true;
     }
-
+    /// <summary>
+    /// Methode sérialisant un objet pour le transformer en tableau de Byte
+    /// </summary>
+    /// <param name="b">Objet à sérialiser</param>
+    /// <returns>Renvoi un tableau de Byte contenant le message à sérialiser</returns>
     private static byte[] BinarySerializeObject(Balle b)
     {
         if (b == null)
@@ -221,7 +224,11 @@ public class ServerClass
             return streamMemory.ToArray();
         }
     }
-
+    /// <summary>
+    /// Message à déserialiser 
+    /// </summary>
+    /// <param name="bt">Tableau provenant du message recu</param>
+    /// <returns>Renvoi un objet BALLE</returns>
     private static Balle BinaryDeserializeObject(byte[] bt)
     {
         if (bt == null)
@@ -241,5 +248,31 @@ public class ServerClass
                 return (Balle) formatter.Deserialize(ms);
             }
         }
+    }
+
+
+    public static void CloseConnection()
+    {
+        if (bluetoothClient != null)
+        {
+            bluetoothClient.Close();
+        }
+        if (bluetoothServerThread != null)
+        {
+            bluetoothServerThread.Abort();
+        }
+        if (readingThread != null)
+        {
+            readingThread.Abort();
+        }
+        if (messageStream != null)
+        {
+            messageStream.Close();
+        }
+        if (readingThread != null)
+        {
+            readingThread.Abort();
+        }
+        serverLaunch = false;
     }
 }

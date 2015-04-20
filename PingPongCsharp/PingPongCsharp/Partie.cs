@@ -123,7 +123,7 @@ namespace PingPongCsharp
                             ball.Visible = false;
                             ServerClass.prepareSendData(b);
                             b.EnDehors = false;
-                        }
+                    }
                     }
                     else
                     {
@@ -226,6 +226,22 @@ namespace PingPongCsharp
         {
             if (joueur == 1)
                 raquette.Location = new Point(this.ClientSize.Width - 46, this.ClientSize.Height / 2 - raquette.Height / 2);
+        }
+
+        private void Partie_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.updateOutputLog("Fermeture de la partie en cours", 0);
+            if (joueur == 1)
+            {
+                this.form.changeScanButtonActivate(true);
+                this.form.changeClientButtonActivate(false);
+                ClientClass.CloseConnection();
+            }
+            else
+            {
+                this.form.changeServerButtonActivate(true);
+                ServerClass.CloseConnection();
+            }
         }
     }
 }
