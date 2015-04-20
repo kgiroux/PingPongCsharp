@@ -208,8 +208,8 @@ namespace PingPongCsharp
             p = new Partie(0, this);
             p.ShowDialog();
             ready = false;
+            this.Visible = false;
         }
-
 
         private void ClientConnectedServer()
         {
@@ -272,6 +272,23 @@ namespace PingPongCsharp
             Func<int> del = delegate()
             {
                 this.scan_button.Enabled = activated;
+                return 0;
+            };
+            try
+            {
+                Invoke(del);
+            }
+            catch (ObjectDisposedException ex)
+            {
+                Console.WriteLine("====>>> changeScanButtonActivate " + ex.Message);
+            }
+        }
+
+        public void ChangeVisibily(Boolean activated)
+        {
+            Func<int> del = delegate()
+            {
+                this.Visible = activated;
                 return 0;
             };
             try

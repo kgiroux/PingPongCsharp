@@ -244,11 +244,13 @@ namespace PingPongCsharp
             {
                 this.form.changeScanButtonActivate(true);
                 ClientClass.CloseConnection();
+                this.form.ChangeVisibily(true);
             }
             else
             {
                 this.form.changeServerButtonActivate(true);
                 ServerClass.CloseConnection();
+                this.form.ChangeVisibily(true);
             }
         }
 
