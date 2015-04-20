@@ -33,7 +33,9 @@
             this.raquette = new System.Windows.Forms.PictureBox();
             this.ball = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.score = new System.Windows.Forms.Label();
+            this.temps = new System.Windows.Forms.Label();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.raquette)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ball)).BeginInit();
             this.SuspendLayout();
@@ -68,18 +70,35 @@
             this.timer1.Interval = 10;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // score
+            // temps
             // 
-            this.score.AutoSize = true;
-            this.score.BackColor = System.Drawing.Color.Transparent;
-            this.score.Font = new System.Drawing.Font("OCR A Extended", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.score.ForeColor = System.Drawing.Color.White;
-            this.score.Location = new System.Drawing.Point(435, 9);
-            this.score.Name = "score";
-            this.score.Size = new System.Drawing.Size(271, 123);
-            this.score.TabIndex = 3;
-            this.score.Text = "100";
-            this.score.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.temps.AutoSize = true;
+            this.temps.BackColor = System.Drawing.Color.Transparent;
+            this.temps.Font = new System.Drawing.Font("OCR A Extended", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.temps.ForeColor = System.Drawing.Color.White;
+            this.temps.Location = new System.Drawing.Point(435, 9);
+            this.temps.Name = "temps";
+            this.temps.Size = new System.Drawing.Size(182, 83);
+            this.temps.TabIndex = 3;
+            this.temps.Text = "100";
+            this.temps.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // timer2
+            // 
+            this.timer2.Enabled = true;
+            this.timer2.Interval = 1000;
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("OCR A Extended", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(437, 92);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(182, 83);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "0-0";
             // 
             // Partie
             // 
@@ -89,7 +108,8 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1125, 506);
-            this.Controls.Add(this.score);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.temps);
             this.Controls.Add(this.ball);
             this.Controls.Add(this.raquette);
             this.DoubleBuffered = true;
@@ -110,6 +130,8 @@
         private System.Windows.Forms.PictureBox raquette;
         private System.Windows.Forms.PictureBox ball;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Label score;
+        private System.Windows.Forms.Label temps;
+        private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.Label label1;
     }
 }

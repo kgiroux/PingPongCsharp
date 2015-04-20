@@ -16,7 +16,6 @@ namespace PingPongCsharp
         private int joueur;
         private Form1 form;
         private Balle b;
-        private int time = 0;
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         static extern short GetAsyncKeyState(System.Windows.Forms.Keys vKey);
@@ -26,6 +25,7 @@ namespace PingPongCsharp
             this.joueur = joueur;
             this.form = form;
             InitializeComponent();
+            temps.Location = new Point(this.ClientSize.Width / 2 - temps.Width / 2, temps.Location.Y);
             b = new Balle(ball.Location.X, ball.Location.Y);
             this.Resize += new EventHandler(Form1_Resize);
 
@@ -231,6 +231,8 @@ namespace PingPongCsharp
         {
             if (joueur == 1)
                 raquette.Location = new Point(this.ClientSize.Width - 46, this.ClientSize.Height / 2 - raquette.Height / 2);
+
+            temps.Location = new Point(this.ClientSize.Width / 2 - temps.Width / 2, temps.Location.Y);
         }
 
         private void Partie_FormClosing(object sender, FormClosingEventArgs e)
@@ -246,6 +248,15 @@ namespace PingPongCsharp
                 this.form.changeServerButtonActivate(true);
                 ServerClass.CloseConnection();
             }
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            if (int.Parse(temps.Text) > 0)
+            {
+                temps.Text = (int.Parse(temps.Text) - 1).ToString();
+                temps.Location = new Point(this.ClientSize.Width / 2 - temps.Width / 2, temps.Location.Y);
+            }   
         }
     }
 }
