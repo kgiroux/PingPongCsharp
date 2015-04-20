@@ -189,11 +189,6 @@ public class ServerClass
     {
         this.form.updateConsoleLog(text,type);
     }
-    
-    public void closeServer()
-    {
-       //this.bluetoothServerThread.Finalize();
-    }
     /// <summary>
     /// Destructeur de la classe 
     /// </summary>
@@ -270,7 +265,9 @@ public class ServerClass
         }
     }
 
-
+    /// <summary>
+    /// Methode fermant les objets et threads utilisés
+    /// </summary>
     public static void CloseConnection()
     {
         if (bluetoothClient != null)

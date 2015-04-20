@@ -329,6 +329,9 @@ public class ClientClass
             bluetoothClientThread.Abort();
         }
     }
+    /// <summary>
+    /// Destructeur de la classe
+    /// </summary>
     ~ClientClass()
     {
         devices_found = null;
