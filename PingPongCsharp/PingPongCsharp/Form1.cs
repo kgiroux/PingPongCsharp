@@ -29,7 +29,6 @@ namespace PingPongCsharp
         public Form1()
         {
             InitializeComponent();
-            client.Enabled = false;
             item = new List<string>();
         }
 
@@ -55,7 +54,6 @@ namespace PingPongCsharp
         {
             /* Désactivation du bouton Client et du bouton Scan */
             /* Configuration du Serveur */
-            client.Enabled = false;
             scan_button.Enabled = false;
             serveur.Enabled = false;
             /* Créer un objet ServerClass qui va être l'objet contenir toute les méthodes concernant le serveur */
@@ -89,7 +87,6 @@ namespace PingPongCsharp
         
         private void stop_action(object sender, EventArgs e){
                 serveur.Enabled = true;
-                client.Enabled = false;
                 scan_button.Enabled = true;
                 textBox1.Text = "";
                 Partie p = new Partie(1,this);
@@ -104,7 +101,6 @@ namespace PingPongCsharp
         /// <param name="e"></param>
         private void scan_button_Click(object sender, EventArgs e)
         {
-            client.Enabled = false;
             clt = new ClientClass(this);
             Launching_partie(1);
             clt.startScanBluetoothDevices();
@@ -258,39 +254,37 @@ namespace PingPongCsharp
             this.ready_client = ready;
         }
 
-        internal void changeServerButtonActivate(Boolean activated)
+        public void changeServerButtonActivate(Boolean activated)
         {
-            try
+            Func<int> del = delegate()
             {
                 this.serveur.Enabled = activated;
-            }
-            catch (System.InvalidOperationException ex)
+                return 0;
+            };
+            try
             {
-                Console.WriteLine("===> 1" + ex.Message);
+                Invoke(del);
+            }
+            catch (ObjectDisposedException ex)
+            {
+                Console.WriteLine(ex.Message);
             }
         }
 
-        internal void changeScanButtonActivate(Boolean activated)
+        public void changeScanButtonActivate(Boolean activated)
         {
-            try
+            Func<int> del = delegate()
             {
                 this.scan_button.Enabled = activated;
-            }
-            catch (System.InvalidOperationException ex)
-            {
-                Console.WriteLine("===> 2" + ex.Message);
-            }
-        }
-
-        internal void changeClientButtonActivate(Boolean activated)
-        {
+                return 0;
+            };
             try
             {
-                this.client.Enabled = activated;
+                Invoke(del);
             }
-            catch (System.InvalidOperationException ex)
+            catch (ObjectDisposedException ex)
             {
-                Console.WriteLine("===> 3" + ex.Message);
+                Console.WriteLine(ex.Message);
             }
         }
     }

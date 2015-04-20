@@ -351,6 +351,8 @@ public class ClientClass
         {
             bluetoothClientThread.Abort();
         }
+        this.form.changeClientButtonActivate(false);
+        this.form.changeScanButtonActivate(true);
         
     }
 

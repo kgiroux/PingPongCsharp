@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.serveur = new System.Windows.Forms.Button();
-            this.client = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.NamePlayer = new System.Windows.Forms.Label();
             this.stop = new System.Windows.Forms.Button();
@@ -48,16 +47,6 @@
             this.serveur.Text = "Serveur";
             this.serveur.UseVisualStyleBackColor = true;
             this.serveur.Click += new System.EventHandler(this.serveur_click);
-            // 
-            // client
-            // 
-            this.client.Location = new System.Drawing.Point(560, 250);
-            this.client.Name = "client";
-            this.client.Size = new System.Drawing.Size(97, 23);
-            this.client.TabIndex = 0;
-            this.client.Text = "Client";
-            this.client.UseVisualStyleBackColor = true;
-            this.client.Click += new System.EventHandler(this.client_Click);
             // 
             // textBox1
             // 
@@ -107,7 +96,7 @@
             // 
             this.scan_button.Location = new System.Drawing.Point(457, 250);
             this.scan_button.Name = "scan_button";
-            this.scan_button.Size = new System.Drawing.Size(97, 23);
+            this.scan_button.Size = new System.Drawing.Size(200, 23);
             this.scan_button.TabIndex = 0;
             this.scan_button.Text = "Scan";
             this.scan_button.UseVisualStyleBackColor = true;
@@ -134,7 +123,6 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.serveur);
             this.Controls.Add(this.scan_button);
-            this.Controls.Add(this.client);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form1";
             this.Text = "Configuration Bluetooth";
@@ -147,7 +135,6 @@
         #endregion
 
         private System.Windows.Forms.Button serveur;
-        private System.Windows.Forms.Button client;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label NamePlayer;
         private System.Windows.Forms.Button stop;

@@ -112,6 +112,7 @@ public class ServerClass
             {
                 bluetoothClient.Close();
             }
+            this.form.changeServerButtonActivate(true);
         }
         catch (Exception ex)
         {
