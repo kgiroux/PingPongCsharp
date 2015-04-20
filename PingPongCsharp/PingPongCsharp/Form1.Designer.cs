@@ -40,9 +40,9 @@
             // 
             // serveur
             // 
-            this.serveur.Location = new System.Drawing.Point(118, 254);
+            this.serveur.Location = new System.Drawing.Point(60, 254);
             this.serveur.Name = "serveur";
-            this.serveur.Size = new System.Drawing.Size(97, 23);
+            this.serveur.Size = new System.Drawing.Size(377, 23);
             this.serveur.TabIndex = 0;
             this.serveur.Text = "Serveur";
             this.serveur.UseVisualStyleBackColor = true;
@@ -106,7 +106,7 @@
             // 
             this.outPutLog.Location = new System.Drawing.Point(60, 71);
             this.outPutLog.Name = "outPutLog";
-            this.outPutLog.Size = new System.Drawing.Size(272, 177);
+            this.outPutLog.Size = new System.Drawing.Size(377, 177);
             this.outPutLog.TabIndex = 6;
             this.outPutLog.Text = "";
             // 
