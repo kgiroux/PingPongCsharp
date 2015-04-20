@@ -209,6 +209,7 @@ namespace PingPongCsharp
             p.ShowDialog();
             ready = false;
             this.ChangeVisibily(false);
+            score =""+ 1 + "" + 2;
         }
 
         private void ClientConnectedServer()
@@ -290,6 +291,7 @@ namespace PingPongCsharp
             Func<int> del = delegate()
             {
                 this.Visible = activated;
+                this.Hide();
                 return 0;
             };
             try
