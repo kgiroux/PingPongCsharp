@@ -103,7 +103,7 @@ namespace PingPongCsharp
         {
             this.updateDevicesList(new List<string>());
             clt = new ClientClass(this);
-            Launching_partie(1);
+            
             clt.startScanBluetoothDevices();
         }
         
@@ -197,6 +197,7 @@ namespace PingPongCsharp
         {
             serveur.Enabled = false;
             /* Lance la connexion au serveur */
+            Launching_partie(1);
             Console.WriteLine(listBoxDevice.SelectedItem.ToString());
             Console.WriteLine("ICI 1");
             clt.connectAsClient(listBoxDevice.SelectedItem.ToString());
