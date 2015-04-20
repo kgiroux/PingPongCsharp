@@ -96,7 +96,7 @@ public class ServerClass
         }
         catch (System.Net.Sockets.SocketException ex)
         {
-            Console.WriteLine(ex.Message);
+            Console.WriteLine("=== > 4" + ex.Message);
             this.updateOutputLog(ex.Message, -1);
             this.updateOutputLog("Fail to connect to this serveur", -1);
             if (readingThread != null)
@@ -115,7 +115,7 @@ public class ServerClass
         }
         catch (Exception ex)
         {
-            Console.WriteLine(ex.Message);
+            Console.WriteLine("=== > 4" +ex.Message);
             this.updateOutputLog(ex.Message, -1);
             this.updateOutputLog("Fail to connect to this serveur", -1);
             if (readingThread != null)
@@ -157,7 +157,7 @@ public class ServerClass
         }
         catch (Exception ex)
         {
-            Console.WriteLine(ex.Message);
+            Console.WriteLine("=== > 5" +ex.Message);
         }
     }
 

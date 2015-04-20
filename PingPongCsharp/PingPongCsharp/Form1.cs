@@ -243,7 +243,7 @@ namespace PingPongCsharp
             }
             else
             {
-                
+                Console.WriteLine("ICI");
             }
             
         }
@@ -260,17 +260,38 @@ namespace PingPongCsharp
 
         internal void changeServerButtonActivate(Boolean activated)
         {
-            this.serveur.Enabled = activated;
+            try
+            {
+                this.serveur.Enabled = activated;
+            }
+            catch (System.InvalidOperationException ex)
+            {
+                Console.WriteLine("===> 1" + ex.Message);
+            }
         }
 
         internal void changeScanButtonActivate(Boolean activated)
         {
-            this.scan_button.Enabled = activated;
+            try
+            {
+                this.scan_button.Enabled = activated;
+            }
+            catch (System.InvalidOperationException ex)
+            {
+                Console.WriteLine("===> 2" + ex.Message);
+            }
         }
 
         internal void changeClientButtonActivate(Boolean activated)
         {
-            this.client.Enabled = activated;
+            try
+            {
+                this.client.Enabled = activated;
+            }
+            catch (System.InvalidOperationException ex)
+            {
+                Console.WriteLine("===> 3" + ex.Message);
+            }
         }
     }
 }
