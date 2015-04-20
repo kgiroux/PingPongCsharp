@@ -180,12 +180,16 @@ namespace PingPongCsharp
             {
                 if (ServerClass.b != null || ClientClass.b != null)
                 {
+                    ball.Visible = true;
+                    ball.Location = new Point(ball.Location.X, ball.Location.Y);
+
                     if (joueur == 0)
                     {
                         b.EnDehors = ServerClass.b.EnDehors;
                         if (b.EnDehors == true)
                         {
                             b = new Balle(this.ClientSize.Width / 2 - ball.Width / 2, this.ClientSize.Height / 2 - ball.Height / 2);
+                            b.EnDehors = false;
                         }
                         else
                         {
@@ -202,6 +206,7 @@ namespace PingPongCsharp
                         if (b.EnDehors == true)
                         {
                             b = new Balle(this.ClientSize.Width / 2 - ball.Width / 2, this.ClientSize.Height / 2 - ball.Height / 2);
+                            b.EnDehors = false;
                         }
                         else
                         {
@@ -212,8 +217,6 @@ namespace PingPongCsharp
                             ClientClass.b = null;
                         }
                     }
-
-                    ball.Visible = true;
                 }
             }
         }
