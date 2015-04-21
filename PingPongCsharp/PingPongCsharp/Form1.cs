@@ -103,7 +103,6 @@ namespace PingPongCsharp
             clt.startScanBluetoothDevices();
         }
         
-        /* Méthode permettant de mettre à jour la liste du contenu dans la liste Box */
         /// <summary>
         /// Méthode permettant de mettre à jour la liste des appareils disponibles via la détection bluetooth
         /// </summary>
@@ -235,7 +234,7 @@ namespace PingPongCsharp
             p = new Partie(0, this);
             p.ShowDialog();
             ready = false;
-            this.ChangeVisibily(true);
+            this.ChangeVisibily(false);
         }
         /// <summary>
         /// Methode qui va attendre l'acceptation du serveur
@@ -247,7 +246,7 @@ namespace PingPongCsharp
             p = new Partie(1,this);
             p.ShowDialog();
             ready_client = false;
-            this.ChangeVisibily(true);
+            this.ChangeVisibily(false);
         }
 
         /// <summary>
@@ -258,6 +257,7 @@ namespace PingPongCsharp
         {
             if (mode == 0)
             {
+                this.updateConsoleLog("Lancement serveur",1);
                 launching_partie = new Thread(new ThreadStart(ClientConnected));
                 launching_partie.Start();
             }

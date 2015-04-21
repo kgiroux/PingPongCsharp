@@ -273,6 +273,7 @@ public class ServerClass
         if (bluetoothClient != null)
         {
             bluetoothClient.Close();
+            bluetoothServerListener.Stop();
         }
         if (bluetoothServerThread != null)
         {
