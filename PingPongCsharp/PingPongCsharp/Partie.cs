@@ -16,6 +16,7 @@ namespace PingPongCsharp
         private int joueur;
         private Form1 form;
         private Balle b;
+        private DataTransit dt;
         private int scoreServer;
         private int scoreClient;
 
@@ -55,6 +56,13 @@ namespace PingPongCsharp
             {
                 b.Lance();
                 timer2.Enabled = true;
+                dt = new DataTransit();
+                dt.Timer = true;
+
+                if (joueur == 0)
+                    ServerClass.prepareSendData(dt);
+                else
+                    ClientClass.prepareSendData(dt);
             }
         }
 
@@ -168,7 +176,7 @@ namespace PingPongCsharp
                             ball.Visible = false;
 
                             //Envoi des données
-                            DataTransit dt = new DataTransit();
+                            dt = new DataTransit();
                             dt.BallePro = b;
                             dt.Alive = true;
                             ClientClass.prepareSendData(dt);
@@ -182,7 +190,7 @@ namespace PingPongCsharp
                             b.EnDehors = true;
                             b.Vitesse = 0;
                             ball.Visible = false;
-                            DataTransit dt = new DataTransit();
+                            dt = new DataTransit();
                             dt.BallePro = b;
                             dt.Alive = true;
                             ClientClass.prepareSendData(dt);
@@ -205,6 +213,8 @@ namespace PingPongCsharp
             }
             else
             {
+                if (ServerClass.dt.Timer == true || ClientClass.dt.Timer != true)
+                    timer2.Enabled = true;
                 if (ServerClass.dt.BallePro != null || ClientClass.dt.BallePro != null)
                 {
                     
