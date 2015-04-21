@@ -54,8 +54,7 @@ namespace PingPongCsharp
             if (e.KeyCode == Keys.Space && b.Vitesse == 0 && ball.Visible == true)
             {
                 b.Lance();
-                if (scoreClient == 0 && scoreServer == 0)
-                    timer2.Enabled = true;
+                timer2.Enabled = true;
             }
         }
 
@@ -140,6 +139,7 @@ namespace PingPongCsharp
                             dt.BallePro = b;
                             dt.Alive = true;
                             ServerClass.prepareSendData(dt);
+                            timer2.Enabled = false;
                             b.EnDehors = false;
                         }
                     }
@@ -186,6 +186,7 @@ namespace PingPongCsharp
                             dt.BallePro = b;
                             dt.Alive = true;
                             ClientClass.prepareSendData(dt);
+                            timer2.Enabled = false;
                             b.EnDehors = false;
                         }
                     }
@@ -215,6 +216,7 @@ namespace PingPongCsharp
                         b.X = this.ClientSize.Width;
                         if (b.EnDehors == true)
                         {
+                            timer2.Enabled = false;
                             scoreServer++;
                             score.Text = scoreServer + "-" + scoreClient;
                             ball.Location = new Point(this.ClientSize.Width / 2 - ball.Width / 2, this.ClientSize.Height / 2 - ball.Height / 2);
@@ -229,6 +231,7 @@ namespace PingPongCsharp
                         b.X = 0;
                         if (b.EnDehors == true)
                         {
+                            timer2.Enabled = false;
                             scoreClient++;
                             score.Text = scoreServer + "-" + scoreClient;
                             ball.Location = new Point(this.ClientSize.Width / 2 - ball.Width / 2, this.ClientSize.Height / 2 - ball.Height / 2);
