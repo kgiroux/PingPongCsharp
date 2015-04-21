@@ -9,8 +9,8 @@ namespace PingPongCsharp
     [Serializable]
     public class DataTransit
     {
-        private Balle balle;
-        private Boolean alive;
+        private Balle balle = null;
+        private Boolean alive = true;
         public Balle BallePro { get { return balle; } set { balle = value; } }
         public Boolean Alive { get { return alive; } set { alive = value; } }
     }

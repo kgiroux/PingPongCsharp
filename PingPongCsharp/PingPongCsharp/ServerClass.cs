@@ -225,9 +225,9 @@ public class ServerClass
     /// </summary>
     /// <param name="b">Objet à sérialiser</param>
     /// <returns>Renvoi un tableau de Byte contenant le message à sérialiser</returns>
-    private static byte[] BinarySerializeObject(DataTransit b)
+    private static byte[] BinarySerializeObject(DataTransit dt)
     {
-        if (b == null)
+        if (dt == null)
         {
             return new byte[0];
         }
@@ -235,7 +235,7 @@ public class ServerClass
         {
             MemoryStream streamMemory = new MemoryStream();
             BinaryFormatter formatter = new BinaryFormatter();
-            formatter.Serialize(streamMemory, b);
+            formatter.Serialize(streamMemory, dt);
             return streamMemory.ToArray();
         }
     }
