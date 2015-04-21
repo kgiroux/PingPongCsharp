@@ -129,6 +129,7 @@ namespace PingPongCsharp
                         if (b.X > this.ClientSize.Width)
                         {
                             ball.Visible = false;
+                            b.Y = ball.Location.Y / this.ClientSize.Height;
                         
                             //Envoi des données
                             DataTransit dt = new DataTransit();
@@ -176,6 +177,7 @@ namespace PingPongCsharp
                         if (b.X < 0)
                         {
                             ball.Visible = false;
+                            b.Y = ball.Location.Y / this.ClientSize.Height;
 
                             //Envoi des données
                             dt = new DataTransit();
@@ -205,7 +207,7 @@ namespace PingPongCsharp
 
                     try
                     {
-                        ball.Location = new Point(b.X, b.Y);
+                        ball.Location = new Point(b.X, (int)b.Y);
                     }
                     catch (InvalidOperationException ex)
                     {
@@ -221,6 +223,7 @@ namespace PingPongCsharp
                 {
                     b = ServerClass.dt.BallePro;
                     b.X = this.ClientSize.Width;
+                    b.Y = b.Y * this.ClientSize.Height;
                     if (b.EnDehors == true)
                     {
                         timer2.Enabled = false;
@@ -236,6 +239,7 @@ namespace PingPongCsharp
                 {
                     b = ClientClass.dt.BallePro;
                     b.X = 0;
+                    b.Y = b.Y * this.ClientSize.Height;
                     if (b.EnDehors == true)
                     {
                         timer2.Enabled = false;

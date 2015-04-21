@@ -107,7 +107,6 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(782, 853);
-            this.ControlBox = false;
             this.Controls.Add(this.ball);
             this.Controls.Add(this.score);
             this.Controls.Add(this.temps);

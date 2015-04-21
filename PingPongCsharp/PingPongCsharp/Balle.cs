@@ -11,14 +11,14 @@ namespace PingPongCsharp
     public class Balle
     {
         private int x;
-        private int y;
+        private double y;
         private int angle;
         private int vitesse;
         private bool enDehors;
         public int Angle { get {return angle;} set{angle = value;} }
         public int Vitesse { get {return vitesse;} set{vitesse = value;} }
         public int X { get { return x; } set { x = value; } }
-        public int Y { get { return y; } set { y = value; } }
+        public double Y { get { return y; } set { y = value; } }
         public bool EnDehors { get { return enDehors; } set { enDehors = value; } }
 
         public Balle(int x, int y)
