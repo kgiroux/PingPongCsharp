@@ -362,8 +362,6 @@ public class ClientClass
         {
             Console.WriteLine("==> " +ex.Message);
         }
-        
-        
     }
 
     /// <summary>

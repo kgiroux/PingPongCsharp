@@ -273,7 +273,11 @@ namespace PingPongCsharp
             {
                 temps.Text = (int.Parse(temps.Text) - 1).ToString();
                 temps.Location = new Point(this.ClientSize.Width / 2 - temps.Width / 2, temps.Location.Y);
-            }   
+            }
+            else
+            {
+                timer1.Enabled = false;
+            }
         }
     }
 }
