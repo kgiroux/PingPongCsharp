@@ -232,9 +232,10 @@ namespace PingPongCsharp
             // Serveur
             while (!ready) ;
             p = new Partie(0, this);
-            p.ShowDialog();
             ready = false;
             this.ChangeVisibily(false);
+            p.ShowDialog();
+            
         }
         /// <summary>
         /// Methode qui va attendre l'acceptation du serveur
@@ -244,9 +245,10 @@ namespace PingPongCsharp
             // Client
             while (!ready_client) ;
             p = new Partie(1,this);
-            p.ShowDialog();
             ready_client = false;
             this.ChangeVisibily(false);
+            p.ShowDialog();
+            
         }
 
         /// <summary>
