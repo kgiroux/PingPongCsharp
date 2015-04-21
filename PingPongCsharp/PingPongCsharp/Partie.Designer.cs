@@ -76,7 +76,7 @@
             this.temps.BackColor = System.Drawing.Color.Transparent;
             this.temps.Font = new System.Drawing.Font("OCR A Extended", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.temps.ForeColor = System.Drawing.Color.White;
-            this.temps.Location = new System.Drawing.Point(435, 9);
+            this.temps.Location = new System.Drawing.Point(422, 92);
             this.temps.Name = "temps";
             this.temps.Size = new System.Drawing.Size(182, 83);
             this.temps.TabIndex = 3;
@@ -94,7 +94,7 @@
             this.score.AutoSize = true;
             this.score.BackColor = System.Drawing.Color.Transparent;
             this.score.Font = new System.Drawing.Font("OCR A Extended", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.score.Location = new System.Drawing.Point(437, 92);
+            this.score.Location = new System.Drawing.Point(422, 9);
             this.score.Name = "score";
             this.score.Size = new System.Drawing.Size(182, 83);
             this.score.TabIndex = 4;
@@ -108,9 +108,9 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1125, 506);
+            this.Controls.Add(this.ball);
             this.Controls.Add(this.score);
             this.Controls.Add(this.temps);
-            this.Controls.Add(this.ball);
             this.Controls.Add(this.raquette);
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.Color.White;
