@@ -29,6 +29,8 @@ namespace PingPongCsharp
         public Form1()
         {
             InitializeComponent();
+            serveur.Enabled = false;
+            scan_button.Enabled = false;
             item = new List<string>();
         }
 
@@ -186,7 +188,7 @@ namespace PingPongCsharp
             {
                 Invoke(del);
             }
-            catch (ObjectDisposedException ex)
+            catch (System.InvalidOperationException ex)
             {
                 Console.WriteLine(ex.Message);
             }
