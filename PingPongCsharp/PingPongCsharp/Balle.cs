@@ -43,8 +43,6 @@ namespace PingPongCsharp
             int[] p = new int[2];
             x += (int)(Math.Cos(angle * Math.PI / 180) * vitesse);
             y += (int)(Math.Sin(angle * Math.PI / 180) * vitesse);
-
-            Console.WriteLine(Math.Cos(angle) + "     " + Math.Sin(angle));
         }
     }
 }
