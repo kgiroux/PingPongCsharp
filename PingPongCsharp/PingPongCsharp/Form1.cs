@@ -56,6 +56,7 @@ namespace PingPongCsharp
             /* Configuration du Serveur */
             scan_button.Enabled = false;
             serveur.Enabled = false;
+            this.ready = false;
             /* Créer un objet ServerClass qui va être l'objet contenir toute les méthodes concernant le serveur */
             /* On lui passe l'objet form pour pouvoir modifier les textes dans la liste et la textBox */
             svr = new ServerClass(this);
@@ -96,6 +97,7 @@ namespace PingPongCsharp
         private void scan_button_Click(object sender, EventArgs e)
         {
             this.updateDevicesList(new List<string>());
+            this.ready_client = false;
             clt = new ClientClass(this);
             
             clt.startScanBluetoothDevices();
