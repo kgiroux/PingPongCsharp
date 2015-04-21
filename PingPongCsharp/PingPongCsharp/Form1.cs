@@ -84,8 +84,6 @@ namespace PingPongCsharp
                 {
                     ClientClass.CloseConnection();
                 }
-                //Partie p = new Partie(1,this);
-                //p.Show();
         }
 
         /* Bouton Scan qui va être chercher les appareils pour le client */
@@ -343,6 +341,15 @@ namespace PingPongCsharp
             {
                 Console.WriteLine("====>>> changeScanButtonActivate " + ex.Message);
             }
+        }
+        public void InvokeClickServer()
+        {
+            Func<int> del = delegate()
+            {
+                serveur_click(null, null);
+                return 0;
+            };
+            Invoke(del);
         }
     }
 }

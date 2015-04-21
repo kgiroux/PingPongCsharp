@@ -279,6 +279,7 @@ namespace PingPongCsharp
                 this.form.changeServerButtonActivate(true);
                 ServerClass.CloseConnection();
                 this.form.ChangeVisibily(true);
+                this.form.InvokeClickServer();
             }
         }
 
