@@ -54,6 +54,7 @@ namespace PingPongCsharp
         {
             /* Désactivation du bouton Client et du bouton Scan */
             /* Configuration du Serveur */
+            textBox1.Enabled = false;
             scan_button.Enabled = false;
             serveur.Enabled = false;
             this.ready = false;
@@ -75,6 +76,7 @@ namespace PingPongCsharp
         private void stop_action(object sender, EventArgs e){
                 serveur.Enabled = true;
                 scan_button.Enabled = true;
+                textBox1.Enabled = true;
                 this.updateConsoleLog("Fermeture des connexions", -1);
                 if (svr != null)
                 {
@@ -197,6 +199,7 @@ namespace PingPongCsharp
         private void listBoxDevice_DoubleClick(object sender, EventArgs e)
         {
             serveur.Enabled = false;
+            textBox1.Enabled = false;
             /* Lance la connexion au serveur */
             Launching_partie(1);
             clt.connectAsClient(listBoxDevice.SelectedItem.ToString());
@@ -350,6 +353,31 @@ namespace PingPongCsharp
                 return 0;
             };
             Invoke(del);
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.Dispose();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (!("".Equals(textBox1.Text)))
+            {
+                serveur.Enabled = true;
+                scan_button.Enabled = true;
+            }
+            else if (textBox1.Text.Length == 0)
+            {
+                serveur.Enabled = true;
+                scan_button.Enabled = true;
+            }
+            else
+            {
+                serveur.Enabled = false;
+                scan_button.Enabled = false;
+            }
+
         }
     }
 }
