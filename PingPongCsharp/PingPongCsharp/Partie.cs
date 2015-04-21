@@ -129,7 +129,7 @@ namespace PingPongCsharp
                         if (b.X > this.ClientSize.Width)
                         {
                             ball.Visible = false;
-                            b.Y = ball.Location.Y / this.ClientSize.Height;
+                            b.Y = (double)ball.Location.Y / (double)this.ClientSize.Height;
                         
                             //Envoi des données
                             DataTransit dt = new DataTransit();
@@ -177,7 +177,7 @@ namespace PingPongCsharp
                         if (b.X < 0)
                         {
                             ball.Visible = false;
-                            b.Y = ball.Location.Y / this.ClientSize.Height;
+                            b.Y = (double)ball.Location.Y / (double)this.ClientSize.Height;
 
                             //Envoi des données
                             dt = new DataTransit();
