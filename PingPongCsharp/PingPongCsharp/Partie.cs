@@ -95,7 +95,7 @@ namespace PingPongCsharp
                 Console.WriteLine(ex.Message);
             }
             
-            if(ServerClass.dt.BallePro == null || ClientClass.dt.BallePro == null)  
+            if(ServerClass.dt.BallePro == null && ClientClass.dt.BallePro == null)  
             {
                 if (b.Vitesse != 0) 
                 {
