@@ -95,7 +95,7 @@ namespace PingPongCsharp
                 Console.WriteLine(ex.Message);
             }
             
-            if(ball.Visible == true)  
+            if(ServerClass.dt.BallePro == null || ClientClass.dt.BallePro == null)  
             {
                 if (b.Vitesse != 0) 
                 {
@@ -212,46 +212,44 @@ namespace PingPongCsharp
                 }
             }
             else
-            {
-                if (ServerClass.dt.Timer == true || ClientClass.dt.Timer != true)
-                    timer2.Enabled = true;
-                if (ServerClass.dt.BallePro != null || ClientClass.dt.BallePro != null)
-                {
-                    
-                    ball.Visible = true;
+            { 
+                ball.Visible = true;
 
-                    if (joueur == 0)
+                if (joueur == 0)
+                {
+                    b = ServerClass.dt.BallePro;
+                    b.X = this.ClientSize.Width;
+                    if (b.EnDehors == true)
                     {
-                        b = ServerClass.dt.BallePro;
-                        b.X = this.ClientSize.Width;
-                        if (b.EnDehors == true)
-                        {
-                            timer2.Enabled = false;
-                            scoreServer++;
-                            score.Text = scoreServer + "-" + scoreClient;
-                            ball.Location = new Point(this.ClientSize.Width / 2 - ball.Width / 2, this.ClientSize.Height / 2 - ball.Height / 2);
-                            b = new Balle(ball.Location.X, ball.Location.Y);
-                            b.EnDehors = false;
-                        }
-                        ServerClass.dt.BallePro = null;
+                        timer2.Enabled = false;
+                        scoreServer++;
+                        score.Text = scoreServer + "-" + scoreClient;
+                        ball.Location = new Point(this.ClientSize.Width / 2 - ball.Width / 2, this.ClientSize.Height / 2 - ball.Height / 2);
+                        b = new Balle(ball.Location.X, ball.Location.Y);
+                        b.EnDehors = false;
                     }
-                    else
+                    ServerClass.dt.BallePro = null;
+                }
+                else
+                {
+                    b = ClientClass.dt.BallePro;
+                    b.X = 0;
+                    if (b.EnDehors == true)
                     {
-                        b = ClientClass.dt.BallePro;
-                        b.X = 0;
-                        if (b.EnDehors == true)
-                        {
-                            timer2.Enabled = false;
-                            scoreClient++;
-                            score.Text = scoreServer + "-" + scoreClient;
-                            ball.Location = new Point(this.ClientSize.Width / 2 - ball.Width / 2, this.ClientSize.Height / 2 - ball.Height / 2);
-                            b = new Balle(ball.Location.X, ball.Location.Y);
-                            b.EnDehors = false;
-                        }
-                        ClientClass.dt.BallePro = null;
+                        timer2.Enabled = false;
+                        scoreClient++;
+                        score.Text = scoreServer + "-" + scoreClient;
+                        ball.Location = new Point(this.ClientSize.Width / 2 - ball.Width / 2, this.ClientSize.Height / 2 - ball.Height / 2);
+                        b = new Balle(ball.Location.X, ball.Location.Y);
+                        b.EnDehors = false;
                     }
+                    ClientClass.dt.BallePro = null;
                 }
             }
+
+            if (ServerClass.dt.Timer == true || ClientClass.dt.Timer == true)
+                timer2.Enabled = true;
+
         }
         public void updateOutputLog(String text, int type)
         {
