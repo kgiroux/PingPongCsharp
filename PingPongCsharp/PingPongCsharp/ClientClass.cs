@@ -29,7 +29,7 @@ public class ClientClass
     static byte[] messageSend;
     static byte[] messageRecu;
     static bool messageAvailable; 
-    public static Balle b;
+    public static DataTransit dt;
 
 
    /// <summary>
@@ -212,7 +212,7 @@ public class ClientClass
                 this.form.setReadyClient(true);
                 await stream.ReadAsync(messageRecu, 0, messageRecu.Length);
                 this.updateOutputLog("ICI " + Encoding.ASCII.GetString(messageRecu), 0);
-                b = BinaryDeserializeObject(messageRecu);
+                dt = BinaryDeserializeObject(messageRecu);
                 messageRecu = new byte[1024];
                 messageRecu.Initialize();
             }
@@ -370,7 +370,7 @@ public class ClientClass
     /// Message qui lance la préparation du message
     /// </summary>
     /// <param name="b">Passage de Balle</param>
-    public static void prepareSendData(Balle b)
+    public static void prepareSendData(DataTransit b)
     {
         messageSend = BinarySerializeObject(b);
         messageAvailable = true;
@@ -380,7 +380,7 @@ public class ClientClass
     /// </summary>
     /// <param name="b"></param>
     /// <returns></returns>
-    private static byte[] BinarySerializeObject(Balle b)
+    private static byte[] BinarySerializeObject(DataTransit b)
     {
         if (b == null)
         {
@@ -399,7 +399,7 @@ public class ClientClass
     /// </summary>
     /// <param name="bt">Passage du tableau de Byte qui a été reçu</param>
     /// <returns>Renvoi un objet de type Balle</returns>
-    private static Balle BinaryDeserializeObject(byte[] bt)
+    private static DataTransit BinaryDeserializeObject(byte[] bt)
     {
         if (bt == null)
         {
@@ -415,7 +415,7 @@ public class ClientClass
             {
                 BinaryFormatter formatter = new BinaryFormatter();
                 MemoryStream ms = new MemoryStream(bt);
-                return (Balle)formatter.Deserialize(ms);
+                return (DataTransit)formatter.Deserialize(ms);
             }
         }
     }

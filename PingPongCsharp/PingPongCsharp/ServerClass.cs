@@ -23,7 +23,7 @@ public class ServerClass
     private static Thread readingThread= null;
     static byte[]  messageRecu;
     static byte[]  messageSend;
-    public static Balle b; 
+    public static DataTransit dt; 
     private static bool messageAvailable = false;
     private static bool serverLaunch = false;
 
@@ -169,7 +169,7 @@ public class ServerClass
                 this.form.setReady(true);
                 int x = await messageStream.ReadAsync(messageRecu, 0, messageRecu.Length);
                 this.updateOutputLog("ICI " + Encoding.ASCII.GetString(messageRecu), 0);
-                b = BinaryDeserializeObject(messageRecu);
+                dt = BinaryDeserializeObject(messageRecu);
                 messageRecu = new byte[1024];
                 messageRecu.Initialize();
             }
@@ -215,7 +215,7 @@ public class ServerClass
     /// Methode préparant les messages pour le serveur
     /// </summary>
     /// <param name="b"> Objet à envoyer</param>
-    public static void prepareSendData(Balle b)
+    public static void prepareSendData(DataTransit b)
     {
         messageSend = BinarySerializeObject(b);
         messageAvailable = true;
@@ -225,7 +225,7 @@ public class ServerClass
     /// </summary>
     /// <param name="b">Objet à sérialiser</param>
     /// <returns>Renvoi un tableau de Byte contenant le message à sérialiser</returns>
-    private static byte[] BinarySerializeObject(Balle b)
+    private static byte[] BinarySerializeObject(DataTransit b)
     {
         if (b == null)
         {
@@ -244,7 +244,7 @@ public class ServerClass
     /// </summary>
     /// <param name="bt">Tableau provenant du message recu</param>
     /// <returns>Renvoi un objet BALLE</returns>
-    private static Balle BinaryDeserializeObject(byte[] bt)
+    private static DataTransit BinaryDeserializeObject(byte[] bt)
     {
         if (bt == null)
         {
@@ -260,7 +260,7 @@ public class ServerClass
             {
                 BinaryFormatter formatter = new BinaryFormatter();
                 MemoryStream ms = new MemoryStream(bt);
-                return (Balle) formatter.Deserialize(ms);
+                return (DataTransit)formatter.Deserialize(ms);
             }
         }
     }
