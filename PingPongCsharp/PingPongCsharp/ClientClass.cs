@@ -29,7 +29,7 @@ public class ClientClass
     static byte[] messageSend;
     static byte[] messageRecu;
     static bool messageAvailable; 
-    public static DataTransit dt;
+    public static DataTransit dt = new DataTransit();
 
 
    /// <summary>
