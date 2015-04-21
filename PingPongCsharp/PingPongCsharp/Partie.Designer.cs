@@ -113,8 +113,10 @@
             this.Controls.Add(this.raquette);
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.Color.White;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Partie";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Partie";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Partie_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.raquette)).EndInit();
