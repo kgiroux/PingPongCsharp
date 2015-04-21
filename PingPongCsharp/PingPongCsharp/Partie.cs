@@ -118,7 +118,10 @@ namespace PingPongCsharp
                             ball.Visible = false;
                         
                             //Envoi des données
-                            ServerClass.prepareSendData(b);
+                            DataTransit dt = new DataTransit();
+                            dt.BallePro = b;
+                            dt.Alive = true;
+                            ServerClass.prepareSendData(dt);
 
                             b.Vitesse = 0;
                         }
@@ -129,7 +132,10 @@ namespace PingPongCsharp
                             b.EnDehors = true;
                             b.Vitesse = 0;
                             ball.Visible = false;
-                            ServerClass.prepareSendData(b);
+                            DataTransit dt = new DataTransit();
+                            dt.BallePro = b;
+                            dt.Alive = true;
+                            ServerClass.prepareSendData(dt);
                             b.EnDehors = false;
                     }
                     }
@@ -158,7 +164,10 @@ namespace PingPongCsharp
                             ball.Visible = false;
 
                             //Envoi des données
-                            ClientClass.prepareSendData(b);
+                            DataTransit dt = new DataTransit();
+                            dt.BallePro = b;
+                            dt.Alive = true;
+                            ClientClass.prepareSendData(dt);
 
                             b.Vitesse = 0;
                         }
@@ -169,7 +178,10 @@ namespace PingPongCsharp
                             b.EnDehors = true;
                             b.Vitesse = 0;
                             ball.Visible = false;
-                            ClientClass.prepareSendData(b);
+                            DataTransit dt = new DataTransit();
+                            dt.BallePro = b;
+                            dt.Alive = true;
+                            ClientClass.prepareSendData(dt);
                             b.EnDehors = false;
                         }
                     }
@@ -188,13 +200,15 @@ namespace PingPongCsharp
             }
             else
             {
-                if (ServerClass.b != null || ClientClass.b != null)
+                if (ServerClass.dt.BallePro != null || ClientClass.dt.BallePro != null)
                 {
+                    
                     ball.Visible = true;
 
                     if (joueur == 0)
                     {
-                        b.EnDehors = ServerClass.b.EnDehors;
+                        b = ServerClass.dt.BallePro;
+                        b.X = this.ClientSize.Width;
                         if (b.EnDehors == true)
                         {
                             scoreServer++;
@@ -203,18 +217,12 @@ namespace PingPongCsharp
                             b = new Balle(ball.Location.X, ball.Location.Y);
                             b.EnDehors = false;
                         }
-                        else
-                        {
-                            b.X = this.ClientSize.Width;
-                            b.Y = ServerClass.b.Y;
-                            b.Vitesse = ServerClass.b.Vitesse;
-                            b.Angle = ServerClass.b.Angle;
-                        }
-                        ServerClass.b = null;
+                        ServerClass.dt.BallePro = null;
                     }
                     else
                     {
-                        b.EnDehors = ClientClass.b.EnDehors;
+                        b = ClientClass.dt.BallePro;
+                        b.X = 0;
                         if (b.EnDehors == true)
                         {
                             scoreClient++;
@@ -223,14 +231,7 @@ namespace PingPongCsharp
                             b = new Balle(ball.Location.X, ball.Location.Y);
                             b.EnDehors = false;
                         }
-                        else
-                        {
-                            b.X = 0;
-                            b.Y = ClientClass.b.Y;
-                            b.Vitesse = ClientClass.b.Vitesse;
-                            b.Angle = ClientClass.b.Angle;
-                        }
-                        ClientClass.b = null;
+                        ClientClass.dt.BallePro = null;
                     }
                 }
             }

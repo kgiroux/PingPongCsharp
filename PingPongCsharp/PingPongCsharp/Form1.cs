@@ -59,24 +59,10 @@ namespace PingPongCsharp
             /* Créer un objet ServerClass qui va être l'objet contenir toute les méthodes concernant le serveur */
             /* On lui passe l'objet form pour pouvoir modifier les textes dans la liste et la textBox */
             svr = new ServerClass(this);
-            
             Launching_partie(0);
             /* Lancement de la methode pour lancer le serveur */
             svr.connectAsServer();
-        }
-        /* Méthode de lancement Client, cela va gerer la connection en fonction de la cible choisit */
-        /// <summary>
-        /// Méthode dédiée à la gestion du click sur le bouton Client
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void client_Click(object sender, EventArgs e)
-        {
-            /* Désactive le bouton Server */
-            serveur.Enabled = false;
-            /* Lance la connexion au serveur */
-            Console.WriteLine(listBoxDevice.SelectedItem.ToString());
-            clt.connectAsClient(listBoxDevice.SelectedItem.ToString());
+            
         }
         /* Bouton Stop qui va permettre de quitter le serveur et le client */
         /// <summary>
@@ -88,9 +74,17 @@ namespace PingPongCsharp
         private void stop_action(object sender, EventArgs e){
                 serveur.Enabled = true;
                 scan_button.Enabled = true;
-                textBox1.Text = "";
-                Partie p = new Partie(0,this);
-                p.Show();
+                this.updateConsoleLog("Fermeture des connexions", -1);
+                if (svr != null)
+                {
+                    ServerClass.CloseConnection();
+                }
+                if (clt != null)
+                {
+                    ClientClass.CloseConnection();
+                }
+                //Partie p = new Partie(1,this);
+                //p.Show();
         }
 
         /* Bouton Scan qui va être chercher les appareils pour le client */
@@ -153,7 +147,11 @@ namespace PingPongCsharp
             }
             
         }
-
+        /// <summary>
+        /// Message de LOG 
+        /// </summary>
+        /// <param name="text"> Texte à faire apparaitre dans la text view</param>
+        /// <param name="type">Type de message (erreur, normale, success) </param>
         public void updateConsoleLog(string text, int type)
         {
             /* Création d'une méthode sécurisé (pointeur sur une fonction) pour changer le contenu de la liste. Cette méthode est anonyme*/
@@ -192,7 +190,11 @@ namespace PingPongCsharp
                 Console.WriteLine(ex.Message);
             }
         }
-
+        /// <summary>
+        /// Event lors du double click sur un item de la liste
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void listBoxDevice_DoubleClick(object sender, EventArgs e)
         {
             serveur.Enabled = false;
@@ -201,6 +203,29 @@ namespace PingPongCsharp
             clt.connectAsClient(listBoxDevice.SelectedItem.ToString());
         }
 
+
+        /// <summary>
+        /// Libère la boucle de la méthode ClientConnected
+        /// </summary>
+        /// <param name="ready">True si la connexion est faite</param>
+        public void setReady(Boolean ready)
+        {
+            this.ready = ready;
+        }
+        /// <summary>
+        /// Libère la boucle de la méthode ClientConnectedServer
+        /// </summary>
+        /// <param name="ready">True si l'acceptation est faite</param>
+        public void setReadyClient(Boolean ready)
+        {
+            this.ready_client = ready;
+        }
+
+
+
+        /// <summary>
+        /// Methode qui va attendre une connexion d'un client
+        /// </summary>
         private void ClientConnected()
         {
             // Serveur
@@ -208,9 +233,11 @@ namespace PingPongCsharp
             p = new Partie(0, this);
             p.ShowDialog();
             ready = false;
-            this.ChangeVisibily(false);
+            this.ChangeVisibily(true);
         }
-
+        /// <summary>
+        /// Methode qui va attendre l'acceptation du serveur
+        /// </summary>
         private void ClientConnectedServer()
         {
             // Client
@@ -218,10 +245,13 @@ namespace PingPongCsharp
             p = new Partie(1,this);
             p.ShowDialog();
             ready_client = false;
-            this.ChangeVisibily(false);
+            this.ChangeVisibily(true);
         }
 
-        
+        /// <summary>
+        /// Lancement des methodes d'écoute de la connexion (serveur) et de l'acceptation (client) 
+        /// </summary>
+        /// <param name="mode">1 pour le Serveur, 0 pour le client</param>
         private void Launching_partie(int mode)
         {
             if (mode == 0)
@@ -240,17 +270,12 @@ namespace PingPongCsharp
             }
             
         }
+        
 
-        public void setReady(Boolean ready)
-        {
-            this.ready = ready;
-        }
-
-        public void setReadyClient(Boolean ready)
-        {
-            this.ready_client = ready;
-        }
-
+       /// <summary>
+       /// Change le status du bouton Server
+       /// </summary>
+       /// <param name="activated">status du bouton</param>
         public void changeServerButtonActivate(Boolean activated)
         {
             Func<int> del = delegate()
@@ -267,7 +292,10 @@ namespace PingPongCsharp
                 Console.WriteLine("====>>> changeServerButtonActivate " + ex.Message);
             }
         }
-
+        /// <summary>
+        /// Change le status du bouton Scan
+        /// </summary>
+        /// <param name="activated">status du bouton</param>
         public void changeScanButtonActivate(Boolean activated)
         {
             Func<int> del = delegate()
@@ -285,12 +313,22 @@ namespace PingPongCsharp
             }
         }
 
+        /// <summary>
+        /// Change la visibilité de la form de configuration
+        /// </summary>
+        /// <param name="activated">status de la form</param>
+
         public void ChangeVisibily(Boolean activated)
         {
             Func<int> del = delegate()
             {
                 this.Visible = activated;
-                this.Hide();
+                if (activated)
+                {
+                    this.Show();
+                }else{
+                    this.Hide();
+                }
                 return 0;
             };
             try
