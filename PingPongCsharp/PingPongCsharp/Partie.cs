@@ -32,8 +32,8 @@ namespace PingPongCsharp
             InitializeComponent();
             temps.Location = new Point(this.ClientSize.Width / 2 - temps.Width / 2, temps.Location.Y);
             score.Location = new Point(this.ClientSize.Width / 2 - score.Width / 2, score.Location.Y);
-            raquette.Location = new Point(this.ClientSize.Width / 2 - raquette.Width / 2, raquette.Location.Y);
-            ball.Location = new Point(this.ClientSize.Width / 2 - ball.Width / 2, ball.Location.Y);
+            raquette.Location = new Point(raquette.Location.X, this.ClientSize.Height / 2 - raquette.Height / 2);
+            ball.Location = new Point(this.ClientSize.Width / 2 - ball.Width / 2, this.ClientSize.Height / 2 - ball.Height / 2);
             b = new Balle(ball.Location.X, ball.Location.Y);
             this.Resize += new EventHandler(Form1_Resize);
 
