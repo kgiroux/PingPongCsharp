@@ -51,8 +51,12 @@ namespace PingPongCsharp
         
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Space && b.Vitesse == 0 && ball.Visible == true)
+            if (e.KeyCode == Keys.Space && b.Vitesse == 0 && ball.Visible == true)
+            {
                 b.Lance();
+                if (scoreClient == 0 && scoreServer == 0)
+                    timer2.Enabled = true;
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -137,7 +141,7 @@ namespace PingPongCsharp
                             dt.Alive = true;
                             ServerClass.prepareSendData(dt);
                             b.EnDehors = false;
-                    }
+                        }
                     }
                     else
                     {
