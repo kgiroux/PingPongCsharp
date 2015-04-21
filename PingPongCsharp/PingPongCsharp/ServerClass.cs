@@ -23,7 +23,7 @@ public class ServerClass
     private static Thread readingThread= null;
     static byte[]  messageRecu;
     static byte[]  messageSend;
-    public static DataTransit dt; 
+    public static DataTransit dt = new DataTransit(); 
     private static bool messageAvailable = false;
     private static bool serverLaunch = false;
 
