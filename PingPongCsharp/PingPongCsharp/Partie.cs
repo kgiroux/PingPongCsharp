@@ -289,6 +289,7 @@ namespace PingPongCsharp
             {
                 ClientClass.prepareSendData(dt);
                 this.form.changeScanButtonActivate(true);
+                this.Dispose();
                 ClientClass.CloseConnection();
             }
             else
@@ -296,9 +297,10 @@ namespace PingPongCsharp
                 ServerClass.prepareSendData(dt);
                 this.form.changeServerButtonActivate(true);
                 ServerClass.CloseConnection();
+                this.Dispose();
                 this.form.InvokeClickServer();
             }
-            this.Dispose();
+            
             this.form.ChangeVisibily(true);
         }
 
