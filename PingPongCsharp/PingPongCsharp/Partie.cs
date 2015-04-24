@@ -300,7 +300,6 @@ namespace PingPongCsharp
                 this.Dispose();
                 this.form.InvokeClickServer();
             }
-            
             this.form.ChangeVisibily(true);
         }
 
