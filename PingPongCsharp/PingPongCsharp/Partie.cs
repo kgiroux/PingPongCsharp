@@ -96,6 +96,11 @@ namespace PingPongCsharp
             {
                 Console.WriteLine(ex.Message);
             }
+
+            if(ServerClass.dt.Alive == false || ClientClass.dt.Alive == false)
+            {
+                this.Partie_FormClosing(null, null);
+            }
             
             if(ServerClass.dt.BallePro == null && ClientClass.dt.BallePro == null)  
             {
@@ -277,20 +282,24 @@ namespace PingPongCsharp
 
         private void Partie_FormClosing(object sender, FormClosingEventArgs e)
         {
+            dt = new DataTransit();
+            dt.Alive = false;
             this.updateOutputLog("Fermeture de la partie en cours", 0);
             if (joueur == 1)
             {
+                ClientClass.prepareSendData(dt);
                 this.form.changeScanButtonActivate(true);
                 ClientClass.CloseConnection();
-                this.form.ChangeVisibily(true);
             }
             else
             {
+                ServerClass.prepareSendData(dt);
                 this.form.changeServerButtonActivate(true);
                 ServerClass.CloseConnection();
-                this.form.ChangeVisibily(true);
                 this.form.InvokeClickServer();
             }
+
+            this.form.ChangeVisibily(true);
         }
 
         private void timer2_Tick(object sender, EventArgs e)
