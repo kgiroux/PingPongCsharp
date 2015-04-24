@@ -207,11 +207,13 @@ namespace PingPongCsharp
         private void ClientConnected()
         {
             // Serveur
+            p = null;
             while (!ready) ;
             p = new Partie(0, this);
             ready = false;
             this.ChangeVisibily(false);
             p.ShowDialog();
+            
             
         }
         /// <summary>
