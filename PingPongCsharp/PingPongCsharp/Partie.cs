@@ -120,7 +120,7 @@ namespace PingPongCsharp
 
                             if(b.Angle > 60 && b.Angle < 180)
                                 b.Angle = 60;
-                            if(b.Angle < 300 && b.Angle > 180)
+                            else if(b.Angle < 300 && b.Angle > 180)
                                 b.Angle = 300;
 
                             b.Vitesse++;
@@ -141,11 +141,13 @@ namespace PingPongCsharp
                         }
                         else if (b.X < 0)
                         {
+                            ball.Visible = false;
+
                             scoreClient++;
                             score.Text = scoreServer + "-" + scoreClient;
+
                             b.EnDehors = true;
                             b.Vitesse = 0;
-                            ball.Visible = false;
                             DataTransit dt = new DataTransit();
                             dt.BallePro = b;
                             dt.Alive = true;
@@ -170,7 +172,7 @@ namespace PingPongCsharp
 
                             if (b.Angle > 240 && b.Angle < 360)
                                 b.Angle = 240;
-                            if (b.Angle < 120 && b.Angle > 0)
+                            else if (b.Angle < 120 && b.Angle > 0)
                                 b.Angle = 120;
                         }
 
@@ -189,11 +191,13 @@ namespace PingPongCsharp
                         }
                         else if (b.X > this.ClientSize.Width)
                         {
+                            ball.Visible = false;
+
                             scoreServer++;
                             score.Text = scoreServer + "-" + scoreClient;
+
                             b.EnDehors = true;
                             b.Vitesse = 0;
-                            ball.Visible = false;
                             dt = new DataTransit();
                             dt.BallePro = b;
                             dt.Alive = true;
