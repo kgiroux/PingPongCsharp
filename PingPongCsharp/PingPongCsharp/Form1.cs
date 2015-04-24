@@ -98,6 +98,7 @@ namespace PingPongCsharp
         /// <param name="e"></param>
         private void scan_button_Click(object sender, EventArgs e)
         {
+            textBox1.Enabled = false;
             this.updateDevicesList(new List<string>());
             this.ready_client = false;
             clt = new ClientClass(this);
@@ -111,7 +112,7 @@ namespace PingPongCsharp
         /// <param name="item_return"></param>
         public void updateDevicesList(List<string> item_return)
         {
-            this.updateConsoleLog("Création de la liste des appareils disponibles");
+            this.updateConsoleLog("Création de la liste des appareils disponibles",0);
             /* Création d'une méthode sécurisé (pointeur sur une fonction) pour changer le contenu de la liste. Cette méthode est anonyme*/
             Func<int> del = delegate()
             {
@@ -122,33 +123,6 @@ namespace PingPongCsharp
                 return 0;
             };
             Invoke(del);
-        }
-
-        /* Méthode permettant de mettre du texte dans notre textBox */
-
-        /// <summary>
-        ///     Permet de mettre à jour l'object TextBox dédié à l'affichage des logs 
-        /// </summary>
-        /// <param name="text"></param>
-        public void updateConsoleLog(string text)
-        {
-            /* Création d'une méthode sécurisé (pointeur sur une fonction) pour changer le contenu de la liste. Cette méthode est anonyme*/
-            Func<int> del = delegate()
-            {
-                /* Rajoute du texte à la texte box */
-                //outPutLog.ForeColor= Color.Red ;
-                outPutLog.AppendText(text + System.Environment.NewLine);
-                return 0;
-            };
-            try
-            {
-                Invoke(del);
-            }
-            catch (ObjectDisposedException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            
         }
         /// <summary>
         /// Message de LOG 
