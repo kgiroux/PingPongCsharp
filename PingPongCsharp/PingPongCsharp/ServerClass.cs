@@ -55,14 +55,22 @@ public class ServerClass
     /// <summary>
     /// Methode de démarrage du serveur
     /// </summary>
-    private void start_server()
+    private void start_server() 
     {
         this.updateOutputLog("Initializing component...",0);
         /* Création du listener pour le serveur */
         bluetoothServerListener = new BluetoothListener(this.mUUID);
 
         Console.WriteLine(this.mUUID);
-        bluetoothServerListener.Start();
+        try
+        {
+            bluetoothServerListener.Start();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+        
 
         bluetoothClient = bluetoothServerListener.AcceptBluetoothClient();
         /* Attend qu'un client se connect */
@@ -277,7 +285,15 @@ public class ServerClass
         }
         if (bluetoothServerListener != null)
         {
-            bluetoothServerListener.Stop();
+            try
+            {
+                bluetoothServerListener.Stop();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
         }
         if (bluetoothServerThread != null)
         {

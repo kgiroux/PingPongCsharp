@@ -289,8 +289,9 @@ namespace PingPongCsharp
             {
                 ClientClass.prepareSendData(dt);
                 this.form.changeScanButtonActivate(true);
-                this.Dispose();
                 ClientClass.CloseConnection();
+                this.Dispose();
+                
             }
             else
             {
