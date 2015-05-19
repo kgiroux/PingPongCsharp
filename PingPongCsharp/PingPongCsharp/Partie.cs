@@ -54,17 +54,29 @@ namespace PingPongCsharp
         
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Space && b.Vitesse == 0 && ball.Visible == true)
+            if (timer1.Enabled == true)
             {
-                b.Lance();
-                timer2.Enabled = true;
-                dt = new DataTransit();
-                dt.Timer = true;
+                if (e.KeyCode == Keys.Space && b.Vitesse == 0 && ball.Visible == true)
+                {
+                    b.Lance();
+                    timer2.Enabled = true;
+                    dt = new DataTransit();
+                    dt.Timer = true;
 
+                    if (joueur == 0)
+                        ServerClass.prepareSendData(dt);
+                    else
+                        ClientClass.prepareSendData(dt);
+                }
+            }
+            else
+            {
+                timer1.Enabled = true;
                 if (joueur == 0)
-                    ServerClass.prepareSendData(dt);
-                else
-                    ClientClass.prepareSendData(dt);
+                    if (e.KeyCode == Keys.Space)
+                        this.InitializeComponent();
+                    else if (e.KeyCode == Keys.Escape)
+                        this.Partie_FormClosing(null, null);
             }
         }
 
