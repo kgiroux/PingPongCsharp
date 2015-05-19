@@ -76,8 +76,6 @@ namespace PingPongCsharp
         /// <param name="e"></param>
         
         private void stop_action(object sender, EventArgs e){
-            p = new Partie(0, this);
-            p.ShowDialog();
             serveur.Enabled = true;
                 scan_button.Enabled = true;
                 textBox1.Enabled = true;
