@@ -69,6 +69,7 @@ public class ClientClass
                     this.updateOutputLog("Starting to connect",0);
                     this.updateOutputLog("Starting connecting Thread !!!",0);
                     bluetoothClientThread = new Thread(new ThreadStart(ClientConnectThread));
+                    bluetoothClientThread.IsBackground = true;
                     bluetoothClientThread.Start();
                 }
                 else
@@ -131,6 +132,7 @@ public class ClientClass
             client.EndConnect(result);
             stream = client.GetStream();
             readingThread = new Thread(new ThreadStart(reading));
+            readingThread.IsBackground = true;
             readingThread.Start();
             while (true)
             {
@@ -247,6 +249,7 @@ public class ClientClass
     public void startScanBluetoothDevices()
     {
         bluetoothScanThread = new Thread(new ThreadStart(scan));
+        bluetoothScanThread.IsBackground = true;
         try
         {
             bluetoothScanThread.Start();

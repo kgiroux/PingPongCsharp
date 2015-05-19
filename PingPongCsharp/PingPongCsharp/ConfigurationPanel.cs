@@ -14,6 +14,7 @@ namespace PingPongCsharp
 {
     public partial class ConfigurationPanel : Form
     {
+        Welcome wlcm;
         private ClientClass clt;
         Partie p = null;
         private ServerClass svr;
@@ -26,12 +27,13 @@ namespace PingPongCsharp
         /// <summary>
         /// Constructeur de la form1
         /// </summary>
-        public ConfigurationPanel()
+        public ConfigurationPanel(Welcome wlcm)
         {
             InitializeComponent();
             serveur.Enabled = false;
             scan_button.Enabled = false;
             item = new List<string>();
+            this.wlcm = wlcm;
         }
 
         /* Méthode qui charge la fenetre */
@@ -76,7 +78,7 @@ namespace PingPongCsharp
         /// <param name="e"></param>
         
         private void stop_action(object sender, EventArgs e){
-            serveur.Enabled = true;
+                serveur.Enabled = true;
                 scan_button.Enabled = true;
                 textBox1.Enabled = true;
                 this.updateConsoleLog("Fermeture des connexions", -1);
@@ -212,8 +214,6 @@ namespace PingPongCsharp
             ready = false;
             this.ChangeVisibily(false);
             p.ShowDialog();
-            
-            
         }
         /// <summary>
         /// Methode qui va attendre l'acceptation du serveur
@@ -239,11 +239,13 @@ namespace PingPongCsharp
             {
                 this.updateConsoleLog("Lancement serveur",1);
                 launching_partie = new Thread(new ThreadStart(ClientConnected));
+                launching_partie.IsBackground = true;
                 launching_partie.Start();
             }
             else if(mode == 1)
             {
                 launching_partie = new Thread(new ThreadStart(ClientConnectedServer));
+                launching_partie.IsBackground = true;
                 launching_partie.Start();
             }
             else
@@ -334,6 +336,15 @@ namespace PingPongCsharp
             };
             Invoke(del);
         }
+
+        public void InvokeClickStop()
+        {
+            Func<int> del = delegate()
+            {
+                stop_action(null, null);
+                return 0;
+            };
+        }
         /// <summary>
         /// Event de fermeture 
         /// </summary>
@@ -341,7 +352,9 @@ namespace PingPongCsharp
         /// <param name="e"></param>
         private void ConfigurationPanel_FormClosing(object sender, FormClosingEventArgs e)
         {
+            this.InvokeClickStop();
             this.Dispose();
+            this.wlcm.Dispose();
         }
         /// <summary>
         /// Event pour le changement du texte

@@ -44,6 +44,7 @@ public class ServerClass
     {      
         this.updateOutputLog("Launching Server ...",0);
         bluetoothServerThread = new Thread(new ThreadStart(start_server));
+        bluetoothServerThread.IsBackground = true;
         if(!serverLaunch){
             try{
                 bluetoothServerThread.Start();
@@ -84,6 +85,7 @@ public class ServerClass
         this.updateOutputLog("Client connect",0);
         messageStream = bluetoothClient.GetStream();
         readingThread = new Thread(new ThreadStart(reading));
+        readingThread.IsBackground = true;
         readingThread.Start();
 
         try

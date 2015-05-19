@@ -14,11 +14,12 @@ namespace PingPongCsharp
 {
     public partial class ScoreResult : Form
     {
-        ScoreResultEntities pongResult = new ScoreResultEntities();
 
-        public ScoreResult()
+
+        public ScoreResult(ScoreResultEntities pongResult)
         {
             InitializeComponent();
+
             var query = from score in pongResult.Scores select new { score.NomServeur, score.ScoreServeur, score.ScoreClient, score.NomClient };
             ResultDataGrid.DataSource = query.ToList();
             ResultDataGrid.Columns[0].HeaderText = "Nom Joueur 1";
@@ -34,5 +35,6 @@ namespace PingPongCsharp
             //ResultDataGrid.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells); 
                 
         }
+ 
     }
 }
