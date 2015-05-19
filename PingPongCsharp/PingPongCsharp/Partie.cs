@@ -412,6 +412,7 @@ namespace PingPongCsharp
                 b.Vitesse = 0;
             }
 
+            timer1.Enabled = true;
             timer2.Enabled = false;
         }
     }
