@@ -14,7 +14,7 @@ namespace PingPongCsharp
     public partial class Partie : Form
     {
         private int joueur;
-        private Form1 form;
+        private ConfigurationPanel form;
         private Balle b;
         private DataTransit dt;
         private int scoreServer;
@@ -23,7 +23,7 @@ namespace PingPongCsharp
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         static extern short GetAsyncKeyState(System.Windows.Forms.Keys vKey);
 
-        public Partie(int joueur, Form1 form)
+        public Partie(int joueur, ConfigurationPanel form)
         {
             scoreServer = 0;
             scoreClient = 0;

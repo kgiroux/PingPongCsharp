@@ -25,7 +25,7 @@ public class ClientClass
     private Guid mUUID = new Guid("293eb187-b6e9-4434-894b-ef81120f0e5b");
     private List<string> items_bluetooth;
     private int error = 0;
-    private Form1 form;
+    private ConfigurationPanel form;
     static byte[] messageSend;
     static byte[] messageRecu;
     static bool messageAvailable; 
@@ -36,7 +36,7 @@ public class ClientClass
    /// Constructeur de l'objet Client Class 
    /// </summary>
    /// <param name="form"></param>
-    public ClientClass(Form1 form)
+    public ClientClass(ConfigurationPanel form)
 	{
         this.form = form;
         items_bluetooth = new List<string>();

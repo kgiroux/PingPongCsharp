@@ -14,7 +14,7 @@ using System.Linq;
 
 public class ServerClass
 {
-    private Form1 form;
+    private ConfigurationPanel form;
     private Guid mUUID = new Guid("293eb187-b6e9-4434-894b-ef81120f0e5b");
     private static BluetoothClient bluetoothClient;
     private static Stream messageStream = null;
@@ -31,7 +31,7 @@ public class ServerClass
     /// Constructeur de ServerClass
     /// </summary>
     /// <param name="form"></param>
-    public ServerClass(Form1 form)
+    public ServerClass(ConfigurationPanel form)
 	{
         this.form = form;
 	}

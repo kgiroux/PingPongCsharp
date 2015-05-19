@@ -1,6 +1,6 @@
 ﻿namespace PingPongCsharp
 {
-    partial class Form1
+    partial class ConfigurationPanel
     {
         /// <summary>
         /// Variable nécessaire au concepteur.
@@ -111,7 +111,7 @@
             this.outPutLog.TabIndex = 6;
             this.outPutLog.Text = "";
             // 
-            // Form1
+            // ConfigurationPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -125,10 +125,10 @@
             this.Controls.Add(this.serveur);
             this.Controls.Add(this.scan_button);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "Form1";
+            this.Name = "ConfigurationPanel";
             this.Text = "Configuration Bluetooth";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ConfigurationPanel_FormClosing);
+            this.Load += new System.EventHandler(this.ConfigurationPanel_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

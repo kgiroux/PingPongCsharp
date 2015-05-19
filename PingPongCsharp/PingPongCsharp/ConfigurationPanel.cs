@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace PingPongCsharp
 {
-    public partial class Form1 : Form
+    public partial class ConfigurationPanel : Form
     {
         private ClientClass clt;
         Partie p = null;
@@ -24,9 +24,9 @@ namespace PingPongCsharp
         /* Constructeur de la fenetre*/
         
         /// <summary>
-        /// Constructeur de la form 1
+        /// Constructeur de la form1
         /// </summary>
-        public Form1()
+        public ConfigurationPanel()
         {
             InitializeComponent();
             serveur.Enabled = false;
@@ -40,7 +40,7 @@ namespace PingPongCsharp
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Form1_Load(object sender, EventArgs e)
+        private void ConfigurationPanel_Load(object sender, EventArgs e)
         {
 
         }
@@ -341,30 +341,30 @@ namespace PingPongCsharp
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        private void ConfigurationPanel_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Console.WriteLine("Passage OCIé");
             this.Dispose();
         }
-
+        /// <summary>
+        /// Event pour le changement du texte
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
+            
+            // Si le texte est différent de la chaine vide
             if (!("".Equals(textBox1.Text)))
             {
                 serveur.Enabled = true;
                 scan_button.Enabled = true;
             }
-            else if (textBox1.Text.Length == 0)
-            {
-                serveur.Enabled = true;
-                scan_button.Enabled = true;
-            }
+            // Sinon si le text est différent de null
             else
             {
                 serveur.Enabled = false;
                 scan_button.Enabled = false;
             }
-
         }
     }
 }
