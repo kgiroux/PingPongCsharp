@@ -18,7 +18,7 @@ namespace PingPongCsharp
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             /* Lancement de la première fenetre */
-            Application.Run(new ConfigurationPanel());
+            Application.Run(new Welcome());
         }
     }
 }

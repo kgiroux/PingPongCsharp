@@ -1,6 +1,6 @@
 ﻿namespace PingPongCsharp
 {
-    partial class Score
+    partial class ScoreResult
     {
         /// <summary>
         /// Required designer variable.
@@ -28,34 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ScoreDataGrid = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.ScoreDataGrid)).BeginInit();
+            this.ResultDataGrid = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.ResultDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
-            // ScoreDataGrid
+            // ResultDataGrid
             // 
-            this.ScoreDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ScoreDataGrid.Location = new System.Drawing.Point(12, 12);
-            this.ScoreDataGrid.Name = "ScoreDataGrid";
-            this.ScoreDataGrid.Size = new System.Drawing.Size(598, 295);
-            this.ScoreDataGrid.TabIndex = 0;
+            this.ResultDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ResultDataGrid.Location = new System.Drawing.Point(12, 12);
+            this.ResultDataGrid.Name = "ResultDataGrid";
+            this.ResultDataGrid.Size = new System.Drawing.Size(645, 237);
+            this.ResultDataGrid.TabIndex = 0;
             // 
-            // Score
+            // ScoreResult
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(622, 319);
-            this.Controls.Add(this.ScoreDataGrid);
-            this.Name = "Score";
-            this.Text = "Score";
-            ((System.ComponentModel.ISupportInitialize)(this.ScoreDataGrid)).EndInit();
+            this.ClientSize = new System.Drawing.Size(669, 264);
+            this.Controls.Add(this.ResultDataGrid);
+            this.Name = "ScoreResult";
+            this.Text = "ScoreResult";
+            ((System.ComponentModel.ISupportInitialize)(this.ResultDataGrid)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView ScoreDataGrid;
+        private System.Windows.Forms.DataGridView ResultDataGrid;
 
     }
 }

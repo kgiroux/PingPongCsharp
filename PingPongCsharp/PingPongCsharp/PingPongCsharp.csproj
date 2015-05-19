@@ -47,12 +47,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="InTheHand.Net.Personal, Version=3.5.605.0, Culture=neutral, PublicKeyToken=ea38caa273134499, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\32feet.NET\NET\InTheHand.Net.Personal.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -72,6 +81,20 @@
     <Compile Include="ConfigurationPanel.Designer.cs">
       <DependentUpon>ConfigurationPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Score.cs">
+      <DependentUpon>ScoreResult.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ScoreResult.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ScoreResult.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ScoreResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ScoreResult.Designer.cs">
+      <DependentUpon>ScoreResult.cs</DependentUpon>
+    </Compile>
     <Compile Include="Partie.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,15 +103,28 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Score.cs">
-      <SubType>Form</SubType>
+    <Compile Include="ScoreResult1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ScoreResult.tt</DependentUpon>
     </Compile>
-    <Compile Include="Score.Designer.cs">
-      <DependentUpon>Score.cs</DependentUpon>
+    <Compile Include="ScoreResult1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ScoreResult.edmx</DependentUpon>
     </Compile>
     <Compile Include="ServerClass.cs" />
+    <Compile Include="Welcome.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Welcome.Designer.cs">
+      <DependentUpon>Welcome.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="ConfigurationPanel.resx">
       <DependentUpon>ConfigurationPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ScoreResult.resx">
+      <DependentUpon>ScoreResult.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Partie.resx">
       <DependentUpon>Partie.cs</DependentUpon>
@@ -102,9 +138,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Score.resx">
-      <DependentUpon>Score.cs</DependentUpon>
+    <EmbeddedResource Include="Welcome.resx">
+      <DependentUpon>Welcome.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -114,6 +151,23 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EntityDeploy Include="ScoreResult.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ScoreResult1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ScoreResult.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ScoreResult.edmx</DependentUpon>
+      <LastGenOutput>ScoreResult.Context.cs</LastGenOutput>
+    </None>
+    <None Include="ScoreResult.edmx.diagram">
+      <DependentUpon>ScoreResult.edmx</DependentUpon>
+    </None>
+    <None Include="ScoreResult.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ScoreResult.edmx</DependentUpon>
+      <LastGenOutput>ScoreResult1.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -143,6 +197,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>Pong.mdf</DependentUpon>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

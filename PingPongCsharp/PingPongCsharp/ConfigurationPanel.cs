@@ -364,5 +364,6 @@ namespace PingPongCsharp
                 scan_button.Enabled = false;
             }
         }
+
     }
 }

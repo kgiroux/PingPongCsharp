@@ -36,7 +36,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.scan_button = new System.Windows.Forms.Button();
             this.outPutLog = new System.Windows.Forms.RichTextBox();
-            this.Score = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // serveur
@@ -112,21 +111,11 @@
             this.outPutLog.TabIndex = 6;
             this.outPutLog.Text = "";
             // 
-            // Score
-            // 
-            this.Score.Location = new System.Drawing.Point(457, 309);
-            this.Score.Name = "Score";
-            this.Score.Size = new System.Drawing.Size(97, 23);
-            this.Score.TabIndex = 7;
-            this.Score.Text = "Score";
-            this.Score.UseVisualStyleBackColor = true;
-            // 
             // ConfigurationPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(684, 344);
-            this.Controls.Add(this.Score);
             this.Controls.Add(this.outPutLog);
             this.Controls.Add(this.listBoxDevice);
             this.Controls.Add(this.stop);
@@ -155,7 +144,6 @@
         private System.Windows.Forms.Button scan_button;
         private System.Windows.Forms.ListBox listBoxDevice;
         private System.Windows.Forms.RichTextBox outPutLog;
-        private System.Windows.Forms.Button Score;
     }
 }
 
