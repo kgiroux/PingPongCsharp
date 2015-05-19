@@ -71,12 +71,18 @@ namespace PingPongCsharp
             }
             else
             {
-                timer1.Enabled = true;
                 if (joueur == 0)
+                {
                     if (e.KeyCode == Keys.Space)
-                        this.InitializeComponent();
+                    {
+                        this.Reset();
+                    }
                     else if (e.KeyCode == Keys.Escape)
+                    {
+                        timer1.Enabled = true;
                         this.Partie_FormClosing(null, null);
+                    }
+                }
             }
         }
 
@@ -369,7 +375,44 @@ namespace PingPongCsharp
                         Victoire.Visible = true;
                     }
                 }
+
+                if (ClientClass.dt.Reset == true)
+                    this.Reset();
             }
+        }
+
+        private void Reset()
+        {
+            Victoire.Visible = false;
+            Instructions.Visible = false;
+
+            temps.Text = "100";
+            temps.Location = new Point(this.ClientSize.Width / 2 - temps.Width / 2, temps.Location.Y);
+
+            raquette.Location = new Point(raquette.Location.X, this.Height / 2 - raquette.Height / 2);
+
+            scoreClient = 0;
+            scoreServer = 0;
+            score.Text = scoreServer + "-" + scoreClient;
+
+            if (joueur == 0)
+            {
+                ball.Visible = true;
+                ball.Location = new Point(this.ClientSize.Width / 2 - ball.Width / 2, this.ClientSize.Height / 2 - ball.Height / 2);
+                b = new Balle(ball.Location.X, ball.Location.Y);
+                b.EnDehors = false;
+
+                dt = new DataTransit();
+                dt.Reset = true;
+                ServerClass.prepareSendData(dt);
+            }
+            else
+            {
+                ball.Visible = false;
+                b.Vitesse = 0;
+            }
+
+            timer2.Enabled = false;
         }
     }
 }
