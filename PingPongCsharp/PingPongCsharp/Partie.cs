@@ -314,6 +314,48 @@ namespace PingPongCsharp
             else
             {
                 timer1.Enabled = false;
+                if (joueur == 0)
+                {
+                    if (scoreServer > scoreClient)
+                    {
+                        Victoire.Text = "You Win !";
+                        Victoire.Location = new Point(this.ClientSize.Width / 2 - Victoire.Width / 2, Victoire.Location.Y);
+                        Victoire.Visible = true;
+                    }
+                    else if (scoreServer < scoreClient)
+                    {
+                        Victoire.Text = "You Loose !";
+                        Victoire.Location = new Point(this.ClientSize.Width / 2 - Victoire.Width / 2, Victoire.Location.Y);
+                        Victoire.Visible = true;
+                    }
+                    else
+                    {
+                        Victoire.Text = "Par !";
+                        Victoire.Location = new Point(this.ClientSize.Width / 2 - Victoire.Width / 2, Victoire.Location.Y);
+                        Victoire.Visible = true;
+                    }
+                }
+                else
+                {
+                    if (scoreServer > scoreClient)
+                    {
+                        Victoire.Text = "You Loose !";
+                        Victoire.Location = new Point(this.ClientSize.Width / 2 - Victoire.Width / 2, Victoire.Location.Y);
+                        Victoire.Visible = true;
+                    }
+                    else if (scoreServer < scoreClient)
+                    {
+                        Victoire.Text = "You Win !";
+                        Victoire.Location = new Point(this.ClientSize.Width / 2 - Victoire.Width / 2, Victoire.Location.Y);
+                        Victoire.Visible = true;
+                    }
+                    else
+                    {
+                        Victoire.Text = "Par !";
+                        Victoire.Location = new Point(this.ClientSize.Width / 2 - Victoire.Width / 2, Victoire.Location.Y);
+                        Victoire.Visible = true;
+                    }
+                }
             }
         }
     }

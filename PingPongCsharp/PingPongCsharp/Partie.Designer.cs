@@ -36,6 +36,7 @@
             this.temps = new System.Windows.Forms.Label();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.score = new System.Windows.Forms.Label();
+            this.Victoire = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.raquette)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ball)).BeginInit();
             this.SuspendLayout();
@@ -99,6 +100,20 @@
             this.score.TabIndex = 4;
             this.score.Text = "0-0";
             // 
+            // Victoire
+            // 
+            this.Victoire.AutoSize = true;
+            this.Victoire.BackColor = System.Drawing.Color.Transparent;
+            this.Victoire.Font = new System.Drawing.Font("OCR A Extended", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Victoire.ForeColor = System.Drawing.Color.White;
+            this.Victoire.Location = new System.Drawing.Point(172, 271);
+            this.Victoire.Name = "Victoire";
+            this.Victoire.Size = new System.Drawing.Size(476, 83);
+            this.Victoire.TabIndex = 5;
+            this.Victoire.Text = "You Win !";
+            this.Victoire.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.Victoire.Visible = false;
+            // 
             // Partie
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -107,6 +122,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(782, 853);
+            this.Controls.Add(this.Victoire);
             this.Controls.Add(this.ball);
             this.Controls.Add(this.score);
             this.Controls.Add(this.temps);
@@ -135,5 +151,6 @@
         private System.Windows.Forms.Label temps;
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Label score;
+        private System.Windows.Forms.Label Victoire;
     }
 }
