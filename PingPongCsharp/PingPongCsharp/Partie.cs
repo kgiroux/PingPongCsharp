@@ -316,6 +316,7 @@ namespace PingPongCsharp
                 timer1.Enabled = false;
                 if (joueur == 0)
                 {
+                    Instructions.Visible = true;
                     if (scoreServer > scoreClient)
                     {
                         Victoire.Text = "You Win !";

@@ -37,6 +37,7 @@
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.score = new System.Windows.Forms.Label();
             this.Victoire = new System.Windows.Forms.Label();
+            this.Instructions = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.raquette)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ball)).BeginInit();
             this.SuspendLayout();
@@ -114,6 +115,20 @@
             this.Victoire.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.Victoire.Visible = false;
             // 
+            // Instructions
+            // 
+            this.Instructions.AutoSize = true;
+            this.Instructions.BackColor = System.Drawing.Color.Transparent;
+            this.Instructions.Font = new System.Drawing.Font("OCR A Extended", 28.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Instructions.ForeColor = System.Drawing.Color.White;
+            this.Instructions.Location = new System.Drawing.Point(28, 470);
+            this.Instructions.Name = "Instructions";
+            this.Instructions.Size = new System.Drawing.Size(742, 100);
+            this.Instructions.TabIndex = 6;
+            this.Instructions.Text = "Press [Space] to Restart\r\nOr [Esc] to Quit";
+            this.Instructions.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.Instructions.Visible = false;
+            // 
             // Partie
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -122,6 +137,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(782, 853);
+            this.Controls.Add(this.Instructions);
             this.Controls.Add(this.Victoire);
             this.Controls.Add(this.ball);
             this.Controls.Add(this.score);
@@ -152,5 +168,6 @@
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Label score;
         private System.Windows.Forms.Label Victoire;
+        private System.Windows.Forms.Label Instructions;
     }
 }
