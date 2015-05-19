@@ -44,8 +44,15 @@ public class ServerClass
     {      
         this.updateOutputLog("Launching Server ...",0);
         bluetoothServerThread = new Thread(new ThreadStart(start_server));
-        if(!serverLaunch)
-            bluetoothServerThread.Start();
+        if(!serverLaunch){
+            try{
+                bluetoothServerThread.Start();
+            }catch(ThreadStartException th){
+                this.updateOutputLog(th.Message,-1);
+                ServerClass.CloseConnection();
+            }
+        }
+            
         else
         {
             this.updateOutputLog("Server already launched",0);
@@ -297,7 +304,11 @@ public class ServerClass
         }
         if (bluetoothServerThread != null)
         {
-            bluetoothServerThread.Abort();
+            if(bluetoothServerThread.IsAlive == true){
+                bluetoothServerThread.Abort();
+            }else{
+                bluetoothServerThread = null;
+            }
         }
         if (readingThread != null)
         {

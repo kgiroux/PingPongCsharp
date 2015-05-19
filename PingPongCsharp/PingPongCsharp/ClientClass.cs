@@ -225,11 +225,13 @@ public class ClientClass
     }
 
 
-
-    string myPin = "1234";
+    /// <summary>
+    /// Methode pour l'association des appareils
+    /// </summary>
+    
     public bool pairDevice()
     {
-
+        string myPin = "1234";
         if (!device_selected.Authenticated)
         {
             if(!BluetoothSecurity.PairRequest(device_selected.DeviceAddress,myPin)){
@@ -245,7 +247,16 @@ public class ClientClass
     public void startScanBluetoothDevices()
     {
         bluetoothScanThread = new Thread(new ThreadStart(scan));
-        bluetoothScanThread.Start();
+        try
+        {
+            bluetoothScanThread.Start();
+        }
+        catch (ThreadStartException th)
+        {
+            this.updateOutputLog(th.Message, -1);
+            ClientClass.CloseConnection();
+            this.updateOutputLog("Erreur lancement du processus", -1);
+        }
     }
     /// <summary>
     /// Méthode gérant le scan des appareils bluetooth
@@ -314,7 +325,15 @@ public class ClientClass
         } 
         if (bluetoothScanThread != null)
         {
-            bluetoothScanThread.Abort();
+            if (bluetoothClientThread.IsAlive == true)
+            {
+                bluetoothScanThread.Abort();
+            }
+            else
+            {
+                bluetoothClientThread = null;
+            }
+            
         }
         if (readingThread != null)
         {
