@@ -76,7 +76,9 @@ namespace PingPongCsharp
         /// <param name="e"></param>
         
         private void stop_action(object sender, EventArgs e){
-                serveur.Enabled = true;
+            p = new Partie(0, this);
+            p.ShowDialog();
+            serveur.Enabled = true;
                 scan_button.Enabled = true;
                 textBox1.Enabled = true;
                 this.updateConsoleLog("Fermeture des connexions", -1);
@@ -207,7 +209,6 @@ namespace PingPongCsharp
         private void ClientConnected()
         {
             // Serveur
-            p = null;
             while (!ready) ;
             p = new Partie(0, this);
             ready = false;
@@ -323,6 +324,9 @@ namespace PingPongCsharp
                 Console.WriteLine("====>>> changeScanButtonActivate " + ex.Message);
             }
         }
+        /// <summary>
+        /// Permet de simuler un click
+        /// </summary>
         public void InvokeClickServer()
         {
             Func<int> del = delegate()
@@ -332,9 +336,14 @@ namespace PingPongCsharp
             };
             Invoke(del);
         }
-
+        /// <summary>
+        /// Event de fermeture 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            Console.WriteLine("Passage OCIé");
             this.Dispose();
         }
 
