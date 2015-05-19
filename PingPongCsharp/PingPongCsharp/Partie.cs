@@ -324,6 +324,11 @@ namespace PingPongCsharp
 
         private void timer2_Tick(object sender, EventArgs e)
         {
+            if (ServerClass.dt.Alive == false || ClientClass.dt.Alive == false)
+            {
+                this.Partie_FormClosing(null, null);
+            }
+
             if (int.Parse(temps.Text) > 0)
             {
                 temps.Text = (int.Parse(temps.Text) - 1).ToString();
