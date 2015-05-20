@@ -328,7 +328,7 @@ public class ClientClass
         } 
         if (bluetoothScanThread != null)
         {
-            if (bluetoothClientThread.IsAlive == true)
+            if (bluetoothScanThread.IsAlive == true)
             {
                 bluetoothScanThread.Abort();
             }
@@ -348,7 +348,14 @@ public class ClientClass
         }
         if (bluetoothClientThread != null)
         {
-            bluetoothClientThread.Abort();
+            if (bluetoothClientThread.IsAlive == true)
+            {
+                bluetoothClientThread.Abort();
+            }
+            else
+            {
+                bluetoothClientThread = null;
+            }
         }
     }
     /// <summary>
