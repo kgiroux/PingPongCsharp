@@ -20,7 +20,6 @@ namespace PingPongCsharp
             InitializeComponent();
             var query = from score in pongResult.Scores where score.Id == 1 select new { score.NomServeur, score.ScoreServeur, score.ScoreClient, score.NomClient };
             Console.WriteLine(query.ToList());
-            
         }
 
         private void Start_Click(object sender, EventArgs e)
