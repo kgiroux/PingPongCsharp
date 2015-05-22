@@ -16,11 +16,11 @@ namespace PingPongCsharp
     {
 
 
-        public ScoreResult(ScoreResultEntities pongResult)
+        public ScoreResult()
         {
             InitializeComponent();
 
-            var query = from score in pongResult.Scores select new { score.NomServeur, score.ScoreServeur, score.ScoreClient, score.NomClient };
+            var query = from score in SingletonDb.Instance.Scores select new { score.NomServeur, score.ScoreServeur, score.ScoreClient, score.NomClient };
             ResultDataGrid.DataSource = query.ToList();
             ResultDataGrid.Columns[0].HeaderText = "Nom Joueur 1";
             ResultDataGrid.Columns[1].HeaderText = "Score du Joueur 1";

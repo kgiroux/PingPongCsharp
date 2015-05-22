@@ -361,13 +361,13 @@ namespace PingPongCsharp
             {
                 if (timer1.Enabled)
                 {
-                    ScoreResultEntities pongResult = new ScoreResultEntities();
+                  
                     Score scoreData = new Score();
                     scoreData.NomClient = nameClient;
                     scoreData.NomServeur = nameServer;
                     scoreData.ScoreClient = scoreClient;
                     scoreData.ScoreServeur = scoreServer;
-                    pongResult.Scores.Add(scoreData);
+                    SingletonDb.Instance.Scores.Add(scoreData);
 
                     
                     /*
@@ -377,8 +377,8 @@ namespace PingPongCsharp
                     Score score = new Score();
                     
                     scoreData.Add(score);*/
-                   
-                    pongResult.SaveChanges();
+
+                    SingletonDb.Instance.SaveChanges();
                 }
 
                 timer1.Enabled = false;
