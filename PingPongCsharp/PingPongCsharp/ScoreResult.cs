@@ -34,17 +34,5 @@ namespace PingPongCsharp
            
                 
         }
-        public ScoreResult(ScoreResultEntities pongResult, String nameJoueurServeur, String nameJoueurClient, int ScoreJoueurServer, int ScoreJoueurClient)
-        {
-            Score score = new Score();
-            score.NomClient = nameJoueurClient;
-            score.NomServeur = nameJoueurServeur;
-            score.ScoreClient = ScoreJoueurClient;
-            score.ScoreServeur = ScoreJoueurServer;
-            pongResult.Scores.Add(score);
-            pongResult.SaveChanges();
-        }
-
- 
     }
 }

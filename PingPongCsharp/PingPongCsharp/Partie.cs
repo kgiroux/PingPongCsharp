@@ -19,6 +19,8 @@ namespace PingPongCsharp
         private DataTransit dt;
         private int scoreServer;
         private int scoreClient;
+        private String nameServer;
+        private String nameClient;
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         static extern short GetAsyncKeyState(System.Windows.Forms.Keys vKey);
@@ -336,6 +338,15 @@ namespace PingPongCsharp
             }
             else
             {
+                ScoreResultEntities pongResult = new ScoreResultEntities();
+                Score score = new Score();
+                score.NomClient = nameServer;
+                score.NomServeur = nameClient;
+                score.ScoreClient = scoreClient;
+                score.ScoreServeur = scoreServer;
+                pongResult.Scores.Add(score);
+                pongResult.SaveChanges();
+
                 timer1.Enabled = false;
                 if (joueur == 0)
                 {
