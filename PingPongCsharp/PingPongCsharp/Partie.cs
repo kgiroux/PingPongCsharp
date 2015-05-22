@@ -31,6 +31,8 @@ namespace PingPongCsharp
             scoreClient = 0;
             this.joueur = joueur;
             this.form = form;
+            nameServer = "";
+            nameClient = "";
             
             InitializeComponent();
             temps.Location = new Point(this.ClientSize.Width / 2 - temps.Width / 2, temps.Location.Y);
@@ -361,8 +363,8 @@ namespace PingPongCsharp
                 {
                     ScoreResultEntities pongResult = new ScoreResultEntities();
                     Score score = new Score();
-                    score.NomClient = nameServer;
-                    score.NomServeur = nameClient;
+                    score.NomClient = nameClient;
+                    score.NomServeur = nameServer;
                     score.ScoreClient = scoreClient;
                     score.ScoreServeur = scoreServer;
                     pongResult.Scores.Add(score);
