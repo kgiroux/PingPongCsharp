@@ -68,14 +68,15 @@ namespace PingPongCsharp
                     timer2.Enabled = true;
                     dt = new DataTransit();
                     dt.Timer = true;
-                    if (joueur == 0){
-                        dt.NameServer = nameServer;
+
+                    if (joueur == 0)
+                    {
+                        dt.NameJoueur = nameServer;
                         ServerClass.prepareSendData(dt);
                     }
-
                     else
                     {
-                        dt.NameClient = nameClient;
+                        dt.NameJoueur = nameClient;
                         ClientClass.prepareSendData(dt);
                     }
                         
@@ -293,7 +294,15 @@ namespace PingPongCsharp
             }
 
             if (ServerClass.dt.Timer == true || ClientClass.dt.Timer == true)
+            {
                 timer2.Enabled = true;
+
+                if (nameClient == "" || nameServer == "")
+                    if (joueur == 0)
+                        nameClient = ServerClass.dt.NameJoueur;
+                    else
+                        nameServer = ClientClass.dt.NameJoueur;
+            }
 
         }
         public void updateOutputLog(String text, int type)
@@ -348,14 +357,17 @@ namespace PingPongCsharp
             }
             else
             {
-                ScoreResultEntities pongResult = new ScoreResultEntities();
-                Score score = new Score();
-                score.NomClient = nameServer;
-                score.NomServeur = nameClient;
-                score.ScoreClient = scoreClient;
-                score.ScoreServeur = scoreServer;
-                pongResult.Scores.Add(score);
-                pongResult.SaveChanges();
+                if (timer1.Enabled)
+                {
+                    ScoreResultEntities pongResult = new ScoreResultEntities();
+                    Score score = new Score();
+                    score.NomClient = nameServer;
+                    score.NomServeur = nameClient;
+                    score.ScoreClient = scoreClient;
+                    score.ScoreServeur = scoreServer;
+                    pongResult.Scores.Add(score);
+                    pongResult.SaveChanges();
+                }
 
                 timer1.Enabled = false;
                 if (joueur == 0)
