@@ -352,7 +352,7 @@ namespace PingPongCsharp
                 this.Partie_FormClosing(null, null);
             }
 
-            if (int.Parse(temps.Text) > 0)
+            if (int.Parse(temps.Text) > 0 && temps.Text != "")
             {
                 temps.Text = (int.Parse(temps.Text) - 1).ToString();
                 temps.Location = new Point(this.ClientSize.Width / 2 - temps.Width / 2, temps.Location.Y);
@@ -362,12 +362,13 @@ namespace PingPongCsharp
                 if (timer1.Enabled)
                 {
                     ScoreResultEntities pongResult = new ScoreResultEntities();
+                    var scoreData = pongResult.Set<Score>();
                     Score score = new Score();
                     score.NomClient = nameClient;
                     score.NomServeur = nameServer;
                     score.ScoreClient = scoreClient;
                     score.ScoreServeur = scoreServer;
-                    pongResult.Scores.Add(score);
+                    scoreData.Add(score);
                     pongResult.SaveChanges();
                 }
 
