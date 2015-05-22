@@ -362,13 +362,22 @@ namespace PingPongCsharp
                 if (timer1.Enabled)
                 {
                     ScoreResultEntities pongResult = new ScoreResultEntities();
+                    Score scoreData = new Score();
+                    scoreData.NomClient = nameClient;
+                    scoreData.NomServeur = nameServer;
+                    scoreData.ScoreClient = scoreClient;
+                    scoreData.ScoreServeur = scoreServer;
+                    pongResult.Scores.Add(scoreData);
+
+                    
+                    /*
+                    
+                    pongResult.Scores.Add
                     var scoreData = pongResult.Set<Score>();
                     Score score = new Score();
-                    score.NomClient = nameClient;
-                    score.NomServeur = nameServer;
-                    score.ScoreClient = scoreClient;
-                    score.ScoreServeur = scoreServer;
-                    scoreData.Add(score);
+                    
+                    scoreData.Add(score);*/
+                   
                     pongResult.SaveChanges();
                 }
 
