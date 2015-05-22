@@ -210,7 +210,7 @@ namespace PingPongCsharp
         {
             // Serveur
             while (!ready) ;
-            p = new Partie(0, this);
+            p = new Partie(0, this, textBox1.Text.ToString());
             ready = false;
             this.ChangeVisibily(false);
             p.ShowDialog();
@@ -222,7 +222,7 @@ namespace PingPongCsharp
         {
             // Client
             while (!ready_client) ;
-            p = new Partie(1,this);
+            p = new Partie(1,this,textBox1.Text.ToString());
             ready_client = false;
             this.ChangeVisibily(false);
             p.ShowDialog();

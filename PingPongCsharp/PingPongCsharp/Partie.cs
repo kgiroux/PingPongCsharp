@@ -25,12 +25,13 @@ namespace PingPongCsharp
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         static extern short GetAsyncKeyState(System.Windows.Forms.Keys vKey);
 
-        public Partie(int joueur, ConfigurationPanel form)
+        public Partie(int joueur, ConfigurationPanel form, String nameJoueur)
         {
             scoreServer = 0;
             scoreClient = 0;
             this.joueur = joueur;
             this.form = form;
+            
             InitializeComponent();
             temps.Location = new Point(this.ClientSize.Width / 2 - temps.Width / 2, temps.Location.Y);
             score.Location = new Point(this.ClientSize.Width / 2 - score.Width / 2, score.Location.Y);
@@ -38,7 +39,7 @@ namespace PingPongCsharp
             ball.Location = new Point(this.ClientSize.Width / 2 - ball.Width / 2, this.ClientSize.Height / 2 - ball.Height / 2);
             b = new Balle(ball.Location.X, ball.Location.Y);
             this.Resize += new EventHandler(Form1_Resize);
-
+             
             if (joueur == 1)
             {
                 ball.Visible = false;
@@ -49,6 +50,9 @@ namespace PingPongCsharp
                 Image img_terrain = this.BackgroundImage;
                 img_terrain.RotateFlip(RotateFlipType.Rotate180FlipNone);
                 this.BackgroundImage = img_terrain;
+                nameClient = nameJoueur;
+            }else{
+                nameServer = nameJoueur;
             }
 
             KeyDown += new KeyEventHandler(Form1_KeyDown);
@@ -64,11 +68,17 @@ namespace PingPongCsharp
                     timer2.Enabled = true;
                     dt = new DataTransit();
                     dt.Timer = true;
-
-                    if (joueur == 0)
+                    if (joueur == 0){
+                        dt.NameServer = nameServer;
                         ServerClass.prepareSendData(dt);
+                    }
+
                     else
+                    {
+                        dt.NameClient = nameClient;
                         ClientClass.prepareSendData(dt);
+                    }
+                        
                 }
             }
             else
