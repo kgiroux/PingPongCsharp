@@ -127,10 +127,11 @@ namespace PingPongCsharp
             Invoke(del);
         }
         /// <summary>
-        /// Message de LOG 
+        /// Message de LOG
+        /// 
         /// </summary>
         /// <param name="text"> Texte à faire apparaitre dans la text view</param>
-        /// <param name="type">Type de message (erreur, normale, success) </param>
+        /// <param name="type">Type de message (erreur = -1 , normale = 0, success = 1) </param>
         public void updateConsoleLog(string text, int type)
         {
             /* Création d'une méthode sécurisé (pointeur sur une fonction) pour changer le contenu de la liste. Cette méthode est anonyme*/
@@ -182,8 +183,6 @@ namespace PingPongCsharp
             Launching_partie(1);
             clt.connectAsClient(listBoxDevice.SelectedItem.ToString());
         }
-
-
         /// <summary>
         /// Libère la boucle de la méthode ClientConnected
         /// </summary>
@@ -192,6 +191,7 @@ namespace PingPongCsharp
         {
             this.ready = ready;
         }
+
         /// <summary>
         /// Libère la boucle de la méthode ClientConnectedServer
         /// </summary>
@@ -200,9 +200,6 @@ namespace PingPongCsharp
         {
             this.ready_client = ready;
         }
-
-
-
         /// <summary>
         /// Methode qui va attendre une connexion d'un client
         /// </summary>
@@ -235,6 +232,7 @@ namespace PingPongCsharp
         /// <param name="mode">1 pour le Serveur, 0 pour le client</param>
         private void Launching_partie(int mode)
         {
+            // Cas du mode server
             if (mode == 0)
             {
                 this.updateConsoleLog("Lancement serveur",1);
@@ -242,14 +240,17 @@ namespace PingPongCsharp
                 launching_partie.IsBackground = true;
                 launching_partie.Start();
             }
+            // Cas du mode client
             else if(mode == 1)
             {
                 launching_partie = new Thread(new ThreadStart(ClientConnectedServer));
                 launching_partie.IsBackground = true;
                 launching_partie.Start();
             }
+            // Cas d'échec
             else
             {
+                this.updateConsoleLog("Echec lancement des thread d'écoute", -1);
                 Console.WriteLine("ICI");
             }
             
@@ -273,7 +274,7 @@ namespace PingPongCsharp
             }
             catch (ObjectDisposedException ex)
             {
-                Console.WriteLine("====>>> changeServerButtonActivate " + ex.Message);
+                this.updateConsoleLog("ObjectDisposedException " + ex.Message,-1);
             }
         }
         /// <summary>
@@ -293,7 +294,7 @@ namespace PingPongCsharp
             }
             catch (ObjectDisposedException ex)
             {
-                Console.WriteLine("====>>> changeScanButtonActivate " + ex.Message);
+                this.updateConsoleLog("ObjectDisposedException " + ex.Message, -1);
             }
         }
 
@@ -321,7 +322,7 @@ namespace PingPongCsharp
             }
             catch (ObjectDisposedException ex)
             {
-                Console.WriteLine("====>>> changeScanButtonActivate " + ex.Message);
+                this.updateConsoleLog("ObjectDisposedException " + ex.Message, -1);
             }
         }
         /// <summary>
@@ -376,6 +377,18 @@ namespace PingPongCsharp
                 serveur.Enabled = false;
                 scan_button.Enabled = false;
             }
+        }
+        /// <summary>
+        /// Permet de revenir au menu principal
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BackMenu_Click(object sender, EventArgs e)
+        {
+            // Affichage de la fenetre welcome
+            wlcm.Show();
+            // Destruction de la fenetre de configuration
+            this.Dispose();
         }
 
     }

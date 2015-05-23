@@ -19,13 +19,16 @@ namespace PingPongCsharp
         public ScoreResult()
         {
             InitializeComponent();
-
-            var query = from score in SingletonDb.Instance.Scores select new { score.NomServeur, score.ScoreServeur, score.ScoreClient, score.NomClient };
-            ResultDataGrid.DataSource = query.ToList();
-            ResultDataGrid.Columns[0].HeaderText = "Nom Joueur 1";
-            ResultDataGrid.Columns[1].HeaderText = "Score du Joueur 1";
-            ResultDataGrid.Columns[2].HeaderText = "Score du Joueur 2";
-            ResultDataGrid.Columns[3].HeaderText = "Nom du Joueur 2";
+            using (ScoreResultEntities db = new ScoreResultEntities())
+            {
+                var query = from score in db.Scores select new { score.NomServeur, score.ScoreServeur, score.ScoreClient, score.NomClient };
+                ResultDataGrid.DataSource = query.ToList();
+                ResultDataGrid.Columns[0].HeaderText = "Nom Joueur 1";
+                ResultDataGrid.Columns[1].HeaderText = "Score du Joueur 1";
+                ResultDataGrid.Columns[2].HeaderText = "Score du Joueur 2";
+                ResultDataGrid.Columns[3].HeaderText = "Nom du Joueur 2";
+            }
+           
             
             ResultDataGrid.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             ResultDataGrid.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;

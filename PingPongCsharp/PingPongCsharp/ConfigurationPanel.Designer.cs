@@ -36,6 +36,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.scan_button = new System.Windows.Forms.Button();
             this.outPutLog = new System.Windows.Forms.RichTextBox();
+            this.BackMenu = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // serveur
@@ -111,11 +112,22 @@
             this.outPutLog.TabIndex = 6;
             this.outPutLog.Text = "";
             // 
+            // BackMenu
+            // 
+            this.BackMenu.Location = new System.Drawing.Point(459, 309);
+            this.BackMenu.Name = "BackMenu";
+            this.BackMenu.Size = new System.Drawing.Size(75, 23);
+            this.BackMenu.TabIndex = 7;
+            this.BackMenu.Text = "Menu";
+            this.BackMenu.UseVisualStyleBackColor = true;
+            this.BackMenu.Click += new System.EventHandler(this.BackMenu_Click);
+            // 
             // ConfigurationPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(684, 344);
+            this.Controls.Add(this.BackMenu);
             this.Controls.Add(this.outPutLog);
             this.Controls.Add(this.listBoxDevice);
             this.Controls.Add(this.stop);
@@ -144,6 +156,7 @@
         private System.Windows.Forms.Button scan_button;
         private System.Windows.Forms.ListBox listBoxDevice;
         private System.Windows.Forms.RichTextBox outPutLog;
+        private System.Windows.Forms.Button BackMenu;
     }
 }
 

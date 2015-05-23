@@ -53,6 +53,7 @@ public class ClientClass
         device_selected = null;
         if (devices_found != null)
         {
+            // Si on trouver le nom de l'appareil que sur lequel nous avons cliqué
             foreach (BluetoothDeviceInfo device in devices_found)
             {
                 if (name_device == device.DeviceName)
@@ -61,9 +62,11 @@ public class ClientClass
                     break;
                 }
             }
+            // On essaye de se connecter
             this.updateOutputLog("Try to connect to : " + device_selected.DeviceName, 0);
             if (device_selected != null)
             {
+                // Si les appareils sont déjà associer;
                 if (pairDevice())
                 {
                     this.updateOutputLog("Starting to connect",0);
@@ -72,18 +75,21 @@ public class ClientClass
                     bluetoothClientThread.IsBackground = true;
                     bluetoothClientThread.Start();
                 }
+                // Sinon impossible de se connecter
                 else
                 {
                     this.updateOutputLog("Failed to connect",-1);
                     error = -1;
                 }
             }
+                // Appareil non trouvé
             else
             {
                 this.updateOutputLog("Device not found !!! ", -1);
                 error = -1;
             }
         }
+            // Liste des appareil vide
         else
         {
             this.updateOutputLog("Device not found !!! ", -1);
@@ -97,6 +103,7 @@ public class ClientClass
     /// </summary>
     private void ClientConnectThread()
     {
+        /// Démarrage du thread pour se connecter au serveur
         this.updateOutputLog("Connect",0);
         client = new BluetoothClient();
         Console.WriteLine(device_selected.DeviceAddress);
@@ -126,6 +133,7 @@ public class ClientClass
     /// <param name="result"></param>
     void BluetoothClientConnectCallBack(IAsyncResult result)
     {
+        /// Récupération des messages de façon asynchrones
         client = (BluetoothClient)result.AsyncState;
         try
         {
@@ -140,6 +148,7 @@ public class ClientClass
                 while (!messageAvailable) ;
                 try
                 {
+                    // Ecriture du messages
                     this.updateOutputLog(Encoding.ASCII.GetString(messageSend),0);
                     stream.Write(messageSend, 0, messageSend.Length);
                 }
@@ -155,7 +164,9 @@ public class ClientClass
                 messageAvailable = false;
             }
         }
-        catch (System.Net.Sockets.SocketException ex )
+        // cas d'erreur
+        // Fermeture des thread et des sockets
+        catch ( Exception ex )
         {
             this.error = -1;
             Console.WriteLine(ex.Message);
@@ -166,26 +177,6 @@ public class ClientClass
                 readingThread.Abort();
             }
             this.updateOutputLog("Fermeture des connexions",-1);
-            if (stream != null)
-            {
-                stream.Close();
-            }
-            if (client != null)
-            {
-                client.Close();
-            }
-        }
-        catch (Exception ex)
-        {
-            this.error = -1;
-            Console.WriteLine(ex.Message);
-            this.updateOutputLog(ex.Message,-1);
-            this.updateOutputLog("Fail to connect to this serveur",-1);
-            if (readingThread != null)
-            {
-                readingThread.Abort();
-            }
-            this.updateOutputLog("Fermeture des connexions", -1);
             if (stream != null)
             {
                 stream.Close();
@@ -222,7 +213,7 @@ public class ClientClass
          catch (Exception ex)
          {
              CloseConnection();
-             Console.WriteLine("=++>" +ex.Message);
+             this.updateOutputLog(ex.Message, -1);
          }
     }
 
@@ -237,6 +228,7 @@ public class ClientClass
         if (!device_selected.Authenticated)
         {
             if(!BluetoothSecurity.PairRequest(device_selected.DeviceAddress,myPin)){
+                this.updateOutputLog("Failed to pair devices", -1);
                 return false;
             }
         }
@@ -319,6 +311,8 @@ public class ClientClass
     }
     /// <summary>
     /// Méthode permettant de fermer la connection
+    /// Suppression des thread
+    /// Fermeture des sockets
     /// </summary>
     public static void CloseConnection()
     {

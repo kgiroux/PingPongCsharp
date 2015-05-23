@@ -368,17 +368,9 @@ namespace PingPongCsharp
                     scoreData.ScoreClient = scoreClient;
                     scoreData.ScoreServeur = scoreServer;
                     SingletonDb.Instance.Scores.Add(scoreData);
-
-                    
-                    /*
-                    
-                    pongResult.Scores.Add
-                    var scoreData = pongResult.Set<Score>();
-                    Score score = new Score();
-                    
-                    scoreData.Add(score);*/
-
                     SingletonDb.Instance.SaveChanges();
+                    
+                    
                 }
 
                 timer1.Enabled = false;

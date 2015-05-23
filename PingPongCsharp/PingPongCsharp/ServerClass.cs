@@ -38,8 +38,6 @@ public class ServerClass
     /// <summary>
     ///  Méthode de lancement pour la création du serveur */
     /// </summary>
-
-    
     public void connectAsServer()
     {      
         this.updateOutputLog("Launching Server ...",0);
@@ -68,15 +66,14 @@ public class ServerClass
         this.updateOutputLog("Initializing component...",0);
         /* Création du listener pour le serveur */
         bluetoothServerListener = new BluetoothListener(this.mUUID);
-
-        Console.WriteLine(this.mUUID);
+        this.updateOutputLog("Votre mUUID : " + this.mUUID, 1);
         try
         {
             bluetoothServerListener.Start();
         }
         catch (Exception ex)
         {
-            Console.WriteLine(ex.Message);
+            this.updateOutputLog("Exception : " +ex.Message, -1);
         }
         
 
@@ -100,50 +97,20 @@ public class ServerClass
                 }
                 catch (IOException e)
                 {
-                    this.updateOutputLog("====>>>" + e.Message, -1);
+                    this.updateOutputLog("IO Exception : " + e.Message, -1);
                 }
                 finally
                 {
-                    this.updateOutputLog("Passage ICI +++ FIN d'envoi !!!!", 0);
+                    this.updateOutputLog("FIN d'envoi du message", 0);
                 }
                 this.form.setReady(true);
                 messageAvailable = false;
 
             }
         }
-        catch (System.Net.Sockets.SocketException ex)
-        {
-            Console.WriteLine("=== > 4" + ex.Message);
-            this.updateOutputLog(ex.Message, -1);
-            this.updateOutputLog("Fail to connect to this serveur", -1);
-            if (readingThread != null)
-            {
-                readingThread.Abort();
-            }
-            this.updateOutputLog("Fermeture des connexions", -1);
-            if (messageStream != null)
-            {
-                messageStream.Close();
-            }
-            if (bluetoothClient != null)
-            {
-                bluetoothClient.Close();
-            }
-
-            try
-            {
-                this.form.changeServerButtonActivate(true);
-            }
-            catch (System.NullReferenceException ex1)
-            {
-                Console.WriteLine("==>   this.form.changeServerButtonActivate " + ex1.Message);
-            }
-       
-        }
         catch (Exception ex)
         {
-            Console.WriteLine("=== > 4" +ex.Message);
-            this.updateOutputLog(ex.Message, -1);
+            this.updateOutputLog("Exception  : " + ex.Message, -1);
             this.updateOutputLog("Fail to connect to this serveur", -1);
             if (readingThread != null)
             {
@@ -158,15 +125,15 @@ public class ServerClass
             {
                 bluetoothClient.Close();
             }
-
             try
             {
                 this.form.changeServerButtonActivate(true);
             }
             catch (System.NullReferenceException ex1)
             {
-                Console.WriteLine("==>   this.form.changeServerButtonActivate 2" + ex1.Message);
+                this.updateOutputLog("System.NullReferenceException : " + ex1.Message, -1);
             }
+       
         }
         bluetoothClient.Close();
     }
@@ -193,7 +160,7 @@ public class ServerClass
         }
         catch (Exception ex)
         {
-            Console.WriteLine("=== > 5" +ex.Message);
+            this.updateOutputLog("Excpetion : " +ex.Message,-1);
             CloseConnection();
         }
     }
