@@ -51,11 +51,13 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="InTheHand.Net.Personal, Version=3.5.605.0, Culture=neutral, PublicKeyToken=ea38caa273134499, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -76,71 +78,71 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="About.cs">
-      <SubType>Form</SubType>
+    <Compile Include="Bdd\Score.cs">
+      <DependentUpon>ScoreResultEntitiesModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="About.Designer.cs">
-      <DependentUpon>About.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Balle.cs" />
-    <Compile Include="ClientClass.cs" />
-    <Compile Include="DataTransit.cs" />
-    <Compile Include="ConfigurationPanel.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ConfigurationPanel.Designer.cs">
-      <DependentUpon>ConfigurationPanel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Score.cs">
-      <DependentUpon>ScoreResult.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ScoreResult.Context.cs">
+    <Compile Include="Bdd\ScoreResultEntitiesModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ScoreResult.Context.tt</DependentUpon>
+      <DependentUpon>ScoreResultEntitiesModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="ScoreResult.cs">
+    <Compile Include="Bdd\ScoreResultEntitiesModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ScoreResultEntitiesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Bdd\ScoreResultEntitiesModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ScoreResultEntitiesModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Fenetre\About.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ScoreResult.Designer.cs">
+    <Compile Include="Fenetre\About.Designer.cs">
+      <DependentUpon>About.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Class\Balle.cs" />
+    <Compile Include="Class\ClientClass.cs" />
+    <Compile Include="Class\DataTransit.cs" />
+    <Compile Include="Fenetre\ConfigurationPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fenetre\ConfigurationPanel.Designer.cs">
+      <DependentUpon>ConfigurationPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Fenetre\ScoreResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fenetre\ScoreResult.Designer.cs">
       <DependentUpon>ScoreResult.cs</DependentUpon>
     </Compile>
-    <Compile Include="Partie.cs">
+    <Compile Include="Fenetre\Partie.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Partie.Designer.cs">
+    <Compile Include="Fenetre\Partie.Designer.cs">
       <DependentUpon>Partie.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="Class\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ScoreResult1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ScoreResult.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ScoreResult1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ScoreResult.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="ServerClass.cs" />
-    <Compile Include="SingletonDb.cs" />
-    <Compile Include="Welcome.cs">
+    <Compile Include="Class\ServerClass.cs" />
+    <Compile Include="Class\SingletonDb.cs" />
+    <Compile Include="Fenetre\Welcome.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Welcome.Designer.cs">
+    <Compile Include="Fenetre\Welcome.Designer.cs">
       <DependentUpon>Welcome.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="About.resx">
+    <EmbeddedResource Include="Fenetre\About.resx">
       <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ConfigurationPanel.resx">
+    <EmbeddedResource Include="Fenetre\ConfigurationPanel.resx">
       <DependentUpon>ConfigurationPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ScoreResult.resx">
+    <EmbeddedResource Include="Fenetre\ScoreResult.resx">
       <DependentUpon>ScoreResult.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Partie.resx">
+    <EmbeddedResource Include="Fenetre\Partie.resx">
       <DependentUpon>Partie.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -153,9 +155,16 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Welcome.resx">
+    <EmbeddedResource Include="Fenetre\Welcome.resx">
       <DependentUpon>Welcome.cs</DependentUpon>
     </EmbeddedResource>
+    <EntityDeploy Include="Bdd\ScoreResultEntitiesModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ScoreResultEntitiesModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Bdd\ScoreResultEntitiesModel.edmx.diagram">
+      <DependentUpon>ScoreResultEntitiesModel.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -166,23 +175,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EntityDeploy Include="ScoreResult.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ScoreResult1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="ScoreResult.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ScoreResult.edmx</DependentUpon>
-      <LastGenOutput>ScoreResult.Context.cs</LastGenOutput>
-    </None>
-    <None Include="ScoreResult.edmx.diagram">
-      <DependentUpon>ScoreResult.edmx</DependentUpon>
-    </None>
-    <None Include="ScoreResult.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ScoreResult.edmx</DependentUpon>
-      <LastGenOutput>ScoreResult1.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -205,16 +197,19 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Pong.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Pong_log.ldf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <DependentUpon>Pong.mdf</DependentUpon>
-    </Content>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Content Include="Bdd\ScoreResultEntitiesModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ScoreResultEntitiesModel.edmx</DependentUpon>
+      <LastGenOutput>ScoreResultEntitiesModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Bdd\ScoreResultEntitiesModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ScoreResultEntitiesModel.edmx</DependentUpon>
+      <LastGenOutput>ScoreResultEntitiesModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
