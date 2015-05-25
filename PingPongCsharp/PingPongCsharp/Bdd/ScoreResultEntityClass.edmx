@@ -4,36 +4,36 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ScoreResultNamespace.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="PongModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Score">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NomServeur" Type="text" Nullable="false" />
-          <Property Name="ScoreServeur" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="NomClient" Type="text" Nullable="false" />
+          <Property Name="NomServer" Type="text" Nullable="false" />
+          <Property Name="ScoreServer" Type="int" Nullable="false" />
           <Property Name="ScoreClient" Type="int" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="ScoreResultNamespaceStoreContainer">
+        <EntityContainer Name="PongModelStoreContainer">
           <EntitySet Name="Score" EntityType="Self.Score" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="ScoreResultNamespace" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="PongModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Score">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NomServeur" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ScoreServeur" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="NomClient" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NomServer" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ScoreServer" Type="Int32" Nullable="false" />
           <Property Name="ScoreClient" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="ScoreResultEntitiesTest" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ScoreResultEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Scores" EntityType="Self.Score" />
         </EntityContainer>
       </Schema>
@@ -41,14 +41,14 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ScoreResultNamespaceStoreContainer" CdmEntityContainer="ScoreResultEntitiesTest">
+        <EntityContainerMapping StorageEntityContainer="PongModelStoreContainer" CdmEntityContainer="ScoreResultEntities">
           <EntitySetMapping Name="Scores">
-            <EntityTypeMapping TypeName="ScoreResultNamespace.Score">
+            <EntityTypeMapping TypeName="PongModel.Score">
               <MappingFragment StoreEntitySet="Score">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="NomServeur" ColumnName="NomServeur" />
-                <ScalarProperty Name="ScoreServeur" ColumnName="ScoreServeur" />
                 <ScalarProperty Name="NomClient" ColumnName="NomClient" />
+                <ScalarProperty Name="NomServer" ColumnName="NomServer" />
+                <ScalarProperty Name="ScoreServer" ColumnName="ScoreServer" />
                 <ScalarProperty Name="ScoreClient" ColumnName="ScoreClient" />
               </MappingFragment>
             </EntityTypeMapping>
