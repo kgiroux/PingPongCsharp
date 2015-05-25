@@ -79,22 +79,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bdd\Score.cs">
-      <DependentUpon>ScoreResultEntityClass.tt</DependentUpon>
+      <DependentUpon>ScoreResultEntitiesModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Bdd\ScoreResultEntityClass.Context.cs">
+    <Compile Include="Bdd\ScoreResultEntitiesModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ScoreResultEntityClass.Context.tt</DependentUpon>
+      <DependentUpon>ScoreResultEntitiesModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Bdd\ScoreResultEntityClass.cs">
+    <Compile Include="Bdd\ScoreResultEntitiesModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ScoreResultEntityClass.tt</DependentUpon>
+      <DependentUpon>ScoreResultEntitiesModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Bdd\ScoreResultEntityClass.Designer.cs">
+    <Compile Include="Bdd\ScoreResultEntitiesModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ScoreResultEntityClass.edmx</DependentUpon>
+      <DependentUpon>ScoreResultEntitiesModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Fenetre\About.cs">
       <SubType>Form</SubType>
@@ -158,12 +158,12 @@
     <EmbeddedResource Include="Fenetre\Welcome.resx">
       <DependentUpon>Welcome.cs</DependentUpon>
     </EmbeddedResource>
-    <EntityDeploy Include="Bdd\ScoreResultEntityClass.edmx">
+    <EntityDeploy Include="Bdd\ScoreResultEntitiesModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ScoreResultEntityClass.Designer.cs</LastGenOutput>
+      <LastGenOutput>ScoreResultEntitiesModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Bdd\ScoreResultEntityClass.edmx.diagram">
-      <DependentUpon>ScoreResultEntityClass.edmx</DependentUpon>
+    <None Include="Bdd\ScoreResultEntitiesModel.edmx.diagram">
+      <DependentUpon>ScoreResultEntitiesModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -177,9 +177,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
@@ -202,25 +200,17 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Bdd\ScoreResultEntityClass.Context.tt">
+    <Content Include="Bdd\ScoreResultEntitiesModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ScoreResultEntityClass.edmx</DependentUpon>
-      <LastGenOutput>ScoreResultEntityClass.Context.cs</LastGenOutput>
+      <DependentUpon>ScoreResultEntitiesModel.edmx</DependentUpon>
+      <LastGenOutput>ScoreResultEntitiesModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Bdd\ScoreResultEntityClass.tt">
+    <Content Include="Bdd\ScoreResultEntitiesModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ScoreResultEntityClass.edmx</DependentUpon>
-      <LastGenOutput>ScoreResultEntityClass.cs</LastGenOutput>
-    </Content>
-    <Content Include="Pong.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Pong_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>Pong.mdf</DependentUpon>
+      <DependentUpon>ScoreResultEntitiesModel.edmx</DependentUpon>
+      <LastGenOutput>ScoreResultEntitiesModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -10,7 +10,7 @@ namespace PingPongCsharp
     public sealed class SingletonDb
     {
         private static readonly object padlock = new object();
-        private static ScoreResultEntities pongResult = null;
+        private static ScoreResultEntitiesTest pongResult = null;
         /// <summary>
         /// Constructeur vide pour un singleton
         /// </summary>
@@ -20,7 +20,7 @@ namespace PingPongCsharp
         /// <summary>
         /// Permet de crée une unique instance de ScoreResultEntities;
         /// </summary>
-        public static ScoreResultEntities Instance
+        public static ScoreResultEntitiesTest Instance
         {
             get
             {
@@ -28,7 +28,7 @@ namespace PingPongCsharp
                 {
                     if (pongResult == null)
                     {
-                        pongResult = new ScoreResultEntities();
+                        pongResult = new ScoreResultEntitiesTest();
                     }
                     return pongResult;
                 }

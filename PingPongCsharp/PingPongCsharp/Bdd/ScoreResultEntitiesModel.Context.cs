@@ -13,10 +13,10 @@ namespace PingPongCsharp.Bdd
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ScoreResultEntities : DbContext
+    public partial class ScoreResultEntitiesTest : DbContext
     {
-        public ScoreResultEntities()
-            : base("name=ScoreResultEntities")
+        public ScoreResultEntitiesTest()
+            : base("name=ScoreResultEntitiesTest")
         {
         }
     
