@@ -19,7 +19,7 @@ namespace PingPongCsharp
         public ScoreResult()
         {
             InitializeComponent();
-            var query = from score in SingletonDb.Instance.Scores select new { score.NomServeur, score.ScoreServeur, score.ScoreClient, score.NomClient };
+            var query = from score in SingletonDb.Instance.Scores select new { score.NomServer, score.ScoreServer, score.ScoreClient, score.NomClient };
             ResultDataGrid.DataSource = query.ToList();
             ResultDataGrid.Columns[0].HeaderText = "Nom Joueur 1";
             ResultDataGrid.Columns[1].HeaderText = "Score du Joueur 1";

@@ -21,7 +21,7 @@ namespace PingPongCsharp
         public Welcome()
         {
            InitializeComponent();
-           var query = from score in SingletonDb.Instance.Scores where score.Id == 1 select new { score.NomServeur, score.ScoreServeur, score.ScoreClient, score.NomClient };
+           var query = from score in SingletonDb.Instance.Scores where score.Id == 1 select new { score.NomServer, score.ScoreServer, score.ScoreClient, score.NomClient };
            Console.WriteLine(query.ToList());   
         }
         /// <summary>
@@ -44,9 +44,9 @@ namespace PingPongCsharp
         {
             Score score = SingletonDb.Instance.Scores.Create();
             score.NomClient = "hjklmù";
-            score.NomServeur = "jgklmùkjhklm";
+            score.NomServer = "jgklmùkjhklm";
             score.ScoreClient = 42;
-            score.ScoreServeur = 111;
+            score.ScoreServer = 111;
 
             SingletonDb.Instance.Scores.Add(score);
             SingletonDb.Instance.SaveChanges();
