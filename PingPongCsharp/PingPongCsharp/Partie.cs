@@ -364,9 +364,9 @@ namespace PingPongCsharp
                   
                     Score scoreData = new Score();
                     scoreData.NomClient = nameClient;
-                    scoreData.NomServeur = nameServer;
+                    scoreData.NomServer = nameServer;
                     scoreData.ScoreClient = scoreClient;
-                    scoreData.ScoreServeur = scoreServer;
+                    scoreData.ScoreServer = scoreServer;
                     SingletonDb.Instance.Scores.Add(scoreData);
                     SingletonDb.Instance.SaveChanges();
                     

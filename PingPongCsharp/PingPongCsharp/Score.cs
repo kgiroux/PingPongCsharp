@@ -15,9 +15,9 @@ namespace PingPongCsharp
     public partial class Score
     {
         public int Id { get; set; }
-        public string NomServeur { get; set; }
-        public int ScoreServeur { get; set; }
         public string NomClient { get; set; }
+        public string NomServer { get; set; }
+        public int ScoreServer { get; set; }
         public int ScoreClient { get; set; }
     }
 }
