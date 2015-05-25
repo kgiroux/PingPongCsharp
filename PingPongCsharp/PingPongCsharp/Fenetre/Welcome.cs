@@ -46,7 +46,7 @@ namespace PingPongCsharp
             score.NomClient = "hjklmù";
             score.NomServeur = "jgklmùkjhklm";
             score.ScoreClient = 42;
-            score.ScoreServeur = 111;
+            score.ScoreServeur = 114;
 
             SingletonDb.Instance.Scores.Add(score);
             SingletonDb.Instance.SaveChanges();
