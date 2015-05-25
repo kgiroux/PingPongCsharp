@@ -76,19 +76,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="About.cs">
+    <Compile Include="ScoreResult1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ScoreResult.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Window\About.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="About.Designer.cs">
+    <Compile Include="Window\About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
-    <Compile Include="Balle.cs" />
-    <Compile Include="ClientClass.cs" />
-    <Compile Include="DataTransit.cs" />
-    <Compile Include="ConfigurationPanel.cs">
+    <Compile Include="Class\Balle.cs" />
+    <Compile Include="Class\ClientClass.cs" />
+    <Compile Include="Class\DataTransit.cs" />
+    <Compile Include="Window\ConfigurationPanel.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ConfigurationPanel.Designer.cs">
+    <Compile Include="Window\ConfigurationPanel.Designer.cs">
       <DependentUpon>ConfigurationPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Score.cs">
@@ -99,48 +104,43 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ScoreResult.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="ScoreResult.cs">
+    <Compile Include="Window\ScoreResult.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ScoreResult.Designer.cs">
+    <Compile Include="Window\ScoreResult.Designer.cs">
       <DependentUpon>ScoreResult.cs</DependentUpon>
     </Compile>
-    <Compile Include="Partie.cs">
+    <Compile Include="Window\Partie.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Partie.Designer.cs">
+    <Compile Include="Window\Partie.Designer.cs">
       <DependentUpon>Partie.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="Class\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ScoreResult1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ScoreResult.tt</DependentUpon>
-    </Compile>
     <Compile Include="ScoreResult1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ScoreResult.edmx</DependentUpon>
     </Compile>
-    <Compile Include="ServerClass.cs" />
-    <Compile Include="SingletonDb.cs" />
-    <Compile Include="Welcome.cs">
+    <Compile Include="Class\ServerClass.cs" />
+    <Compile Include="Class\SingletonDb.cs" />
+    <Compile Include="Window\Welcome.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Welcome.Designer.cs">
+    <Compile Include="Window\Welcome.Designer.cs">
       <DependentUpon>Welcome.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="About.resx">
+    <EmbeddedResource Include="Window\About.resx">
       <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ConfigurationPanel.resx">
+    <EmbeddedResource Include="Window\ConfigurationPanel.resx">
       <DependentUpon>ConfigurationPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ScoreResult.resx">
+    <EmbeddedResource Include="Window\ScoreResult.resx">
       <DependentUpon>ScoreResult.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Partie.resx">
+    <EmbeddedResource Include="Window\Partie.resx">
       <DependentUpon>Partie.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -153,7 +153,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Welcome.resx">
+    <EmbeddedResource Include="Window\Welcome.resx">
       <DependentUpon>Welcome.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
@@ -216,6 +216,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
