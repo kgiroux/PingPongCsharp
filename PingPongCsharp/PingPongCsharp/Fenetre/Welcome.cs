@@ -21,16 +21,8 @@ namespace PingPongCsharp
         public Welcome()
         {
            InitializeComponent();
-           var query = from score in SingletonDb.Instance.Scores where score.Id == 1 select new { score.NomServer, score.ScoreServer, score.ScoreClient, score.NomClient };
-           try
-           {
-               Console.WriteLine(query.ToList());   
-           }
-           catch (Exception ex)
-           {
-               Console.WriteLine(ex.Message);
-           }
-            
+           var query = from score in SingletonDb.Instance.Scores where score.Id == 1 select new { score.NomServeur, score.ScoreServeur, score.ScoreClient, score.NomClient };
+           Console.WriteLine(query.ToList());   
         }
         /// <summary>
         /// Permet d'afficher le menu de configuration bluetooth;
@@ -52,9 +44,9 @@ namespace PingPongCsharp
         {
             Score score = SingletonDb.Instance.Scores.Create();
             score.NomClient = "hjklmù";
-            score.NomServer = "jgklmùkjhklm";
+            score.NomServeur = "jgklmùkjhklm";
             score.ScoreClient = 42;
-            score.ScoreServer = 114;
+            score.ScoreServeur = 111;
 
             SingletonDb.Instance.Scores.Add(score);
             SingletonDb.Instance.SaveChanges();
