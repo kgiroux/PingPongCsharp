@@ -32,9 +32,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Partie));
             this.raquette = new System.Windows.Forms.PictureBox();
             this.ball = new System.Windows.Forms.PictureBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timerMvmt = new System.Windows.Forms.Timer(this.components);
             this.temps = new System.Windows.Forms.Label();
-            this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.timerChrono = new System.Windows.Forms.Timer(this.components);
             this.score = new System.Windows.Forms.Label();
             this.Victoire = new System.Windows.Forms.Label();
             this.Instructions = new System.Windows.Forms.Label();
@@ -66,11 +66,11 @@
             this.ball.TabIndex = 2;
             this.ball.TabStop = false;
             // 
-            // timer1
+            // timerMvmt
             // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 10;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.timerMvmt.Enabled = true;
+            this.timerMvmt.Interval = 10;
+            this.timerMvmt.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // temps
             // 
@@ -85,10 +85,10 @@
             this.temps.Text = "100";
             this.temps.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // timer2
+            // timerChrono
             // 
-            this.timer2.Interval = 1000;
-            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            this.timerChrono.Interval = 1000;
+            this.timerChrono.Tick += new System.EventHandler(this.timer2_Tick);
             // 
             // score
             // 
@@ -163,9 +163,9 @@
 
         private System.Windows.Forms.PictureBox raquette;
         private System.Windows.Forms.PictureBox ball;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer timerMvmt;
         private System.Windows.Forms.Label temps;
-        private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.Timer timerChrono;
         private System.Windows.Forms.Label score;
         private System.Windows.Forms.Label Victoire;
         private System.Windows.Forms.Label Instructions;
