@@ -9,6 +9,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+///<author>
+///Cyril LEFEBVRE & Kévin Giroux
+///</author>
 namespace PingPongCsharp
 {
     public partial class Partie : Form
