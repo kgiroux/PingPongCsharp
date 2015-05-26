@@ -60,7 +60,8 @@ namespace PingPongCsharp
         private void About_Click(object sender, EventArgs e)
         {
             About abt = new About(this);
-            abt.ShowDialog();
+            this.Hide();
+            abt.Show();
         }
 
     }

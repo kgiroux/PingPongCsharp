@@ -12,7 +12,7 @@ namespace PingPongCsharp
 {
     public partial class About : Form
     {
-        Welcome wlcm; 
+        private Welcome wlcm; 
         /// <summary>
         /// Constructeur de la fenetre pour les explications
         /// </summary>
@@ -20,7 +20,7 @@ namespace PingPongCsharp
         public About(Welcome wlcm)
         {
             this.wlcm = wlcm;
-            this.wlcm.Hide();
+            
             InitializeComponent();
             Image img = ClientBoxPicture.Image;
             img.RotateFlip(RotateFlipType.Rotate180FlipNone);
@@ -33,8 +33,9 @@ namespace PingPongCsharp
         /// <param name="e"></param>
         private void BackMenu_Click(object sender, EventArgs e)
         {
-            wlcm.Show();
             this.Dispose();
+            this.wlcm.Show();
+            
         }
         /// <summary>
         /// Permet de fermer la fenêtre ainsi que tout les processus
@@ -43,7 +44,7 @@ namespace PingPongCsharp
         /// <param name="e"></param>
         private void About_FormClosing(object sender, FormClosingEventArgs e)
         {
-            wlcm.Dispose();
+            this.wlcm.Dispose();
             this.Dispose();
         }
     }
