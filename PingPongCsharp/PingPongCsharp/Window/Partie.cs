@@ -53,7 +53,7 @@ namespace PingPongCsharp
             
             // Initialisation des évènements
             this.Resize += new EventHandler(Form1_Resize);
-            KeyDown += new KeyEventHandler(Form1_KeyDown);
+            KeyDown += new KeyEventHandler(Partie_KeyDown);
             
             // Si le joueur est du côté client
             if (joueur == 1)
@@ -90,7 +90,7 @@ namespace PingPongCsharp
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        private void Partie_KeyDown(object sender, KeyEventArgs e)
         {
             // Si la partie est en cours
             if (timerMvmt.Enabled == true)
@@ -183,150 +183,153 @@ namespace PingPongCsharp
             }
             
             // Si aucune information sur la balle n'est arrivée par bluetooth et que la balle est en mouvement
-            if (ServerClass.dt.BallePro == null && ClientClass.dt.BallePro == null && b.Vitesse != 0)  
+            if (ServerClass.dt.BallePro == null && ClientClass.dt.BallePro == null)  
             {
-                // Modification de l'angle de la balle celle-ci tape en haut ou en bas
-                if (b.Y < 0 || b.Y + bh > this.ClientSize.Height)
-                    b.Angle = 360 - b.Angle;
-
-                // Si l'on est côté serveur
-                if (joueur == 0)
+                if (b.Vitesse != 0)
                 {
-                    // Modification de l'angle de la balle si celle-ci tape la raquette
-                    if(b.X < rx + rw && b.X > rx && b.Y < ry + rh && b.Y + bh > ry)
+                    // Modification de l'angle de la balle celle-ci tape en haut ou en bas
+                    if (b.Y < 0 || b.Y + bh > this.ClientSize.Height)
+                        b.Angle = 360 - b.Angle;
+
+                    // Si l'on est côté serveur
+                    if (joueur == 0)
                     {
-                        if(b.Angle > 180)
-                            b.Angle = 540 - b.Angle;
-                        else
-                            b.Angle = 180 - b.Angle;
+                        // Modification de l'angle de la balle si celle-ci tape la raquette
+                        if (b.X < rx + rw && b.X > rx && b.Y < ry + rh && b.Y + bh > ry)
+                        {
+                            if (b.Angle > 180)
+                                b.Angle = 540 - b.Angle;
+                            else
+                                b.Angle = 180 - b.Angle;
 
-                        // Modification de l'angle selon l'endroit où la balle arrive sur la raquette
-                        if(b.Y + bh > ry && b.Y + bh/2 < ry + rh/2)
-                            b.Angle -= (int)((double)((double)rh / 2 - ((b.Y + bh) - ry)) / ((double)rh / 2) * 60);
-                        else
-                            b.Angle += (int) ((double)(b.Y - (ry + rh / 2)) / ((double)rh / 2) * 60);
+                            // Modification de l'angle selon l'endroit où la balle arrive sur la raquette
+                            if (b.Y + bh > ry && b.Y + bh / 2 < ry + rh / 2)
+                                b.Angle -= (int)((double)((double)rh / 2 - ((b.Y + bh) - ry)) / ((double)rh / 2) * 60);
+                            else
+                                b.Angle += (int)((double)(b.Y - (ry + rh / 2)) / ((double)rh / 2) * 60);
 
-                        if(b.Angle > 60 && b.Angle < 180)
-                            b.Angle = 60;
-                        else if(b.Angle < 300 && b.Angle > 180)
-                            b.Angle = 300;
+                            if (b.Angle > 60 && b.Angle < 180)
+                                b.Angle = 60;
+                            else if (b.Angle < 300 && b.Angle > 180)
+                                b.Angle = 300;
 
-                        // Augmentation de la vitesse de la balle
-                        b.Accelere();
+                            // Augmentation de la vitesse de la balle
+                            b.Accelere();
+                        }
+
+                        // Si la balle sort du terrain vers le joueur adverse
+                        if (b.X > this.ClientSize.Width)
+                        {
+                            // La balle devient invisible et sa position est modifée
+                            ball.Visible = false;
+                            b.Y = (double)ball.Location.Y / (double)this.ClientSize.Height;
+
+                            // Envoi des données vers le client
+                            DataTransit dt = new DataTransit();
+                            dt.BallePro = b;
+                            dt.Alive = true;
+                            ServerClass.prepareSendData(dt);
+
+                            // La balle est stoppée
+                            b.Vitesse = 0;
+                        }
+                        // Si le joueur ne parvient pas à toucher la balle
+                        else if (b.X < 0)
+                        {
+                            // La balle est cachée
+                            ball.Visible = false;
+
+                            // Le score est modifié
+                            scoreClient++;
+                            score.Text = scoreServer + "-" + scoreClient;
+
+                            // Les informations sont envoyées à l'adversaire
+                            b.EnDehors = true;
+                            b.Vitesse = 0;
+                            DataTransit dt = new DataTransit();
+                            dt.BallePro = b;
+                            dt.Alive = true;
+                            ServerClass.prepareSendData(dt);
+
+                            // Le chrono s'arrête
+                            timerChrono.Enabled = false;
+
+                            b.EnDehors = false;
+                        }
+                    }
+                    else
+                    {
+                        // Modification de l'angle de la balle si celle-ci tape la raquette
+                        if (b.X + bw < rx + rw && b.X + bw > rx && b.Y < ry + rh && b.Y + bh > ry)
+                        {
+                            if (b.Angle > 180)
+                                b.Angle = 540 - b.Angle;
+                            else
+                                b.Angle = 180 - b.Angle;
+
+                            // Modification de l'angle selon l'endroit où la balle arrive sur la raquette
+                            if (b.Y + bh > ry && b.Y + bh / 2 < ry + rh / 2)
+                                b.Angle += (int)((double)((double)rh / 2 - ((b.Y + bh) - ry)) / ((double)rh / 2) * 60);
+                            else
+                                b.Angle -= (int)((double)(b.Y - (ry + rh / 2)) / ((double)rh / 2) * 60);
+
+                            if (b.Angle > 240 && b.Angle < 360)
+                                b.Angle = 240;
+                            else if (b.Angle < 120 && b.Angle > 0)
+                                b.Angle = 120;
+                        }
+
+                        // Si la balle sort du terrain vers le joueur adverse
+                        if (b.X < 0)
+                        {
+                            // La balle devient invisible et sa position est modifée
+                            ball.Visible = false;
+                            b.Y = (double)ball.Location.Y / (double)this.ClientSize.Height;
+
+                            // Envoi des données vers le serveur
+                            dt = new DataTransit();
+                            dt.BallePro = b;
+                            dt.Alive = true;
+                            ClientClass.prepareSendData(dt);
+
+                            b.Vitesse = 0;
+                        }
+                        // Si le joueur ne parvient pas à toucher la balle
+                        else if (b.X > this.ClientSize.Width)
+                        {
+                            // La balle est cachée
+                            ball.Visible = false;
+
+                            // Le score est modifié
+                            scoreServer++;
+                            score.Text = scoreServer + "-" + scoreClient;
+
+                            // Les informations sont envoyées à l'adversaire
+                            b.EnDehors = true;
+                            b.Vitesse = 0;
+                            dt = new DataTransit();
+                            dt.BallePro = b;
+                            dt.Alive = true;
+                            ClientClass.prepareSendData(dt);
+
+                            // Le chrono est arrété
+                            timerChrono.Enabled = false;
+
+                            b.EnDehors = false;
+                        }
                     }
 
-                    // Si la balle sort du terrain vers le joueur adverse
-                    if (b.X > this.ClientSize.Width)
+                    // Modification de la position de la balle
+                    b.Delta();
+
+                    try
                     {
-                        // La balle devient invisible et sa position est modifée
-                        ball.Visible = false;
-                        b.Y = (double)ball.Location.Y / (double)this.ClientSize.Height;
-                        
-                        // Envoi des données vers le client
-                        DataTransit dt = new DataTransit();
-                        dt.BallePro = b;
-                        dt.Alive = true;
-                        ServerClass.prepareSendData(dt);
-
-                        // La balle est stoppée
-                        b.Vitesse = 0;
+                        ball.Location = new Point(b.X, (int)b.Y);
                     }
-                    // Si le joueur ne parvient pas à toucher la balle
-                    else if (b.X < 0)
+                    catch (InvalidOperationException ex)
                     {
-                        // La balle est cachée
-                        ball.Visible = false;
-
-                        // Le score est modifié
-                        scoreClient++;
-                        score.Text = scoreServer + "-" + scoreClient;
-
-                        // Les informations sont envoyées à l'adversaire
-                        b.EnDehors = true;
-                        b.Vitesse = 0;
-                        DataTransit dt = new DataTransit();
-                        dt.BallePro = b;
-                        dt.Alive = true;
-                        ServerClass.prepareSendData(dt);
-
-                        // Le chrono s'arrête
-                        timerChrono.Enabled = false;
-
-                        b.EnDehors = false;
+                        Console.WriteLine(ex.Message);
                     }
-                }
-                else
-                {
-                    // Modification de l'angle de la balle si celle-ci tape la raquette
-                    if (b.X + bw < rx + rw && b.X + bw > rx && b.Y < ry + rh && b.Y + bh > ry)
-                    {
-                        if (b.Angle > 180)
-                            b.Angle = 540 - b.Angle;
-                        else
-                            b.Angle = 180 - b.Angle;
-
-                        // Modification de l'angle selon l'endroit où la balle arrive sur la raquette
-                        if(b.Y + bh > ry && b.Y + bh/2 < ry + rh/2)
-                            b.Angle += (int)((double)((double)rh / 2 - ((b.Y + bh) - ry)) / ((double)rh / 2) * 60);
-                        else
-                            b.Angle -= (int) ((double)(b.Y - (ry + rh / 2)) / ((double)rh / 2) * 60);
-
-                        if (b.Angle > 240 && b.Angle < 360)
-                            b.Angle = 240;
-                        else if (b.Angle < 120 && b.Angle > 0)
-                            b.Angle = 120;
-                    }
-
-                    // Si la balle sort du terrain vers le joueur adverse
-                    if (b.X < 0)
-                    {
-                        // La balle devient invisible et sa position est modifée
-                        ball.Visible = false;
-                        b.Y = (double)ball.Location.Y / (double)this.ClientSize.Height;
-
-                        // Envoi des données vers le serveur
-                        dt = new DataTransit();
-                        dt.BallePro = b;
-                        dt.Alive = true;
-                        ClientClass.prepareSendData(dt);
-
-                        b.Vitesse = 0;
-                    }
-                    // Si le joueur ne parvient pas à toucher la balle
-                    else if (b.X > this.ClientSize.Width)
-                    {
-                        // La balle est cachée
-                        ball.Visible = false;
-
-                        // Le score est modifié
-                        scoreServer++;
-                        score.Text = scoreServer + "-" + scoreClient;
-
-                        // Les informations sont envoyées à l'adversaire
-                        b.EnDehors = true;
-                        b.Vitesse = 0;
-                        dt = new DataTransit();
-                        dt.BallePro = b;
-                        dt.Alive = true;
-                        ClientClass.prepareSendData(dt);
-
-                        // Le chrono est arrété
-                        timerChrono.Enabled = false;
-
-                        b.EnDehors = false;
-                    }
-                }
-
-                // Modification de la position de la balle
-                b.Delta();
-
-                try
-                {
-                    ball.Location = new Point(b.X, (int)b.Y);
-                }
-                catch (InvalidOperationException ex)
-                {
-                    Console.WriteLine(ex.Message);
                 }
             }
             else
