@@ -44,5 +44,13 @@ namespace PingPongCsharp
             x += (int)(Math.Cos(angle * Math.PI / 180) * vitesse);
             y += (int)(Math.Sin(angle * Math.PI / 180) * vitesse);
         }
+
+        public void Accelere()
+        {
+            if (this.vitesse < 20)
+            {
+                this.vitesse++;
+            }
+        }
     }
 }

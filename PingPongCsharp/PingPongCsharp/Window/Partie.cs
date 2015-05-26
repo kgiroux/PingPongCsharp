@@ -212,7 +212,7 @@ namespace PingPongCsharp
                             b.Angle = 300;
 
                         // Augmentation de la vitesse de la balle
-                        b.Vitesse++;
+                        b.Accelere();
                     }
 
                     // Si la balle sort du terrain vers le joueur adverse
