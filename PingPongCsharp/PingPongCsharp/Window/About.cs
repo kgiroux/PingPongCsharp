@@ -36,5 +36,15 @@ namespace PingPongCsharp
             wlcm.Show();
             this.Dispose();
         }
+        /// <summary>
+        /// Permet de fermer la fenêtre ainsi que tout les processus
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void About_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            wlcm.Dispose();
+            this.Dispose();
+        }
     }
 }

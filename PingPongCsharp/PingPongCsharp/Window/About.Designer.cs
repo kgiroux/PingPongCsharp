@@ -33,16 +33,16 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.ClientBoxPicture = new System.Windows.Forms.PictureBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.ClientBoxPicture = new System.Windows.Forms.PictureBox();
             this.BackMenu = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ClientBoxPicture)).BeginInit();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ClientBoxPicture)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -84,6 +84,16 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Client";
             // 
+            // ClientBoxPicture
+            // 
+            this.ClientBoxPicture.Image = ((System.Drawing.Image)(resources.GetObject("ClientBoxPicture.Image")));
+            this.ClientBoxPicture.Location = new System.Drawing.Point(6, 19);
+            this.ClientBoxPicture.Name = "ClientBoxPicture";
+            this.ClientBoxPicture.Size = new System.Drawing.Size(232, 106);
+            this.ClientBoxPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ClientBoxPicture.TabIndex = 1;
+            this.ClientBoxPicture.TabStop = false;
+            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.pictureBox2);
@@ -103,16 +113,6 @@
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 0;
             this.pictureBox2.TabStop = false;
-            // 
-            // ClientBoxPicture
-            // 
-            this.ClientBoxPicture.Image = ((System.Drawing.Image)(resources.GetObject("ClientBoxPicture.Image")));
-            this.ClientBoxPicture.Location = new System.Drawing.Point(6, 19);
-            this.ClientBoxPicture.Name = "ClientBoxPicture";
-            this.ClientBoxPicture.Size = new System.Drawing.Size(232, 106);
-            this.ClientBoxPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.ClientBoxPicture.TabIndex = 1;
-            this.ClientBoxPicture.TabStop = false;
             // 
             // BackMenu
             // 
@@ -134,14 +134,17 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "About";
             this.Text = "About";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.About_FormClosing);
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ClientBoxPicture)).EndInit();
             this.groupBox4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ClientBoxPicture)).EndInit();
             this.ResumeLayout(false);
 
         }

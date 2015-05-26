@@ -40,15 +40,17 @@ namespace PingPongCsharp
         /// <param name="e"></param>
         private void Scores_Click(object sender, EventArgs e)
         {
-            ScoreResult rs = new ScoreResult();
-            Score scoreData = new Score();
+            ScoreResult rs = new ScoreResult(this);
+            /*Test pour ajouter des Scores dans la base de données
+             Score scoreData = new Score();
             scoreData.NomClient = "kshlkqhdfslksqdfqsdfqsd";
             scoreData.NomServeur = "qsldhgqlhsdfglhqdsqsdfqsdfqsdf";
             scoreData.ScoreClient = 42;
             scoreData.ScoreServeur = 47;
             SingletonDb.Instance.Scores.Add(scoreData);
-            SingletonDb.Instance.SaveChanges();
-            rs.ShowDialog();
+            SingletonDb.Instance.SaveChanges();*/
+            this.Hide();
+            rs.Show();
         }
         /// <summary>
         /// Permet de revenir au Menu

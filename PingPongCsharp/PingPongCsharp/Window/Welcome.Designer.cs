@@ -98,6 +98,8 @@
             this.Controls.Add(this.Scores);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.Start);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Welcome";
             this.Text = "PingPongC#";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

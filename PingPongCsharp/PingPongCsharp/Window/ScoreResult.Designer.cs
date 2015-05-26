@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.ResultDataGrid = new System.Windows.Forms.DataGridView();
+            this.BackMenu = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ResultDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -40,14 +41,28 @@
             this.ResultDataGrid.Size = new System.Drawing.Size(645, 237);
             this.ResultDataGrid.TabIndex = 0;
             // 
+            // BackMenu
+            // 
+            this.BackMenu.Location = new System.Drawing.Point(582, 266);
+            this.BackMenu.Name = "BackMenu";
+            this.BackMenu.Size = new System.Drawing.Size(75, 23);
+            this.BackMenu.TabIndex = 1;
+            this.BackMenu.Text = "Menu";
+            this.BackMenu.UseVisualStyleBackColor = true;
+            this.BackMenu.Click += new System.EventHandler(this.BackMenu_Click);
+            // 
             // ScoreResult
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(669, 264);
+            this.ClientSize = new System.Drawing.Size(668, 301);
+            this.Controls.Add(this.BackMenu);
             this.Controls.Add(this.ResultDataGrid);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ScoreResult";
             this.Text = "ScoreResult";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ScoreResult_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.ResultDataGrid)).EndInit();
             this.ResumeLayout(false);
 
@@ -56,6 +71,7 @@
         #endregion
 
         private System.Windows.Forms.DataGridView ResultDataGrid;
+        private System.Windows.Forms.Button BackMenu;
 
     }
 }

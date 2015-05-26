@@ -16,9 +16,12 @@ namespace PingPongCsharp
 {
     public partial class ScoreResult : Form
     {
-
-
-        public ScoreResult()
+        private Welcome wlcm; 
+        /// <summary>
+        /// Permet d'afficher tout les scores
+        /// </summary>
+        /// <param name="wlcm"></param>
+        public ScoreResult(Welcome wlcm)
         {
             InitializeComponent();
             using (ScoreResultEntities db = new ScoreResultEntities())
@@ -30,14 +33,34 @@ namespace PingPongCsharp
                 ResultDataGrid.Columns[2].HeaderText = "Score du Joueur 2";
                 ResultDataGrid.Columns[3].HeaderText = "Nom du Joueur 2";
             }
-           
-            
+
+            this.wlcm = wlcm;
             ResultDataGrid.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             ResultDataGrid.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             ResultDataGrid.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             ResultDataGrid.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
            
                 
+        }
+        /// <summary>
+        /// Permet de fermer tout les processus
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ScoreResult_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.wlcm.Dispose();
+            this.Dispose();
+        }
+        /// <summary>
+        /// Permet de revenir au menu
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BackMenu_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+            this.wlcm.Show();
         }
     }
 }
