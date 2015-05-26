@@ -9,7 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PingPongCsharp;
 using System.Data.Entity.Core.Objects;
-
+///<author>
+///Cyril LEFEBVRE & Kévin Giroux
+///</author>
 namespace PingPongCsharp
 {
     public partial class ScoreResult : Form
