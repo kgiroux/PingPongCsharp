@@ -47,10 +47,10 @@
             this.raquette.AccessibleName = "Raquette";
             this.raquette.BackColor = System.Drawing.SystemColors.InfoText;
             this.raquette.Image = ((System.Drawing.Image)(resources.GetObject("raquette.Image")));
-            this.raquette.Location = new System.Drawing.Point(45, 176);
-            this.raquette.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.raquette.Location = new System.Drawing.Point(34, 143);
+            this.raquette.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.raquette.Name = "raquette";
-            this.raquette.Size = new System.Drawing.Size(21, 156);
+            this.raquette.Size = new System.Drawing.Size(16, 127);
             this.raquette.TabIndex = 0;
             this.raquette.TabStop = false;
             // 
@@ -59,10 +59,10 @@
             this.ball.AccessibleName = "Ball";
             this.ball.BackColor = System.Drawing.Color.Transparent;
             this.ball.Image = ((System.Drawing.Image)(resources.GetObject("ball.Image")));
-            this.ball.Location = new System.Drawing.Point(539, 244);
-            this.ball.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ball.Location = new System.Drawing.Point(404, 198);
+            this.ball.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ball.Name = "ball";
-            this.ball.Size = new System.Drawing.Size(24, 25);
+            this.ball.Size = new System.Drawing.Size(18, 20);
             this.ball.TabIndex = 2;
             this.ball.TabStop = false;
             // 
@@ -78,9 +78,10 @@
             this.temps.BackColor = System.Drawing.Color.Transparent;
             this.temps.Font = new System.Drawing.Font("OCR A Extended", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.temps.ForeColor = System.Drawing.Color.White;
-            this.temps.Location = new System.Drawing.Point(422, 92);
+            this.temps.Location = new System.Drawing.Point(316, 75);
+            this.temps.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.temps.Name = "temps";
-            this.temps.Size = new System.Drawing.Size(182, 83);
+            this.temps.Size = new System.Drawing.Size(148, 66);
             this.temps.TabIndex = 3;
             this.temps.Text = "100";
             this.temps.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -95,9 +96,10 @@
             this.score.AutoSize = true;
             this.score.BackColor = System.Drawing.Color.Transparent;
             this.score.Font = new System.Drawing.Font("OCR A Extended", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.score.Location = new System.Drawing.Point(422, 9);
+            this.score.Location = new System.Drawing.Point(316, 7);
+            this.score.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.score.Name = "score";
-            this.score.Size = new System.Drawing.Size(182, 83);
+            this.score.Size = new System.Drawing.Size(148, 66);
             this.score.TabIndex = 4;
             this.score.Text = "0-0";
             // 
@@ -107,9 +109,10 @@
             this.Victoire.BackColor = System.Drawing.Color.Transparent;
             this.Victoire.Font = new System.Drawing.Font("OCR A Extended", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Victoire.ForeColor = System.Drawing.Color.White;
-            this.Victoire.Location = new System.Drawing.Point(172, 271);
+            this.Victoire.Location = new System.Drawing.Point(129, 220);
+            this.Victoire.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.Victoire.Name = "Victoire";
-            this.Victoire.Size = new System.Drawing.Size(476, 83);
+            this.Victoire.Size = new System.Drawing.Size(388, 66);
             this.Victoire.TabIndex = 5;
             this.Victoire.Text = "You Win !";
             this.Victoire.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -121,9 +124,10 @@
             this.Instructions.BackColor = System.Drawing.Color.Transparent;
             this.Instructions.Font = new System.Drawing.Font("OCR A Extended", 28.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Instructions.ForeColor = System.Drawing.Color.White;
-            this.Instructions.Location = new System.Drawing.Point(28, 470);
+            this.Instructions.Location = new System.Drawing.Point(21, 382);
+            this.Instructions.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.Instructions.Name = "Instructions";
-            this.Instructions.Size = new System.Drawing.Size(742, 100);
+            this.Instructions.Size = new System.Drawing.Size(593, 80);
             this.Instructions.TabIndex = 6;
             this.Instructions.Text = "Press [Space] to Restart\r\nOr [Esc] to Quit";
             this.Instructions.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -131,12 +135,12 @@
             // 
             // Partie
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(782, 853);
+            this.ClientSize = new System.Drawing.Size(586, 602);
             this.Controls.Add(this.Instructions);
             this.Controls.Add(this.Victoire);
             this.Controls.Add(this.ball);
@@ -146,8 +150,9 @@
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Partie";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Partie";

@@ -98,6 +98,7 @@
             this.Controls.Add(this.Scores);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.Start);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Welcome";

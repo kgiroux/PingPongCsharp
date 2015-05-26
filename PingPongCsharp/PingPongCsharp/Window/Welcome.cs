@@ -42,7 +42,7 @@ namespace PingPongCsharp
         {
             ScoreResult rs = new ScoreResult(this);
             /*Test pour ajouter des Scores dans la base de données
-             Score scoreData = new Score();
+             *Score scoreData = new Score();
             scoreData.NomClient = "kshlkqhdfslksqdfqsdfqsd";
             scoreData.NomServeur = "qsldhgqlhsdfglhqdsqsdfqsdfqsdf";
             scoreData.ScoreClient = 42;

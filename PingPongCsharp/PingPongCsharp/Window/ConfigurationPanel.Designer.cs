@@ -137,6 +137,8 @@
             this.Controls.Add(this.serveur);
             this.Controls.Add(this.scan_button);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ConfigurationPanel";
             this.Text = "Ping Pong C# : Configuration Bluetooth ";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ConfigurationPanel_FormClosing);

@@ -58,6 +58,7 @@
             this.ClientSize = new System.Drawing.Size(668, 301);
             this.Controls.Add(this.BackMenu);
             this.Controls.Add(this.ResultDataGrid);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ScoreResult";
