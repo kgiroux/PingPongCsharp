@@ -9,7 +9,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
+///<author>
+///Cyril LEFEBVRE & Kévin Giroux
+///</author>
 namespace PingPongCsharp
 {
     public partial class ConfigurationPanel : Form
@@ -22,10 +24,9 @@ namespace PingPongCsharp
         private Boolean ready_client = false;
         private Thread launching_partie = null;
         List<string> item = null;
-        /* Constructeur de la fenetre*/
         
         /// <summary>
-        /// Constructeur de la form1
+        /// Constructeur de la fenêtre de configuration bluetooth
         /// </summary>
         public ConfigurationPanel(Welcome wlcm)
         {
@@ -36,19 +37,13 @@ namespace PingPongCsharp
             this.wlcm = wlcm;
         }
 
-        /* Méthode qui charge la fenetre */
         /// <summary>
-        /// Méthode chargeant la fenetre 1 
+        /// Méthode chargeant la fenetre 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ConfigurationPanel_Load(object sender, EventArgs e)
-        {
+        private void ConfigurationPanel_Load(object sender, EventArgs e) {}
 
-        }
-
-        /* Methode Click pour le bouton */
-        /* Méthode concernant le serveur */
         /// <summary>
         /// Méthode dédiée à la gestion du click sur le bouton Client
         /// </summary>
@@ -68,15 +63,13 @@ namespace PingPongCsharp
             Launching_partie(0);
             /* Lancement de la methode pour lancer le serveur */
             svr.connectAsServer();
-            
         }
-        /* Bouton Stop qui va permettre de quitter le serveur et le client */
+        
         /// <summary>
         /// Méthode dédiée à la gestion du click sur le bouton Stop
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        
         private void stop_action(object sender, EventArgs e){
                 serveur.Enabled = true;
                 scan_button.Enabled = true;
@@ -92,7 +85,6 @@ namespace PingPongCsharp
                 }
         }
 
-        /* Bouton Scan qui va être chercher les appareils pour le client */
         /// <summary>
         /// Méthode dédiée à la gestion du click sur le bouton scan 
         /// </summary>
@@ -126,9 +118,9 @@ namespace PingPongCsharp
             };
             Invoke(del);
         }
+
         /// <summary>
         /// Message de LOG
-        /// 
         /// </summary>
         /// <param name="text"> Texte à faire apparaitre dans la text view</param>
         /// <param name="type">Type de message (erreur = -1 , normale = 0, success = 1) </param>
@@ -170,6 +162,7 @@ namespace PingPongCsharp
                 Console.WriteLine(ex.Message);
             }
         }
+
         /// <summary>
         /// Event lors du double click sur un item de la liste
         /// </summary>
@@ -183,6 +176,7 @@ namespace PingPongCsharp
             Launching_partie(1);
             clt.connectAsClient(listBoxDevice.SelectedItem.ToString());
         }
+
         /// <summary>
         /// Libère la boucle de la méthode ClientConnected
         /// </summary>
@@ -200,6 +194,7 @@ namespace PingPongCsharp
         {
             this.ready_client = ready;
         }
+
         /// <summary>
         /// Methode qui va attendre une connexion d'un client
         /// </summary>
@@ -212,6 +207,7 @@ namespace PingPongCsharp
             this.ChangeVisibily(false);
             p.ShowDialog();
         }
+
         /// <summary>
         /// Methode qui va attendre l'acceptation du serveur
         /// </summary>
@@ -256,11 +252,10 @@ namespace PingPongCsharp
             
         }
         
-
-       /// <summary>
-       /// Change le status du bouton Server
-       /// </summary>
-       /// <param name="activated">status du bouton</param>
+        /// <summary>
+        /// Change le status du bouton Server
+        /// </summary>
+        /// <param name="activated">status du bouton</param>
         public void changeServerButtonActivate(Boolean activated)
         {
             Func<int> del = delegate()
@@ -277,6 +272,7 @@ namespace PingPongCsharp
                 this.updateConsoleLog("ObjectDisposedException " + ex.Message,-1);
             }
         }
+
         /// <summary>
         /// Change le status du bouton Scan
         /// </summary>
@@ -302,7 +298,6 @@ namespace PingPongCsharp
         /// Change la visibilité de la form de configuration
         /// </summary>
         /// <param name="activated">status de la form</param>
-
         public void ChangeVisibily(Boolean activated)
         {
             Func<int> del = delegate()
@@ -325,6 +320,7 @@ namespace PingPongCsharp
                 this.updateConsoleLog("ObjectDisposedException " + ex.Message, -1);
             }
         }
+
         /// <summary>
         /// Permet de simuler un click
         /// </summary>
@@ -346,6 +342,7 @@ namespace PingPongCsharp
                 return 0;
             };
         }
+
         /// <summary>
         /// Event de fermeture 
         /// </summary>
@@ -357,6 +354,7 @@ namespace PingPongCsharp
             this.Dispose();
             this.wlcm.Dispose();
         }
+
         /// <summary>
         /// Event pour le changement du texte
         /// </summary>
@@ -364,7 +362,6 @@ namespace PingPongCsharp
         /// <param name="e"></param>
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            
             // Si le texte est différent de la chaine vide
             if (!("".Equals(textBox1.Text)))
             {
@@ -378,6 +375,7 @@ namespace PingPongCsharp
                 scan_button.Enabled = false;
             }
         }
+
         /// <summary>
         /// Permet de revenir au menu principal
         /// </summary>
@@ -390,6 +388,5 @@ namespace PingPongCsharp
             // Destruction de la fenetre de configuration
             this.Dispose();
         }
-
     }
 }

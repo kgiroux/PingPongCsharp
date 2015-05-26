@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PingPongCsharp;
 using System.Data.Entity.Core.Objects;
+
 ///<author>
 ///Cyril LEFEBVRE & Kévin Giroux
 ///</author>
@@ -16,7 +17,8 @@ namespace PingPongCsharp
 {
     public partial class ScoreResult : Form
     {
-        private Welcome wlcm; 
+        private Welcome wlcm;
+
         /// <summary>
         /// Permet d'afficher tout les scores
         /// </summary>
@@ -39,9 +41,8 @@ namespace PingPongCsharp
             ResultDataGrid.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             ResultDataGrid.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             ResultDataGrid.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-           
-                
         }
+
         /// <summary>
         /// Permet de fermer tout les processus
         /// </summary>
@@ -52,6 +53,7 @@ namespace PingPongCsharp
             this.wlcm.Dispose();
             this.Dispose();
         }
+
         /// <summary>
         /// Permet de revenir au menu
         /// </summary>

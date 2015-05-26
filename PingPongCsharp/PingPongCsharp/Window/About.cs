@@ -8,11 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+///<author>
+///Cyril LEFEBVRE & Kévin Giroux
+///</author>
 namespace PingPongCsharp
 {
     public partial class About : Form
     {
         private Welcome wlcm; 
+
         /// <summary>
         /// Constructeur de la fenetre pour les explications
         /// </summary>
@@ -26,6 +30,7 @@ namespace PingPongCsharp
             img.RotateFlip(RotateFlipType.Rotate180FlipNone);
             ClientBoxPicture.Image = img;
         }
+
         /// <summary>
         /// Retour au menu;
         /// </summary>
@@ -35,8 +40,8 @@ namespace PingPongCsharp
         {
             this.Dispose();
             this.wlcm.Show();
-            
         }
+
         /// <summary>
         /// Permet de fermer la fenêtre ainsi que tout les processus
         /// </summary>

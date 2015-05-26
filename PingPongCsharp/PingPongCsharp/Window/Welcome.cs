@@ -9,6 +9,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+///<author>
+///Cyril LEFEBVRE & Kévin Giroux
+///</author>
 namespace PingPongCsharp
 {
     public partial class Welcome : Form
@@ -22,6 +25,7 @@ namespace PingPongCsharp
            var query = from score in SingletonDb.Instance.Scores where score.Id == 1 select new { score.NomServeur, score.ScoreServeur, score.ScoreClient, score.NomClient };
            Console.WriteLine(query.ToList());   
         }
+
         /// <summary>
         /// Permet d'afficher le menu de configuration bluetooth;
         /// </summary>
@@ -33,6 +37,7 @@ namespace PingPongCsharp
             cp.Show();
             this.Hide();
         }
+
         /// <summary>
         /// Bouton d'acces au résultat
         /// </summary>
@@ -52,6 +57,7 @@ namespace PingPongCsharp
             this.Hide();
             rs.Show();
         }
+
         /// <summary>
         /// Permet de revenir au Menu
         /// </summary>
@@ -63,6 +69,5 @@ namespace PingPongCsharp
             this.Hide();
             abt.Show();
         }
-
     }
 }

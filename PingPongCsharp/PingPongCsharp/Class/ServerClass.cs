@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 using System.Text;
 using System.Linq;
 
+///<author>
+///Cyril LEFEBVRE & Kévin Giroux
+///</author>
 public class ServerClass
 {
     private ConfigurationPanel form;
@@ -35,6 +38,7 @@ public class ServerClass
 	{
         this.form = form;
 	}
+
     /// <summary>
     ///  Méthode de lancement pour la création du serveur */
     /// </summary>
@@ -50,14 +54,14 @@ public class ServerClass
                 this.updateOutputLog(th.Message,-1);
                 ServerClass.CloseConnection();
             }
-        }
-            
+        }  
         else
         {
             this.updateOutputLog("Server already launched",0);
         }
         serverLaunch = true;
     }
+
     /// <summary>
     /// Methode de démarrage du serveur
     /// </summary>
@@ -75,7 +79,6 @@ public class ServerClass
         {
             this.updateOutputLog("Exception : " +ex.Message, -1);
         }
-        
 
         bluetoothClient = bluetoothServerListener.AcceptBluetoothClient();
         /* Attend qu'un client se connect */
@@ -105,7 +108,6 @@ public class ServerClass
                 }
                 this.form.setReady(true);
                 messageAvailable = false;
-
             }
         }
         catch (Exception ex)
@@ -133,10 +135,10 @@ public class ServerClass
             {
                 this.updateOutputLog("System.NullReferenceException : " + ex1.Message, -1);
             }
-       
         }
         bluetoothClient.Close();
     }
+
     /// <summary>
     /// Methode de lecture pour le serveur. Il s'agit d'un thread qui attend un message
     /// </summary>
@@ -173,6 +175,7 @@ public class ServerClass
     {
         this.form.updateConsoleLog(text,type);
     }
+
     /// <summary>
     /// Destructeur de la classe 
     /// </summary>
@@ -195,6 +198,7 @@ public class ServerClass
             bluetoothClient.Close();
         }
     }
+
     /// <summary>
     /// Methode préparant les messages pour le serveur
     /// </summary>
@@ -204,6 +208,7 @@ public class ServerClass
         messageSend = BinarySerializeObject(b);
         messageAvailable = true;
     }
+
     /// <summary>
     /// Methode sérialisant un objet pour le transformer en tableau de Byte
     /// </summary>
@@ -223,6 +228,7 @@ public class ServerClass
             return streamMemory.ToArray();
         }
     }
+
     /// <summary>
     /// Message à déserialiser 
     /// </summary>
@@ -257,7 +263,6 @@ public class ServerClass
         if (bluetoothClient != null)
         {
             bluetoothClient.Close();
-            
         }
         if (bluetoothServerListener != null)
         {
@@ -269,13 +274,15 @@ public class ServerClass
             {
                 Console.WriteLine(ex.Message);
             }
-            
         }
         if (bluetoothServerThread != null)
         {
-            if(bluetoothServerThread.IsAlive == true){
+            if (bluetoothServerThread.IsAlive == true)
+            {
                 bluetoothServerThread.Abort();
-            }else{
+            }
+            else
+            {
                 bluetoothServerThread = null;
             }
         }

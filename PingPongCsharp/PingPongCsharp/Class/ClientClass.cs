@@ -13,6 +13,9 @@ using System.Threading;
 using System.Linq;
 using PingPongCsharp;
 
+///<author>
+///Cyril LEFEBVRE & Kévin Giroux
+///</author>
 public class ClientClass
 {
     private BluetoothDeviceInfo[] devices_found = null;
@@ -31,7 +34,6 @@ public class ClientClass
     static bool messageAvailable; 
     public static DataTransit dt = new DataTransit();
 
-
    /// <summary>
    /// Constructeur de l'objet Client Class 
    /// </summary>
@@ -41,14 +43,12 @@ public class ClientClass
         this.form = form;
         items_bluetooth = new List<string>();
 	}
+
     /// <summary>
     /// Methode permettant la connexion au client (tester)*/
     /// </summary>
-
     public int connectAsClient(String name_device)
     {
-       
-
         error = 0;
         device_selected = null;
         if (devices_found != null)
@@ -82,14 +82,14 @@ public class ClientClass
                     error = -1;
                 }
             }
-                // Appareil non trouvé
+            // Appareil non trouvé
             else
             {
                 this.updateOutputLog("Device not found !!! ", -1);
                 error = -1;
             }
         }
-            // Liste des appareil vide
+        // Liste des appareil vide
         else
         {
             this.updateOutputLog("Device not found !!! ", -1);
@@ -127,6 +127,7 @@ public class ClientClass
             this.updateOutputLog("Error : " + ex.ToString(),-1);
         }
     }
+
     /// <summary>
     ///  Methode gerant l'envoi et la réception des messages
     /// </summary>
@@ -187,6 +188,7 @@ public class ClientClass
             }
         }
     }
+
     /// <summary>
     /// Méthode Thread pour la récéption de message !!!
     /// </summary>
@@ -217,11 +219,9 @@ public class ClientClass
          }
     }
 
-
     /// <summary>
     /// Methode pour l'association des appareils
     /// </summary>
-    
     public bool pairDevice()
     {
         string myPin = "1234";
@@ -253,6 +253,7 @@ public class ClientClass
             this.updateOutputLog("Erreur lancement du processus", -1);
         }
     }
+
     /// <summary>
     /// Méthode gérant le scan des appareils bluetooth
     /// </summary>
@@ -286,6 +287,7 @@ public class ClientClass
         this.updateOutputLog("=========================", 0);
         this.devices_found = devices;
     }
+
     /// <summary>
     /// Getter permettant d'avoir le nom des appareils
     /// </summary>
