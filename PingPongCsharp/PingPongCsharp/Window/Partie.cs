@@ -51,8 +51,7 @@ namespace PingPongCsharp
             // Création d'un objet Balle permettant de manipuler le composant graphique ball
             b = new Balle(ball.Location.X, ball.Location.Y);
             
-            // Initialisation des évènements
-            this.Resize += new EventHandler(Form1_Resize);
+            // Initialisation de l'évènement des touches du clavier
             KeyDown += new KeyEventHandler(Partie_KeyDown);
             
             // Si le joueur est du côté client
@@ -416,20 +415,6 @@ namespace PingPongCsharp
         public void updateOutputLog(String text, int type)
         {
             this.form.updateConsoleLog(text, type);
-        }
-
-        /// <summary>
-        /// Méthode déclenchée lors du redimensionnement de la fenêtre
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Form1_Resize(Object sender, EventArgs e)
-        {
-            if (joueur == 1)
-                raquette.Location = new Point(this.ClientSize.Width - 46, this.ClientSize.Height / 2 - raquette.Height / 2);
-
-            temps.Location = new Point(this.ClientSize.Width / 2 - temps.Width / 2, temps.Location.Y);
-            score.Location = new Point(this.ClientSize.Width / 2 - score.Width / 2, score.Location.Y);
         }
 
         /// <summary>
