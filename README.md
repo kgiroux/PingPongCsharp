@@ -31,8 +31,13 @@ PingPongC#
 * |----------->ServerClass.cs --> Server for bluetooth connection
 * |----------->SingletonDb.cs --> Singleton that assura that we only have a unique connection into the database.
 * |------>Windows
-* |----------->About.cs --> About Us panel
+* |----------->About.cs --> About panel (Control ... ) 
 * |----------->ConfigurationPanel.cs --> Configuration panel is a the panel that create the link between the Server/Client
 * |----------->Partie.cs --> Game panel
 * |----------->ScoreResult.cs --> Score Panel
 * |----------->Welcome.cs --> Menu / Main panel
+
+# Install
+* You have to download the 32feet librairy for that program works
+* You have to activate Bluetooth to use this program
+* You have to be paired with another computer
