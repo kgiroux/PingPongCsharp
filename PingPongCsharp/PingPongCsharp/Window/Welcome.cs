@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.Entity.Core;
 
 ///<author>
 ///Cyril LEFEBVRE & Kévin Giroux
@@ -21,11 +22,19 @@ namespace PingPongCsharp
         /// </summary>
         public Welcome()
         {
-           InitializeComponent();
-           var query = from score in SingletonDb.Instance.Scores where score.Id == 1 select new { score.NomServeur, score.ScoreServeur, score.ScoreClient, score.NomClient };
-           Console.WriteLine(query.ToList());   
+            InitializeComponent();
+            var query = from score in SingletonDb.Instance.Scores where score.Id == 1 select new { score.NomServeur, score.ScoreServeur, score.ScoreClient, score.NomClient };
+            try
+            {
+                Console.WriteLine(query.ToList());
+                
+            }
+            catch(EntityException e)
+            {
+                Scores.Enabled = false;
+                Console.WriteLine("No database available");
+            }
         }
-
         /// <summary>
         /// Permet d'afficher le menu de configuration bluetooth;
         /// </summary>
