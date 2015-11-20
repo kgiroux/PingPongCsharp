@@ -21,3 +21,18 @@ PongC# is based on client/server architecture. When this game starts, you have t
 
 # Architecture 
 
+PingPongC#
+|
+|------>Class
+|----------->Balle.cs --> Ball object
+|----------->ClientClass.cs --> Client for bluetooth connection
+|----------->DataTransit.cs --> Object that will be send between computer
+|----------->Program.cs --> Main
+|----------->ServerClass.cs --> Server for bluetooth connection
+|----------->SingletonDb.cs --> Singleton that assura that we only have a unique connection into the database.
+|------>Windows
+|----------->About.cs --> About Us panel
+|----------->ConfigurationPanel.cs --> Configuration panel is a the panel that create the link between the Server/Client
+|----------->Partie.cs --> Game panel
+|----------->ScoreResult.cs --> Score Panel
+|----------->Welcome.cs --> Menu / Main panel
