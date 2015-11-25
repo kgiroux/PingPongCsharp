@@ -473,8 +473,9 @@ namespace PingPongCsharp
             }
             else
             {
+                
                 // Sauvegarde dans la BDD du score
-                if (timerMvmt.Enabled)
+                /*if (timerMvmt.Enabled)
                 {
                     Score scoreData = new Score();
                     scoreData.NomClient = nameClient;
@@ -483,7 +484,7 @@ namespace PingPongCsharp
                     scoreData.ScoreServeur = scoreServer;
                     SingletonDb.Instance.Scores.Add(scoreData);
                     SingletonDb.Instance.SaveChanges();   
-                }
+                }*/
 
                 timerMvmt.Enabled = false;
 
